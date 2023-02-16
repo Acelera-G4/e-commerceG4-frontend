@@ -1,0 +1,33 @@
+
+
+<form [formGroup]="formUser">
+    <div >
+      
+      <h3>Criar Usuário</h3>
+    </div>
+    <div>
+      <input formControlName="name" type="text" placeholder="User" />
+    </div>
+    <div>
+      <input formControlName="cpf" type="text" placeholder="CPF" />
+    </div>
+    <div class="box-input">
+      <input formControlName="dateOfBirthday" type="date" placeholder="Date Birthday" />
+    </div>
+    <div class="box-input">
+      <input formControlName="email" type="email" placeholder="Email" />
+    </div>
+    <div class="box-input">
+      <input formControlName="userType" type="text" placeholder="userType" />
+    </div>
+    <div class="box-input">
+      <input formControlName="phoneNumber" type="phone" placeholder="Phone Number" />
+    </div>
+    <div class="box-input">
+      <input formControlName="address" type="text" placeholder="Address" />
+    </div>
+    <div (click)="createUser()" class="box-botao">
+      <input   type="button" value="Criar" />
+    </div>
+    <a >Voltar</a>
+  </form>
