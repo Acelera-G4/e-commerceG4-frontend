@@ -18,8 +18,12 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './pages/components/products/products.component';
-
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ModalCreateUserComponent } from './pages/components/modal-create-user/modal-create-user.component';
+import { ModalUpdateUserComponent } from './pages/components/modal-update-user/modal-update-user.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     HeaderComponent,
     ProductsComponent,
     ListUsersComponent,
+    ModalCreateUserComponent,
+    ModalUpdateUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     InputMaskModule,
     TableModule,
     ChartModule,
-    HttpClientModule
+    HttpClientModule,
+    DialogModule,
+    ButtonModule,
+    ReactiveFormsModule
   ],
   exports: [AppRoutingModule],
   providers: [],

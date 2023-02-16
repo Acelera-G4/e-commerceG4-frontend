@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserService } from './../../../services/users.service';
 import { Component } from '@angular/core';
@@ -12,11 +11,23 @@ import { take } from 'rxjs';
 })
 export class ListUsersComponent {
   listUsers: User[] = [];
+  displayCreateUser: boolean = false;
+  displayUpdateUser: boolean = false;
 
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.listAllUsers();
+  }
+
+  showDialogCreateUser(){
+    console.log("funfei")
+    this.displayCreateUser = true;
+  }
+
+  showDialogUpdateUser(){
+    console.log("funfei")
+    this.displayUpdateUser = true;
   }
 
   listAllUsers() {
