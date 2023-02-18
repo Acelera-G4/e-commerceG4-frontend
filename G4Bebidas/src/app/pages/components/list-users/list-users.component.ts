@@ -1,8 +1,9 @@
 import { Router } from '@angular/router';
 import { UserService } from './../../../services/users.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild, } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { take } from 'rxjs';
+
 
 @Component({
   selector: 'app-list-users',
@@ -10,6 +11,7 @@ import { take } from 'rxjs';
   styleUrls: ['./list-users.component.css'],
 })
 export class ListUsersComponent {
+
   listUsers: User[] = [];
   displayCreateUser: boolean = false;
   displayUpdateUser: boolean = false;

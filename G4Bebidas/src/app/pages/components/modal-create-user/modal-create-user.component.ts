@@ -1,8 +1,11 @@
+import { Address } from './../../../models/address';
 import { UserService } from './../../../services/users.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+
+
 
 @Component({
   selector: 'app-modal-create-user',
@@ -10,54 +13,61 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./modal-create-user.component.css'],
 })
 export class ModalCreateUserComponent {
-  displayBasic: boolean = false;
+  
+  
 
+  
   formUser!: FormGroup;
-
+  
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.formularioVazio();
-  }
-
-  formularioVazio() {
-    this.formUser = this.fb.group({
-      id: [null],
+    private router: Router,
+    ) {}
+    
+    ngOnInit(): void {
+      this.formEmpty();
+    }
+    
+    formEmpty() {
+      this.formUser = this.fb.group({
+        id:[null],
       name: [null],
       cpf: [null],
       dateOfBirthday: [null],
       email: [null],
       userType: [null],
       phoneNumber: [null],
-      address: [null],
     });
   }
 
-  formularioPreenchido(user: User) {
+  formfilled(user: User) {
+    const dateOfBirthday = new Date(user.dateOfBirthday).toISOString().slice(0, 10).split('-').reverse().join('-');
     this.formUser = this.fb.group({
-      id: [user.id],
-      name: [user],
-      cpf: [user],
-      dateOfBirthday: [user.dateOfBirthday],
+      id:[user.id],
+      name: [user.name],
+      cpf: [user.cpf],
+      dateOfBirthday: [dateOfBirthday],
       email: [user.email],
       userType: [user.userType],
       phoneNumber: [user.phoneNumber],
-      address: [user.address],
-    });
+    })
+  }
+
+  teste() {
+    console.log(this.formUser.value);
   }
 
   createUser() {
     this.userService.createUser(this.formUser.value).subscribe({
-      next: (createUser) => {
-        console.log(createUser);
+      next: (registered) => {
+        console.log(registered);
         alert("Cadastrado com sucesso!");
-        this.router.navigate(["/list-users"])
+        location.reload();
       },
       error: (erro) => alert("Preencha todos os campos!")
     });
   }
+
+
 }
