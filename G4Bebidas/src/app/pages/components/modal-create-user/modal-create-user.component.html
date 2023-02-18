@@ -1,33 +1,83 @@
-
+<h2>Cadastro de Usuário</h2>
 
 <form [formGroup]="formUser">
-    <div >
-      
-      <h3>Criar Usuário</h3>
-    </div>
-    <div>
-      <input formControlName="name" type="text" placeholder="User" />
-    </div>
-    <div>
-      <input formControlName="cpf" type="text" placeholder="CPF" />
-    </div>
-    <div class="box-input">
-      <input formControlName="dateOfBirthday" type="date" placeholder="Date Birthday" />
-    </div>
-    <div class="box-input">
-      <input formControlName="email" type="email" placeholder="Email" />
-    </div>
-    <div class="box-input">
-      <input formControlName="userType" type="text" placeholder="userType" />
-    </div>
-    <div class="box-input">
-      <input formControlName="phoneNumber" type="phone" placeholder="Phone Number" />
-    </div>
-    <div class="box-input">
-      <input formControlName="address" type="text" placeholder="Address" />
-    </div>
-    <div (click)="createUser()" class="box-botao">
-      <input   type="button" value="Criar" />
-    </div>
-    <a >Voltar</a>
-  </form>
+  <div>
+    <label for="name">Nome:</label>
+    <input type="text" id="name" formControlName="name" required />
+  </div>
+
+  <div>
+    <label for="cpf">CPF:</label>
+    <input type="text" id="cpf" formControlName="cpf" required />
+  </div>
+
+  <div>
+    <label for="dateOfBirthday">Data de Nascimento:</label>
+    <input
+      type="date"
+      id="dateOfBirthday"
+      formControlName="dateOfBirthday"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email" required />
+  </div>
+
+  <div>
+    <label for="userType">User Type</label>
+    <input type="text" id="userType" formControlName="userType" required />
+  </div>
+  <div>
+    <label for="userType">Phone</label>
+    <input type="text" id="userType" formControlName="phoneNumber" required />
+  </div>
+
+  <button type="submit" (click)="createUser()">Enviar</button>
+</form>
+
+<!-- <form [formGroup]="formAddress">
+  <h3>Endereço</h3>
+  <div>
+    <label for="cep">CEP:</label>
+    <input type="text" id="cep" formControlName="cep" required />
+  </div>
+
+  <div>
+    <label for="street">Rua:</label>
+    <input type="text" id="street" formControlName="street" required />
+  </div>
+
+  <div>
+    <label for="neighborhood">Bairro:</label>
+    <input
+      type="text"
+      id="neighborhood"
+      formControlName="neighborhood"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="number">Número:</label>
+    <input type="text" id="number" formControlName="number" required />
+  </div>
+
+  <div>
+    <label for="complement">Complemento:</label>
+    <input type="text" id="complement" formControlName="complement" />
+  </div>
+
+  <div>
+    <label for="city">Cidade:</label>
+    <input type="text" id="city" formControlName="city" required />
+  </div>
+
+  <div>
+    <label for="uf">UF:</label>
+    <input type="text" id="uf" formControlName="uf" required />
+  </div>
+  <button type="submit" (click)="teste()">Enviar</button>
+</form> -->
