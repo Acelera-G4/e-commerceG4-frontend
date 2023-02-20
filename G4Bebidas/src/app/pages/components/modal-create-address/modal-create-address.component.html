@@ -1,0 +1,40 @@
+<form [formGroup]="formAddress">
+  <label for="cep">CEP:</label>
+  <input type="text" id="cep" name="cep" formControlName="cep" required />
+
+  <label for="street">Rua:</label>
+  <input
+    type="text"
+    id="street"
+    name="street"
+    formControlName="street"
+    required
+  />
+
+  <label for="number">Número:</label>
+  <input
+    type="text"
+    id="number"
+    name="number"
+    formControlName="number"
+    required
+  />
+
+  <label for="complement">Complemento:</label>
+  <input
+    type="text"
+    id="complement"
+    name="complement"
+    formControlName="complement"
+  />
+
+  <label for="city">Cidade:</label>
+  <input type="text" id="city" name="city" formControlName="city" required />
+
+  <label for="uf">Estado:</label>
+  <input type="text" id="uf" name="uf" required formControlName="uf" />
+
+  <input type="submit" value="Salvar " (click)="teste()" />
+
+  <button (click)="testeMatsuda()">ABC</button>
+</form>
