@@ -28,14 +28,24 @@
           <i class="pi pi-user-edit" (click)="showDialogUpdateUser()"></i>
         </td>
         <td><i class="pi pi-times" (click)="deleteUserById(user.id)"></i></td>
+       
       </tr>
     </tbody>
   </table>
 </div>
 
 <p-dialog [(visible)]="displayCreateUser" [style]="{width: '70vw'}" [baseZIndex]="10000">
-  <app-modal-create-user ></app-modal-create-user>
+  <app-modal-create-user></app-modal-create-user>
 </p-dialog>
+
+
+<p-dialog [(visible)]="displayAddress" [style]="{width: '70vw'}" [baseZIndex]="10000">
+  <app-modal-create-address></app-modal-create-address>
+</p-dialog>
+
+
 <p-dialog [(visible)]="displayUpdateUser" [style]="{width: '70vw'}" [baseZIndex]="10000">
 </p-dialog>
+
+
 

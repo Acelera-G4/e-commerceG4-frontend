@@ -2,6 +2,8 @@
 
 <form [formGroup]="formUser">
   <div>
+
+    
     
     <label for="name">Nome:</label>
     <input type="text" id="name" formControlName="name" required />
@@ -24,7 +26,7 @@
 
   <div>
     <label for="email">Email:</label>
-    <input type="email" id="email" formControlName="email" required />
+    <input type="text" id="email" formControlName="email" required />
   </div>
 
   <div>
@@ -37,4 +39,9 @@
   </div>
 
   <button type="submit" (click)="createUser()">Enviar</button>
+  
 </form>
+
+<p-dialog [(visible)]="displayAddress" [style]="{width: '70vw'}" [baseZIndex]="10000">
+  <app-modal-create-address [user]="user" ></app-modal-create-address>
+</p-dialog>
