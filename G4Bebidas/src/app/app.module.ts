@@ -24,6 +24,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ModalCreateUserComponent } from './pages/components/modal-create-user/modal-create-user.component';
 import { ModalUpdateUserComponent } from './pages/components/modal-update-user/modal-update-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalCreateAddressComponent } from './pages/components/modal-create-address/modal-create-address.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListUsersComponent,
     ModalCreateUserComponent,
     ModalUpdateUserComponent,
+    ModalCreateAddressComponent,
   ],
   imports: [
     BrowserModule,

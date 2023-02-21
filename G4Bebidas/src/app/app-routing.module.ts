@@ -1,3 +1,5 @@
+import { ModalCreateUserComponent } from './pages/components/modal-create-user/modal-create-user.component';
+import { ModalCreateAddressComponent } from './pages/components/modal-create-address/modal-create-address.component';
 import { ProductsComponent } from './pages/components/products/products.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
@@ -17,6 +19,10 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'product', component: ProductsComponent},
   {path: 'list-users', component: ListUsersComponent},
+  {path: 'modal-create-address', component: ModalCreateAddressComponent},
+  {path: 'modal-create-address/:id', component: ModalCreateAddressComponent},
+  {path: 'modal-create-user', component: ModalCreateUserComponent},
+  {path: 'modal-create-user/:id', component: ModalCreateUserComponent},
 ];
 
 @NgModule({

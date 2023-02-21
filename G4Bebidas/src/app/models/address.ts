@@ -1,6 +1,6 @@
 import { User } from 'src/app/models/user';
 
-export interface Address {
+export class Address {
   id: number;
   cep: string;
   street: string;
