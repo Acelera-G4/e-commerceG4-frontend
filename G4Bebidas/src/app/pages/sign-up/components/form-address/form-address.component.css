@@ -3,10 +3,9 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  
 }
 
-.form-sign-up {
+.form-address {
   width: 550px;
 
   margin-top: 60px;
@@ -19,26 +18,12 @@
   flex-direction: column;
 }
 
-.img-perfil {
-  display: flex;
-  justify-content: space-around;
-  margin: 35px;
-}
-
 .container-inputs {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   width: 60%;
-  gap: 10px;
-  margin: 20px;
-}
-
-input[type="date"] {
-  background-color: cor;
-}
-input[type="date"]::-webkit-input-placeholder {
-  color: #ffff;
+  gap: 5px;
 }
 
 input {
@@ -50,22 +35,7 @@ input {
   padding: 0;
 }
 
-input::placeholder {
-  color: #fff;
-  font-size: 0.8rem;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  filter: invert(1) brightness(1000%) sepia(100%) saturate(10000%)
-    hue-rotate(240deg);
-}
-
-.button {
-  margin: 20px 0;
-}
-
-.button > a {
+.button > input {
   background-color: #fff;
   border-radius: 8px;
   border: none;
@@ -76,20 +46,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: #5c1fb1;
   cursor: pointer;
   transition: 0.3s;
+  text-decoration: none;
+  margin: 40px 0;
 }
 
-.button > a:hover {
+.button > input:hover {
   color: #fff;
   background-color: #5c1fb1;
 }
 
-.link-back {
-  margin: 30px 0;
+.link {
+  margin: 20px 0;
 }
-.link-back > p {
-  color: #ffff;
+
+.link > a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 0.8rem;
 }
-.link-back > p:hover {
+.link > a:hover {
   color: #ab47bc;
-  cursor: pointer;
 }

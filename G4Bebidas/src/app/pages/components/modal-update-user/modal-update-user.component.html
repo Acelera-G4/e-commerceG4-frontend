@@ -1,1 +1,48 @@
-<p>modal-update-user works!</p>
+<h2>Atualização de Usuário</h2>
+
+<form [formGroup]="formUser">
+  <div>
+
+    
+    
+    <label for="name">Nome:</label>
+    <input type="text" id="name" formControlName="name" required />
+  </div>
+
+  <div>
+    <label for="cpf">CPF:</label>
+    <input type="text" id="cpf" formControlName="cpf" required />
+  </div>
+
+  <div>
+    <label for="dateOfBirthday">Data de Nascimento:</label>
+    <input
+      type="date"
+      id="dateOfBirthday"
+      formControlName="dateOfBirthday"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input type="text" id="email" formControlName="email" required />
+  </div>
+
+  <div>
+    <label for="userType">User Type</label>
+    <input type="text" id="userType" formControlName="userType" required />
+  </div>
+  <div>
+    <label for="userType">Phone</label>
+    <input type="text" id="userType" formControlName="phoneNumber" required />
+  </div>
+
+  <button type="submit" (click)="createUser()">Enviar</button>
+  
+</form>
+
+<p-dialog [(visible)]="displayAddress" [style]="{width: '70vw'}" [baseZIndex]="10000">
+  <app-modal-create-address [user]="user" ></app-modal-create-address>
+</p-dialog>
+

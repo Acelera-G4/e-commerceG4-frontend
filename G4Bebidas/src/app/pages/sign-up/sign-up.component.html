@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="form-sign-up">
+  <form [formGroup]="formUser" class="form-sign-up">
     <div class="img-perfil">
       <img
         src="../../../assets/img-perfil.svg"
@@ -7,23 +7,54 @@
       />
     </div>
     <div class="container-inputs">
-      <input type="text" name="name" id="name" placeholder="Name" />
-      <input type="text" name="cpf" id="cpf" placeholder="CPF" />
+      <input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Name"
+        formControlName="name"
+      />
+      <input
+        type="text"
+        name="cpf"
+        id="cpf"
+        placeholder="CPF"
+        formControlName="cpf"
+      />
       <input
         type="date"
-        name="data-nasc"
-        id="data-nasc"
-        placeholder="Data Nasc"
+        name="dateOfBirthday"
+        id="dateOfBirthday"
+        formControlName="dateOfBirthday"
+        placeholder="dateOfBirthday"
       />
-      <input type="email" name="email" id="email" placeholder="Email" />
-      <input type="tel" name="tel" id="tel" placeholder="Telephone" />
-      <input type="password" name="password" id="password" placeholder="Password" />
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email"
+        formControlName="email"
+      />
+      <input
+        type="tel"
+        name="phoneNumber"
+        id="phoneNumber"
+        placeholder="Phone"
+        formControlName="phoneNumber"
+      />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+        formControlName="password"
+      />
     </div>
     <div class="button">
-        <button>SIGN UP</button>
-    </div>
-    <div class="link-back">
-      <p routerLink="/login"><i class="pi pi-angle-double-left" ></i></p>
+      <a (click)="createUser()">SIGN UP</a>
     </div>
   </form>
+  <!-- <div class="link-back">
+    <p routerLink="/login"><i class="pi pi-angle-double-left" ></i></p>
+  </div> -->
 </div>

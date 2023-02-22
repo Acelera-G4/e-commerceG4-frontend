@@ -1,3 +1,4 @@
+import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
 import { ModalCreateUserComponent } from './pages/components/modal-create-user/modal-create-user.component';
 import { ModalCreateAddressComponent } from './pages/components/modal-create-address/modal-create-address.component';
 import { ProductsComponent } from './pages/components/products/products.component';
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'product', component: ProductsComponent},
   {path: 'list-users', component: ListUsersComponent},
+  {path: 'form-address', component: FormAddressComponent},
+  {path: 'form-address/:id', component: FormAddressComponent},
   {path: 'modal-create-address', component: ModalCreateAddressComponent},
   {path: 'modal-create-address/:id', component: ModalCreateAddressComponent},
   {path: 'modal-create-user', component: ModalCreateUserComponent},

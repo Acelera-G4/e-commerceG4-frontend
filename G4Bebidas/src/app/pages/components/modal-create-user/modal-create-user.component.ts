@@ -35,6 +35,7 @@ export class ModalCreateUserComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    
     this.id = this.activeRouter.snapshot.params['id'];
     if (this.id) {
       this.formEmpty();
