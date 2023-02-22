@@ -25,7 +25,7 @@
         <td>{{ user.userType }}</td>
         <td>{{ user.phoneNumber }}</td>
         <td>
-          <i class="pi pi-user-edit" (click)="showDialogUpdateUser()"></i>
+          <i class="pi pi-user-edit" (click)="showDialogUpdateUser(user)"></i>
         </td>
         <td><i class="pi pi-times" (click)="deleteUserById(user.id)"></i></td>
        
@@ -45,6 +45,8 @@
 
 
 <p-dialog [(visible)]="displayUpdateUser" [style]="{width: '70vw'}" [baseZIndex]="10000">
+  <app-modal-update-user></app-modal-update-user>
+
 </p-dialog>
 
 

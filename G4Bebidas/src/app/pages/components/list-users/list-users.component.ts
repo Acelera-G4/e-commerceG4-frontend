@@ -14,7 +14,8 @@ export class ListUsersComponent {
   displayCreateUser: boolean = false;
   displayAddress: boolean = false;
   displayUpdateUser: boolean = false;
-
+  newUser: User;
+  id:number;
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
@@ -24,7 +25,6 @@ export class ListUsersComponent {
   showDialogCreateUser() {
     console.log('funfei');
     this.displayCreateUser = true;
-    
   }
 
   showDialogAddress() {
@@ -32,8 +32,8 @@ export class ListUsersComponent {
     this.displayAddress = true;
   }
 
-  showDialogUpdateUser() {
-    console.log('funfei');
+  showDialogUpdateUser(user:User) {
+    console.log('funfei', user);    
     this.displayUpdateUser = true;
   }
 
@@ -54,9 +54,9 @@ export class ListUsersComponent {
     });
   }
 
-  closeDialogs(){
+  closeDialogs() {
     this.displayCreateUser = false;
     this.displayAddress = false;
-    console.log("cliquei no " +  this.displayCreateUser)
+    console.log('cliquei no ' + this.displayCreateUser);
   }
 }
