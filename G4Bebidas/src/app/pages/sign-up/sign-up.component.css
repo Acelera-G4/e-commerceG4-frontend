@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  
 }
 
 .form-sign-up {
@@ -61,11 +60,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     hue-rotate(240deg);
 }
 
-.button {
-  margin: 20px 0;
-}
-
-.button > a {
+.button > button {
   background-color: #fff;
   border-radius: 8px;
   border: none;
@@ -76,20 +71,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: #5c1fb1;
   cursor: pointer;
   transition: 0.3s;
+  margin: 20px;
+  text-align: center;
 }
 
-.button > a:hover {
+.button > button:hover {
   color: #fff;
   background-color: #5c1fb1;
-}
-
-.link-back {
-  margin: 30px 0;
-}
-.link-back > p {
-  color: #ffff;
-}
-.link-back > p:hover {
-  color: #ab47bc;
-  cursor: pointer;
 }

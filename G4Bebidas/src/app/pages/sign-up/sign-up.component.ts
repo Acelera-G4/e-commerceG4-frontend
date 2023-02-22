@@ -70,12 +70,30 @@ export class SignUpComponent implements OnInit {
       cpf: [user.cpf],
       dateOfBirthday: [dateOfBirthday],
       email: [user.email],
-      userType: [user.userType],
+      phoneNumber: [user.phoneNumber],
       password: [user.password],
     });
   }
 
   createUser() {
+
+    const user = this.formUser.value;
+
+    if (!user.name) {
+      alert('Por favor, informe o nome');
+      return;
+    }
+  
+    if (!user.email) {
+      alert('Por favor, informe o e-mail');
+      return;
+    }
+  
+    if (!user.phoneNumber) {
+      alert('Por favor, informe o telefone');
+      return;
+    }
+    
     this.userService.createUser(this.formUser.value).subscribe({
       next: (cadastrado) => {
         console.log('cadastrado', cadastrado.id);
