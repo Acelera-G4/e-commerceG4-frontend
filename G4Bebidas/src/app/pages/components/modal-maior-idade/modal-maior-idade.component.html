@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="header">
+    <img src="../../../../assets/lgo_colorida.svg" alt="Logo G4 Bebidas" />
+    <h3>Bem-Vindo!!</h3>
+    <p>Você tem mais de 18 anos?</p>
+  </div>
+  <div >
+    <button (click)="closeDialog()"  class="yes">Sim</button>
+    <button class="no">Não</button>
+  </div>
+  <div class="checkbox">
+    <input type="checkbox" name="maiorIdadeCheckbox" id="maiorIdadeCheckbox" (change)="rememberAnswer()" #maiorIdadeCheckbox />
+    <p>Lembrar minha resposta em futuros acessos.</p>
+  </div>
+  <p>
+    Continuando você estará aceitando os
+    <a href="#">
+      "termos e Condições","Politica de Privacidade" e "Politícas e Cookies"</a
+    >
+  </p>
+</div>

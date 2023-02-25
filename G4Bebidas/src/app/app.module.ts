@@ -26,6 +26,7 @@ import { ModalUpdateUserComponent } from './pages/components/modal-update-user/m
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalCreateAddressComponent } from './pages/components/modal-create-address/modal-create-address.component';
 import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
+import { ModalMaiorIdadeComponent } from './pages/components/modal-maior-idade/modal-maior-idade.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { FormAddressComponent } from './pages/sign-up/components/form-address/fo
     ModalUpdateUserComponent,
     ModalCreateAddressComponent,
     FormAddressComponent,
+    ModalMaiorIdadeComponent,
     
   ],
   imports: [
