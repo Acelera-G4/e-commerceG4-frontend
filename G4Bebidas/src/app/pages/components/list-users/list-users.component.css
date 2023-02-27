@@ -33,6 +33,7 @@
 
 .table tbody + tbody {
   border-top: 2px solid #ffff;
+
 }
 
 .pi {
@@ -49,8 +50,21 @@
 .pi:hover {
   background-color: #6e2c9d;
   color: #fff;
-  
 }
+.pi-times:hover {
+  background-color: rgb(199, 30, 30);
+  color: #fff;
+}
+
+.no-users-message {
+  font-size: 1.2rem;
+  margin-top: 5rem;
+  position: absolute;
+  left: 310px;
+  color: #6e2c9d;
+}
+
+
 
 @media (max-width: 644px) {
   .table-responsive {

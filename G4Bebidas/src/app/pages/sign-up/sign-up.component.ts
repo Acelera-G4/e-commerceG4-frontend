@@ -107,4 +107,6 @@ export class SignUpComponent implements OnInit {
   teste() {
     console.log('oi');
   }
+
+  
 }

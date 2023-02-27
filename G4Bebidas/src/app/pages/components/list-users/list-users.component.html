@@ -16,38 +16,52 @@
       </tr>
     </thead>
     <tbody>
+      <div
+        class="no-users-message"
+        *ngIf="listUsers.length > 0; else noUsers"
+      ></div>
       <tr *ngFor="let user of listUsers">
         <td>{{ user.id }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.cpf }}</td>
         <td>{{ user.dateOfBirthday }}</td>
-        <td>{{ user.email }}</td>
+        <td *ngIf="listUsers.length > 0; else noUsers">{{ user.email }}</td>
         <td>{{ user.userType }}</td>
         <td>{{ user.phoneNumber }}</td>
         <td>
           <i class="pi pi-user-edit" (click)="showDialogUpdateUser(user)"></i>
         </td>
         <td><i class="pi pi-times" (click)="deleteUserById(user.id)"></i></td>
-       
       </tr>
     </tbody>
   </table>
 </div>
 
-<p-dialog [(visible)]="displayCreateUser" [style]="{width: '70vw'}" [baseZIndex]="10000">
+<p-dialog
+  [(visible)]="displayCreateUser"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+>
   <app-modal-create-user></app-modal-create-user>
 </p-dialog>
 
-
-<p-dialog [(visible)]="displayAddress" [style]="{width: '70vw'}" [baseZIndex]="10000">
+<p-dialog
+  header="Long Content"
+  [(visible)]="displayAddress"
+  [style]="{ width: '500vw' }"
+  [baseZIndex]="1000"
+>
   <app-modal-create-address></app-modal-create-address>
 </p-dialog>
 
-
-<p-dialog [(visible)]="displayUpdateUser" [style]="{width: '70vw'}" [baseZIndex]="10000">
+<p-dialog
+  [(visible)]="displayUpdateUser"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+>
   <app-modal-update-user></app-modal-update-user>
-
 </p-dialog>
 
-
-
+<ng-template #noUsers>
+  <p class="no-users-message">Não usuários cadastrados para serem exibidos</p>
+</ng-template>

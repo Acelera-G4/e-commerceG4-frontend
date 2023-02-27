@@ -20,6 +20,7 @@ export class ListUsersComponent {
 
   ngOnInit(): void {
     this.listAllUsers();
+ 
   }
 
   showDialogCreateUser() {

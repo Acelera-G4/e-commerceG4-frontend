@@ -1,0 +1,55 @@
+.title {
+    font-size: 1.6rem;
+    color: #6e2c9d;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+   
+    
+  }
+  form > input {
+    width: 70%;
+    border: none;
+    border-bottom: 1px solid #ab47bc;
+  }
+  form > input:hover {
+    border-bottom: 1px solid #6e2c9d;
+  }
+  form > input::placeholder {
+    color: #ab47bc;
+    font-size: 0.8rem;
+  }
+  form > #dateOfBirthday {
+    color: #ab47bc !important;
+    font-size: 0.8rem;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(1) brightness(10090%) sepia(100%) saturate(10000%)
+      hue-rotate(200deg);
+  }
+  
+  form > .button {
+    margin-top: 25px;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+  }
+  .button > .button-create {
+    background-color: #ab47bc;
+    box-shadow: 1px 1px 5px #6e2c9d;
+    border-radius: 8px;
+    border: none;
+    height: 30px;
+    width: 150px;
+    font-weight: 600;
+    color: #ffff;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
