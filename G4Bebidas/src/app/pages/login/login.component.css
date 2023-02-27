@@ -8,7 +8,7 @@
 
 .form-login {
   width: 550px;
-  margin-top: 60px;
+  margin-top: 40px;
   border-radius: 8px;
   background-image: linear-gradient(#ab47bc, #5c1fb1);
   box-shadow: 1px 1px 10px #ab47bc;
@@ -39,22 +39,25 @@
 .container-input {
   display: flex;
   flex-direction: column;
-  align-self: center;
-  width: 60%;
-  gap: 15px;
+  flex-wrap: wrap;
+  width: 70%;
+  
 }
 
 .container-input > input {
-  outline: 0;
-  border-width: 0 0 1px;
+  border: none;
+  border-bottom: 1px solid #ab47bc;
   border-color: #fff;
-  border-radius: 0;
   background: transparent;
   padding: 0;
+  margin: 10px;
 }
 .container-input > input::placeholder {
+  position: absolute;
+  left: 15px;
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 1rem;
+  
 }
 
 .container-checkbox {

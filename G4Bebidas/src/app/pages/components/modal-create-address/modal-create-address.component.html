@@ -1,9 +1,18 @@
 <form [formGroup]="formAddress">
-  <label for="cep">CEP:</label>
-  <input type="text" id="cep" name="cep" formControlName="cep" required />
+  <h2 class="title">Now Address</h2>
 
-  <label for="street">Rua:</label>
   <input
+    pInputText
+    placeholder="CEP"
+    type="text"
+    id="cep"
+    name="cep"
+    formControlName="cep"
+    required
+  />
+  <input
+    pInputText
+    placeholder="Street"
     type="text"
     id="street"
     name="street"
@@ -11,8 +20,9 @@
     required
   />
 
-  <label for="number">Número:</label>
   <input
+    pInputText
+    placeholder="Number"
     type="text"
     id="number"
     name="number"
@@ -20,23 +30,39 @@
     required
   />
 
-  <label for="complement">Complemento:</label>
   <input
+    pInputText
+    placeholder="Complement"
     type="text"
     id="complement"
     name="complement"
     formControlName="complement"
   />
+  <input
+    pInputText
+    placeholder="City"
+    type="text"
+    id="city"
+    name="city"
+    formControlName="city"
+    required
+  />
 
-  <label for="city">Cidade:</label>
-  <input type="text" id="city" name="city" formControlName="city" required />
-
-  <label for="uf">Estado:</label>
-  <input type="text" id="uf" name="uf" required formControlName="uf" />
-
-  <input type="submit" value="Salvar " (click)="createAddress()" />
-
-
-  
+  <input
+    pInputText
+    placeholder="State"
+    type="text"
+    id="uf"
+    name="uf"
+    required
+    formControlName="uf"
+  />
+  <div class="button">
+    <input
+      class="button-create"
+      type="submit"
+      value="Salvar "
+      (click)="createAddress()"
+    />
+  </div>
 </form>
-

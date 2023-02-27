@@ -8,13 +8,15 @@
     </div>
     <div class="container-inputs">
       <input
+        pInputText
+        placeholder="Name"
         type="text"
         name="name"
         id="name"
-        placeholder="Name"
         formControlName="name"
       />
       <input
+        pInputText
         type="text"
         name="cpf"
         id="cpf"
@@ -22,6 +24,7 @@
         formControlName="cpf"
       />
       <input
+        pInputText
         type="date"
         name="dateOfBirthday"
         id="dateOfBirthday"
@@ -29,6 +32,7 @@
         placeholder="dateOfBirthday"
       />
       <input
+        pInputText
         type="email"
         name="email"
         id="email"
@@ -36,6 +40,7 @@
         formControlName="email"
       />
       <input
+        pInputText
         type="tel"
         name="phoneNumber"
         id="phoneNumber"
@@ -43,6 +48,7 @@
         formControlName="phoneNumber"
       />
       <input
+        pInputText
         type="password"
         name="password"
         id="password"
@@ -51,10 +57,7 @@
       />
     </div>
     <div class="button">
-      <button (click)="createUser()">SIGN UP</button>
+      <button class="button-create" (click)="createUser()">SIGN UP</button>
     </div>
   </form>
-  <!-- <div class="link-back">
-    <p routerLink="/login"><i class="pi pi-angle-double-left" ></i></p>
-  </div> -->
 </div>

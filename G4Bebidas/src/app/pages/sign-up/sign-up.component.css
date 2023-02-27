@@ -7,46 +7,43 @@
 
 .form-sign-up {
   width: 550px;
-
-  margin-top: 60px;
+  margin-top: 40px;
   border-radius: 8px;
   background-image: linear-gradient(#ab47bc, #5c1fb1);
   box-shadow: 1px 1px 10px #ab47bc;
   color: #fff;
   display: flex;
   align-items: center;
+  /* height: 549px; */
   flex-direction: column;
 }
 
 .img-perfil {
   display: flex;
   justify-content: space-around;
-  margin: 35px;
+  margin: 20px;
 }
 
 .container-inputs {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 60%;
-  gap: 10px;
-  margin: 20px;
+  width: 70%;
+  outline: none;
+  border-bottom: 1px solid #ab47bc;
+ 
 }
 
-input[type="date"] {
-  background-color: cor;
-}
-input[type="date"]::-webkit-input-placeholder {
-  color: #ffff;
+.container-inputs > input:hover {
+  border-bottom: 1px solid #6e2c9d;
 }
 
 input {
-  border-width: 0 0 1px;
-  border-color: #fff;
-  color: #ffff;
-  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #fff;
   background: transparent;
-  padding: 0;
+  font-size: 0.8rem;
+  color: #fff !important;
 }
 
 input::placeholder {
@@ -57,7 +54,11 @@ input::placeholder {
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   filter: invert(1) brightness(1000%) sepia(100%) saturate(10000%)
-    hue-rotate(240deg);
+    hue-rotate(180deg);
+}
+
+#dateOfBirthday::placeholder {
+  color: #fff;
 }
 
 .button > button {
@@ -71,7 +72,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: #5c1fb1;
   cursor: pointer;
   transition: 0.3s;
-  margin: 20px;
+  margin: 25px;
   text-align: center;
 }
 
