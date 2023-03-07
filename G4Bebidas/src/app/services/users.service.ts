@@ -7,12 +7,18 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class UserService {
-  url: string = 'http://localhost:8080/user';
+  username = 'User';
+  password = '1234567';
+  url: string = 'api/user';
 
   constructor(private httpClient: HttpClient) {}
 
   listAllUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.url}`);
+    return this.httpClient.get<User[]>(`${this.url}`, {
+      headers: {
+        Authorization: 'Basic ' + btoa(this.username + ':' + this.password),
+      },
+    });
   }
 
   listUserById(id: number): Observable<User> {
@@ -24,8 +30,11 @@ export class UserService {
   }
 
   createUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.url}`, user);
+    // console.log('criando usuario');
+    return this.httpClient.post<User>(`${this.url}`, user, {
+      headers: {
+        Authorization: 'Basic ' + btoa(this.username + ':' + this.password),
+      },
+    });
   }
-
-  
 }
