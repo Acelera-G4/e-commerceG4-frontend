@@ -27,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ModalCreateAddressComponent } from './pages/components/modal-create-address/modal-create-address.component';
 import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
 import { ModalMaiorIdadeComponent } from './pages/components/modal-maior-idade/modal-maior-idade.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ModalMaiorIdadeComponent } from './pages/components/modal-maior-idade/m
     ModalCreateAddressComponent,
     FormAddressComponent,
     ModalMaiorIdadeComponent,
+    CartComponent,
     
   ],
   imports: [
