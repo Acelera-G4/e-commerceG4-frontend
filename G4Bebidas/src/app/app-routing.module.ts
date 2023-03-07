@@ -13,7 +13,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { ListUsersComponent } from './pages/components/list-users/list-users.component';
 
 const routes: Routes = [
-  {path: "", component: HomeComponent },
+  {path: "", component: LoginComponent },
   {path: 'home', component: HomeComponent },
   {path: 'login', component: LoginComponent},
   {path: 'sign-up', component: SignUpComponent},

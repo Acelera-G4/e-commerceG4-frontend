@@ -3,7 +3,7 @@ import { ChartModule } from 'primeng/chart';
 import { ListUsersComponent } from './pages/components/list-users/list-users.component';
 import { HeaderComponent } from './pages/components/header/header.component';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,11 +23,13 @@ import { ButtonModule } from 'primeng/button';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ModalCreateUserComponent } from './pages/components/modal-create-user/modal-create-user.component';
 import { ModalUpdateUserComponent } from './pages/components/modal-update-user/modal-update-user.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ModalCreateAddressComponent } from './pages/components/modal-create-address/modal-create-address.component';
-import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
 import { ModalMaiorIdadeComponent } from './pages/components/modal-maior-idade/modal-maior-idade.component';
-
+import { AngularToastifyModule, ToastService } from 'angular-toastify';
+// import { ToastService } from 'angular-toastify/lib/toast.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,6 @@ import { ModalMaiorIdadeComponent } from './pages/components/modal-maior-idade/m
     ModalCreateAddressComponent,
     FormAddressComponent,
     ModalMaiorIdadeComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -59,10 +60,11 @@ import { ModalMaiorIdadeComponent } from './pages/components/modal-maior-idade/m
     HttpClientModule,
     DialogModule,
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularToastifyModule,
   ],
   exports: [AppRoutingModule],
-  providers: [],
+  providers: [ToastService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
