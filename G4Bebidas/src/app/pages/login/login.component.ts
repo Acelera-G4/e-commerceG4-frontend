@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
+import { elements } from 'chart.js';
 import { LoginModel } from 'src/app/models/login';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/isLoggedIn.service';
@@ -64,12 +65,12 @@ export class LoginComponent implements OnInit {
     });
   }
   loginUser() {
+    let iName: any;
     const e = this.formLogin.value;
-    console.log(e);
+
     let iEmail: any = this.listUsers
       .map((element) => element.email)
       .includes(e.email);
-
     let iPassword: any = this.listUsers
       .map((element) => element.password)
       .includes(e.password);
@@ -88,5 +89,12 @@ export class LoginComponent implements OnInit {
         this.toast.error('senha incorreta!');
       }
     }
+    iName = this.listUsers.find((el) => el.email === e.email);
+
+    console.log(e);
+
+    localStorage.setItem('name', iName.name);
+
+    console.log(iName.name);
   }
 }

@@ -2,11 +2,11 @@ import { FormAddressComponent } from './components/form-address/form-address.com
 
 import { User } from './../../models/user';
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddressService } from 'src/app/services/address.service';
 import { UserService } from 'src/app/services/users.service';
 import { ListUsersComponent } from '../components/list-users/list-users.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -100,7 +100,6 @@ export class SignUpComponent implements OnInit {
       },
       error: (erro) => console.log('errouuu'),
     });
-    // console.log(this.formUser.value);
   }
 
   teste() {

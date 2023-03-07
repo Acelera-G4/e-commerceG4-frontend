@@ -18,7 +18,6 @@ export class AddressService {
   };
 
   urlListAddress: string = 'api/address';
-  // urlListUsers: string = 'http://localhost:8080/users';
 
   constructor(private httpClient: HttpClient) {}
 

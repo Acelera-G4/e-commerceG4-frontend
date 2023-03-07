@@ -14,10 +14,12 @@ export class AuthService {
     this.isLogIn = false;
     localStorage.setItem('log', JSON.stringify(this.isLogIn));
     localStorage.setItem('maiorIdadeCheckbox', 'false');
+    localStorage.removeItem('name');
     this.router.navigate(['/']);
   }
 
   isLoggedIn(): boolean {
+    localStorage.setItem('log', 'false');
     return this.isLogIn;
   }
 }

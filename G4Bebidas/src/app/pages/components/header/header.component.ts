@@ -8,12 +8,13 @@ import { AuthService } from 'src/app/services/isLoggedIn.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  displaySidebar = false;
   isDashboard = false;
   isLogin = false;
   isSignUp = false;
   isHome = false;
   isFormAddress = false;
-
+  name: string | null = localStorage.getItem('name');
   constructor(private router: Router, private auth: AuthService) {}
 
   ngOnInit(): void {
@@ -48,6 +49,7 @@ export class HeaderComponent {
 
   logout() {
     console.log('saindo');
+    this.displaySidebar = false;
     this.auth.logout();
   }
 }

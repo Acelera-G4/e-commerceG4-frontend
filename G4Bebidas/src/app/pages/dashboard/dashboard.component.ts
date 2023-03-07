@@ -26,9 +26,6 @@ export class DashboardComponent {
     };
   }
   ngOnInit(): void {
-    localStorage.getItem('log') == 'false'
-      ? console.log('é falsoooo')
-      : console.log('é verdade');
     localStorage.getItem('log') != (null || 'false')
       ? this.router.navigate(['/dashboard'])
       : this.router.navigate(['/']);
