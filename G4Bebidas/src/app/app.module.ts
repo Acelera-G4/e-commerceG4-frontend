@@ -30,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { CartComponent } from './pages/cart/cart.component';
+import { Sidebar, SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,6 @@ import { CartComponent } from './pages/cart/cart.component';
     ModalCreateAddressComponent,
     FormAddressComponent,
     ModalMaiorIdadeComponent,
-
     CartComponent,
   ],
   imports: [
@@ -64,6 +64,7 @@ import { CartComponent } from './pages/cart/cart.component';
     ButtonModule,
     ReactiveFormsModule,
     AngularToastifyModule,
+    SidebarModule,
   ],
   exports: [AppRoutingModule],
   providers: [ToastService],

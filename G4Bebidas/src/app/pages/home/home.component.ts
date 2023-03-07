@@ -25,16 +25,7 @@ export class HomeComponent implements OnInit {
     this.display = false;
   }
 
-  // isLoggedIn(): boolean {
-  //   console.log(this.auth.isLoggedIn());
-  //   return this.auth.isLoggedIn();
-  // }
-
   ngOnInit(): void {
-    console.log(localStorage.getItem('log'));
-    localStorage.getItem('log') == 'false'
-      ? console.log('é falsoooo')
-      : console.log('é verdade');
     localStorage.getItem('log') != (null || 'false')
       ? this.router.navigate(['/home'])
       : this.router.navigate(['/']);
