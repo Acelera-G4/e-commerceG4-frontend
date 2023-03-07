@@ -76,24 +76,23 @@ export class SignUpComponent implements OnInit {
   }
 
   createUser() {
-
     const user = this.formUser.value;
 
     if (!user.name) {
       alert('Por favor, informe o nome');
       return;
     }
-  
+
     if (!user.email) {
       alert('Por favor, informe o e-mail');
       return;
     }
-  
+
     if (!user.phoneNumber) {
       alert('Por favor, informe o telefone');
       return;
     }
-    
+
     this.userService.createUser(this.formUser.value).subscribe({
       next: (cadastrado) => {
         console.log('cadastrado', cadastrado.id);
@@ -101,12 +100,10 @@ export class SignUpComponent implements OnInit {
       },
       error: (erro) => console.log('errouuu'),
     });
-    console.log(this.formUser.value);
+    // console.log(this.formUser.value);
   }
 
   teste() {
     console.log('oi');
   }
-
-  
 }
