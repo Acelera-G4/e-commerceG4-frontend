@@ -33,8 +33,8 @@ export class ModalUpdateUserComponent {
     private router: Router,
     private activeRouter: ActivatedRoute,
   ) {}
-  ngAfterViewInit(): void {
-  }
+  // ngAfterViewInit(): void {
+  // }
 
   ngOnInit(): void {
     this.id = this.activeRouter.snapshot.params['id'];

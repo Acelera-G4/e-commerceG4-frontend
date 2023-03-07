@@ -1,3 +1,4 @@
+import { CartComponent } from './pages/cart/cart.component';
 import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
 import { ModalCreateUserComponent } from './pages/components/modal-create-user/modal-create-user.component';
 import { ModalCreateAddressComponent } from './pages/components/modal-create-address/modal-create-address.component';
@@ -13,23 +14,24 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { ListUsersComponent } from './pages/components/list-users/list-users.component';
 
 const routes: Routes = [
-  {path: "", component: HomeComponent },
-  {path: 'home', component: HomeComponent },
-  {path: 'login', component: LoginComponent},
-  {path: 'sign-up', component: SignUpComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'product', component: ProductsComponent},
-  {path: 'list-users', component: ListUsersComponent},
-  {path: 'form-address', component: FormAddressComponent},
-  {path: 'form-address/:id', component: FormAddressComponent},
-  {path: 'modal-create-address', component: ModalCreateAddressComponent},
-  {path: 'modal-create-address/:id', component: ModalCreateAddressComponent},
-  {path: 'modal-create-user', component: ModalCreateUserComponent},
-  {path: 'modal-create-user/:id', component: ModalCreateUserComponent},
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'sign-up', component: SignUpComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'product', component: ProductsComponent },
+  { path: 'list-users', component: ListUsersComponent },
+  { path: 'form-address', component: FormAddressComponent },
+  { path: 'form-address/:id', component: FormAddressComponent },
+  { path: 'modal-create-address', component: ModalCreateAddressComponent },
+  { path: 'modal-create-address/:id', component: ModalCreateAddressComponent },
+  { path: 'modal-create-user', component: ModalCreateUserComponent },
+  { path: 'modal-create-user/:id', component: ModalCreateUserComponent },
+  { path: 'cart', component: CartComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

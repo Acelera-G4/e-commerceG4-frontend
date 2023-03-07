@@ -1,12 +1,14 @@
 <div class="container">
   <form [formGroup]="formAddress" class="form-address">
-    <h3>Adicione seu endereço</h3>
+    <h2 class="title">Address</h2>
     <div class="container-inputs">
-      <label for="cep">CEP:</label>
-      <input type="text" id="cep" name="cep" formControlName="cep" required />
+    
+      <input pInputText
+      placeholder="CEP" type="text" id="cep" name="cep" formControlName="cep" required />
 
-      <label for="street">Rua:</label>
       <input
+        pInputText
+        placeholder="Street"
         type="text"
         id="street"
         name="street"
@@ -14,8 +16,9 @@
         required
       />
 
-      <label for="number">Número:</label>
       <input
+        pInputText
+        placeholder="Number"
         type="text"
         id="number"
         name="number"
@@ -23,16 +26,18 @@
         required
       />
 
-      <label for="complement">Complemento:</label>
       <input
+        pInputText
+        placeholder="complement"
         type="text"
         id="complement"
         name="complement"
         formControlName="complement"
       />
 
-      <label for="city">Cidade:</label>
       <input
+        pInputText
+        placeholder="City"
         type="text"
         id="city"
         name="city"
@@ -40,8 +45,15 @@
         required
       />
 
-      <label for="uf">Estado:</label>
-      <input type="text" id="uf" name="uf" required formControlName="uf" />
+      <input
+        pInputText
+        placeholder="UF"
+        type="text"
+        id="uf"
+        name="uf"
+        required
+        formControlName="uf"
+      />
     </div>
     <div class="button">
       <input type="submit" value="Criar " (click)="teste()" />

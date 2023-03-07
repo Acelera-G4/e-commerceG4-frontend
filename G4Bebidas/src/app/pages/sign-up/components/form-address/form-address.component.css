@@ -5,6 +5,12 @@
   flex-wrap: wrap;
 }
 
+.title {
+  margin-top: 25px;
+  font-size: 1.8rem;
+  color: #ffff;
+}
+
 .form-address {
   width: 550px;
 
@@ -22,17 +28,19 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 60%;
-  gap: 5px;
+  width: 70%;
 }
 
 input {
-  border-width: 0 0 1px;
-  border-color: #fff;
   color: #ffff;
-  border-radius: 0;
   background: transparent;
-  padding: 0;
+  border: none;
+  border-bottom: 1px solid #fff;
+}
+
+input::placeholder {
+  color: #fff;
+  font-size: 0.8rem;
 }
 
 .button > input {
