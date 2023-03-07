@@ -15,12 +15,14 @@ export class ListUsersComponent {
   displayAddress: boolean = false;
   displayUpdateUser: boolean = false;
   newUser: User;
-  id:number;
+  id: number;
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
+    localStorage.getItem('log') != (null || 'false')
+      ? this.router.navigate(['/list-users'])
+      : this.router.navigate(['/']);
     this.listAllUsers();
- 
   }
 
   showDialogCreateUser() {
@@ -33,8 +35,8 @@ export class ListUsersComponent {
     this.displayAddress = true;
   }
 
-  showDialogUpdateUser(user:User) {
-    console.log('funfei', user);    
+  showDialogUpdateUser(user: User) {
+    console.log('funfei', user);
     this.displayUpdateUser = true;
   }
 

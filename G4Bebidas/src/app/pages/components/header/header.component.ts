@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/isLoggedIn.service';
 
 @Component({
   selector: 'app-header',
@@ -11,25 +12,29 @@ export class HeaderComponent {
   isLogin = false;
   isSignUp = false;
   isHome = false;
-  isFormAddres = false;
+  isFormAddress = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: AuthService) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
-      if (this.router.url === '/login' || this.router.url === '/sign-up' || this.router.url.startsWith('/form-address')) {
+      if (
+        this.router.url === '/login' ||
+        this.router.url === '/sign-up' ||
+        this.router.url.startsWith('/form-address')
+      ) {
         this.isLogin = true;
         this.isSignUp = true;
-        this.isFormAddres = true;
+        this.isFormAddress = true;
       } else {
         this.isLogin = false;
         this.isSignUp = false;
-        this.isFormAddres = false;
+        this.isFormAddress = false;
       }
 
       if (
         this.router.url === '/dashboard' ||
-        this.router.url === '/list-users'||
+        this.router.url === '/list-users' ||
         this.router.url === '/product'
       ) {
         this.isDashboard = true;
@@ -39,5 +44,10 @@ export class HeaderComponent {
         this.isHome = false;
       }
     });
+  }
+
+  logout() {
+    console.log('saindo');
+    this.auth.logout();
   }
 }

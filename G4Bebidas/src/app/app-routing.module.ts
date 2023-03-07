@@ -14,6 +14,21 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { ListUsersComponent } from './pages/components/list-users/list-users.component';
 
 const routes: Routes = [
+<<<<<<< HEAD
+  {path: "", component: LoginComponent },
+  {path: 'home', component: HomeComponent },
+  {path: 'login', component: LoginComponent},
+  {path: 'sign-up', component: SignUpComponent},
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'product', component: ProductsComponent},
+  {path: 'list-users', component: ListUsersComponent},
+  {path: 'form-address', component: FormAddressComponent},
+  {path: 'form-address/:id', component: FormAddressComponent},
+  {path: 'modal-create-address', component: ModalCreateAddressComponent},
+  {path: 'modal-create-address/:id', component: ModalCreateAddressComponent},
+  {path: 'modal-create-user', component: ModalCreateUserComponent},
+  {path: 'modal-create-user/:id', component: ModalCreateUserComponent},
+=======
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -28,6 +43,7 @@ const routes: Routes = [
   { path: 'modal-create-user', component: ModalCreateUserComponent },
   { path: 'modal-create-user/:id', component: ModalCreateUserComponent },
   { path: 'cart', component: CartComponent },
+>>>>>>> main
 ];
 
 @NgModule({
