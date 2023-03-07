@@ -10,31 +10,28 @@ export class UserService {
   username = 'User';
   password = '1234567';
   url: string = 'api/user';
+  header = {
+    headers: {
+      Authorization: 'Basic ' + btoa(this.username + ':' + this.password),
+    },
+  };
 
   constructor(private httpClient: HttpClient) {}
 
   listAllUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.url}`, {
-      headers: {
-        Authorization: 'Basic ' + btoa(this.username + ':' + this.password),
-      },
-    });
+    return this.httpClient.get<User[]>(`${this.url}`, this.header);
   }
 
   listUserById(id: number): Observable<User> {
-    return this.httpClient.get<User>(`${this.url}/${id}`);
+    return this.httpClient.get<User>(`${this.url}/${id}`, this.header);
   }
 
   deleteUserById(id: number): Observable<User> {
-    return this.httpClient.delete<User>(`${this.url}/${id}`);
+    return this.httpClient.delete<User>(`${this.url}/${id}`, this.header);
   }
 
   createUser(user: User): Observable<User> {
     // console.log('criando usuario');
-    return this.httpClient.post<User>(`${this.url}`, user, {
-      headers: {
-        Authorization: 'Basic ' + btoa(this.username + ':' + this.password),
-      },
-    });
+    return this.httpClient.post<User>(`${this.url}`, user, this.header);
   }
 }
