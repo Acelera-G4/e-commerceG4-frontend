@@ -25,16 +25,11 @@ import { ModalCreateUserComponent } from './pages/components/modal-create-user/m
 import { ModalUpdateUserComponent } from './pages/components/modal-update-user/modal-update-user.component';
 import { ModalCreateAddressComponent } from './pages/components/modal-create-address/modal-create-address.component';
 import { ModalMaiorIdadeComponent } from './pages/components/modal-maior-idade/modal-maior-idade.component';
-<<<<<<< HEAD
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
-// import { ToastService } from 'angular-toastify/lib/toast.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
 import { BrowserModule } from '@angular/platform-browser';
-=======
 import { CartComponent } from './pages/cart/cart.component';
-
->>>>>>> main
 
 @NgModule({
   declarations: [
@@ -53,11 +48,8 @@ import { CartComponent } from './pages/cart/cart.component';
     ModalCreateAddressComponent,
     FormAddressComponent,
     ModalMaiorIdadeComponent,
-<<<<<<< HEAD
-=======
+
     CartComponent,
-    
->>>>>>> main
   ],
   imports: [
     BrowserModule,
