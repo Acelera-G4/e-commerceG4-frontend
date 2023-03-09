@@ -1,0 +1,61 @@
+<div class="container table-responsive" *ngIf="listingCategories">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="header-list">ID</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th></th>
+        <th>
+          <i class="pi pi-user-plus" (click)="showDialogCreateCategory()"></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <div class="no-categories-message" *ngIf="categories.length > 0; else noCategories"></div>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.categoryId }}</td>
+        <td>{{ category.name }}</td>
+        <td>{{ category.description }}</td>
+        <td>
+          <i class="pi pi-pencil" (click)="showDialogUpdateCategory(category)"></i>
+        </td>
+        <td><i class="pi pi-trash" (click)="deleteCategory(category)"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noCategories>
+  <p class="no-categories-message">Não há categorias cadastradas.</p>
+</ng-template>
+
+
+
+<p-dialog [(visible)]="displayCreateCategory" [style]="{ width: '70vw' }" [baseZIndex]="10000">
+  <form [formGroup]="categoryForm">
+    <h2 class="title">Nova Categoria</h2>
+    <input pInputText placeholder="Nome" type="text" id="name" formControlName="name" required />
+
+    <input pInputText placeholder="Descrição" type="text" id="description" formControlName="description" required />
+
+    <div class="button">
+      <button class="button-create" type="submit" (click)="postCategory()">
+        Criar Categoria
+      </button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog [(visible)]="displayUpdateCategory" [style]="{ width: '70vw' }" [baseZIndex]="10000">
+  <form [formGroup]="categoryForm" *ngIf="displayUpdateCategory">
+    <h2 class="title">Atualizar Categoria</h2>
+    <input pInputText placeholder="Nome" type="text" id="name" formControlName="name" required />
+    <input pInputText placeholder="Descrição" type="text" id="description" formControlName="description" required />
+    <div class="button">
+      <button class="button-create" type="submit" (click)="putCategory()">
+        Atualizar Categoria
+      </button>
+    </div>
+  </form>
+</p-dialog>

@@ -1,9 +1,10 @@
+import { AngularToastifyModule, ToastService } from 'angular-toastify';
 import { ChartModule } from 'primeng/chart';
 
 import { ListUsersComponent } from './pages/components/list-users/list-users.component';
 import { HeaderComponent } from './pages/components/header/header.component';
 import { NgModule } from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,12 +24,12 @@ import { ButtonModule } from 'primeng/button';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ModalCreateUserComponent } from './pages/components/modal-create-user/modal-create-user.component';
 import { ModalUpdateUserComponent } from './pages/components/modal-update-user/modal-update-user.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalCreateAddressComponent } from './pages/components/modal-create-address/modal-create-address.component';
 import { ModalMaiorIdadeComponent } from './pages/components/modal-maior-idade/modal-maior-idade.component';
-import { AngularToastifyModule, ToastService } from 'angular-toastify';
-import { ReactiveFormsModule } from '@angular/forms';
+import { CategoriesComponent } from './pages/components/categories/categories.component';
+import { DropdownModule } from 'primeng/dropdown';
 import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { CartComponent } from './pages/cart/cart.component';
 import { Sidebar, SidebarModule } from 'primeng/sidebar';
 
@@ -50,6 +51,7 @@ import { Sidebar, SidebarModule } from 'primeng/sidebar';
     FormAddressComponent,
     ModalMaiorIdadeComponent,
     CartComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,9 +67,11 @@ import { Sidebar, SidebarModule } from 'primeng/sidebar';
     ReactiveFormsModule,
     AngularToastifyModule,
     SidebarModule,
+    FormsModule,
+    DropdownModule
   ],
   exports: [AppRoutingModule],
   providers: [ToastService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
