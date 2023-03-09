@@ -1,4 +1,5 @@
 .container {
+  padding: 0 50px;
   width: 100vw;
   font-weight: 500;
   background-color: #ffff;
@@ -12,7 +13,7 @@
 .container::after {
   content: "";
   width: 90%;
-  /* border-top: thin solid rgba(192, 192, 192, 0.075); */
+  border-top: thin solid rgba(192, 192, 192, 0.075);
 }
 
 .logo {
@@ -38,7 +39,9 @@
 
 .menu {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 35px;
 }
 
 .menu > a {
@@ -107,7 +110,7 @@
 }
 
 .aviso {
-  text-align: left;
+  /* text-align: left; */
   color: #491b89;
   font-size: 1rem;
   font-weight: 700;

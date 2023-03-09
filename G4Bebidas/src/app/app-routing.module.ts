@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'modal-create-address/:id', component: ModalCreateAddressComponent },
   { path: 'modal-create-user', component: ModalCreateUserComponent },
   { path: 'modal-create-user/:id', component: ModalCreateUserComponent },
+  { path: 'cart', component: CartComponent },
 ];
 
 @NgModule({
