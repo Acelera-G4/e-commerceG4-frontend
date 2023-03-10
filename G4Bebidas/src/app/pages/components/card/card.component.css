@@ -1,36 +1,42 @@
 .card {
-  margin-top: 50px;
-  box-shadow: 1px 1px 20px #A581D9;
-  width: 250px;
-  height: 460px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+  margin: 50px;
+  box-shadow: 1px 1px 20px #a581d9;
+  box-sizing: border-box;
+  border-radius: 8px 8px 0 0;
+}
+
+.img-card > img {
+  width: 100%;
   border-radius: 8px 8px 0 0;
 }
 
 .content-card > h4 {
-  margin: 0 auto;
-  width: 80%;
-  font-weight: 500;
+  width: 100%;
+  font-weight: 600;
   text-align: center;
-  margin: 10px;
-}
-
-.img-card>img{
-    border-radius: 8px 8px 0 0;
+  color: #a581d9;
+  font-size: 2rem;
 }
 
 .content-card > p {
-  margin: 0;
-  margin-left: 15px;
+  color: #491b89;
+  margin: 15px;
+}
+
+.price{
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .buttons-card {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   width: 100%;
-  height: 68px;
   margin-top: 10px;
-  /* border-radius: 8px 8px 0 0; */
 }
 
 .button {
@@ -42,13 +48,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 
-.button-radius-left{
-    border-radius: 15px 0 0 0;
+.button-radius-left {
+  border-radius: 15px 0 0 0;
 }
-.button-radius-right{
-    border-radius: 0 15px 0 0;
-    background-color:rgb(171, 73, 189)
+.button-radius-right {
+  border-radius: 0 15px 0 0;
+  background-color: rgb(171, 73, 189);
 }

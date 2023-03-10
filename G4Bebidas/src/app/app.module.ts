@@ -32,6 +32,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { Sidebar, SidebarModule } from 'primeng/sidebar';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -68,10 +69,11 @@ import { Sidebar, SidebarModule } from 'primeng/sidebar';
     AngularToastifyModule,
     SidebarModule,
     FormsModule,
-    DropdownModule
+    DropdownModule,
+    CardModule,
   ],
   exports: [AppRoutingModule],
   providers: [ToastService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
