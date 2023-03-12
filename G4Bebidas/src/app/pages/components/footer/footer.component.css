@@ -42,7 +42,9 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 35px;
+
   justify-content: center;
+
 }
 
 .menu > a {
@@ -123,6 +125,7 @@ li {
 }
 
 .aviso {
+
   color: #491b89;
   font-size: 1.5rem;
   font-weight: 700;
