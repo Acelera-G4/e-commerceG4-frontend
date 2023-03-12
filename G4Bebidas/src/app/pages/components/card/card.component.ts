@@ -13,6 +13,7 @@ export class CardComponent implements OnInit {
   products: Product[] = [];
   size: any;
   error: any;
+  isLoading: boolean = true;
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
@@ -27,6 +28,7 @@ export class CardComponent implements OnInit {
           (product) => product.active == true
         );
         this.size = this.products.length;
+        this.isLoading = false;
       },
       error: (error) => (this.error = error),
     });

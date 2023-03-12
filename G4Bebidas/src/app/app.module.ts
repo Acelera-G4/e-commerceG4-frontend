@@ -33,6 +33,7 @@ import { FormAddressComponent } from './pages/sign-up/components/form-address/fo
 import { CartComponent } from './pages/cart/cart.component';
 import { Sidebar, SidebarModule } from 'primeng/sidebar';
 import { CardModule } from 'primeng/card';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { CardModule } from 'primeng/card';
     FormsModule,
     DropdownModule,
     CardModule,
+    ProgressSpinnerModule
   ],
   exports: [AppRoutingModule],
   providers: [ToastService],

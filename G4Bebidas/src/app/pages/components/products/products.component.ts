@@ -26,6 +26,7 @@ export class ProductsComponent implements OnInit {
   selectedProduct: any;
   imageUrl: String;
   productId: any;
+  isLoading: boolean = true;
 
 
   constructor(private productService: ProductService, private categoryService: CategoryService, private imageUploadService: ImageUploadService, private formBuilder: FormBuilder) {
@@ -34,6 +35,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.getProdutos();
     this.getCategories();
     this.listingProducts = true;
@@ -112,6 +114,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getProdutos() {
+    
     this.productService
       .getProducts()
       .subscribe({
@@ -119,6 +122,7 @@ export class ProductsComponent implements OnInit {
           this.products = response;
           this.products = this.products.filter(product => product.active == true);
           this.size = this.products.length;
+          this.isLoading = false;
         },
         error: (error) => this.error = error
       });

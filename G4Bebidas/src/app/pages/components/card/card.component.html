@@ -1,4 +1,7 @@
 <div class="container-cards">
+  <div class="spin" *ngIf="isLoading">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
   <div class="card" *ngFor="let product of products">
     <div class="img-card">
       <img src="{{ product.image }}" alt="Whisky Chivas" />
@@ -6,7 +9,9 @@
     <div class="content-card">
       <h4>{{ product.name }}</h4>
       <p>{{ product.description }}</p>
-      <p class="price">R${{ product.price }}</p>
+      <p class="price">
+        {{ product.price | currency : "BRL" : "symbol" : "1.2-2" }}
+      </p>
     </div>
     <div class="buttons-card">
       <div class="button button-radius-left">-</div>
