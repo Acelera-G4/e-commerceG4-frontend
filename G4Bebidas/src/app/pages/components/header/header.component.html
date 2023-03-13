@@ -1,6 +1,11 @@
 <div *ngIf="!isLogin && !isSignUp" class="container container-dashboard">
   <div class="logo-container">
-    <img routerLink="/" class="logo logo-dashboard" src="../../../../assets/logo2.svg" alt="logo grupo 4" />
+    <img
+      routerLink="/"
+      class="logo logo-dashboard"
+      src="../../../../assets/logo2.svg"
+      alt="logo grupo 4"
+    />
   </div>
   <div *ngIf="!isHome" class="menu-container">
     <nav class="menu">
@@ -13,28 +18,65 @@
     </nav>
   </div>
 
-
-
   <div *ngIf="!isHome" class="user-container">
-    <i class="pi pi-user" routerLink="/login"></i>
-    <i class="pi pi-shopping-cart" routerLink="cart" alt="icone carrinho de compras"></i>
-    <button style="background: none; border: none;" (click)="displaySidebar = true"> <i
-        class="icon pi pi-list"></i></button>
+    <!-- <i class="pi pi-user" routerLink="/login"></i> -->
+    <i
+      class="icon pi pi-shopping-cart"
+      routerLink="cart"
+      alt="icone carrinho de compras"
+    ></i>
+    <button
+      style="background: none; border: none"
+      (click)="displaySidebar = true"
+    >
+      <i class="icon pi pi-bars"></i>
+    </button>
   </div>
   <div *ngIf="isDashboard" class="icons">
     <!-- conteúdo ficará disponível no dashboard -->
-    <i class="pi pi-user-edit" routerLink="/list-users" alt="link para visualizar lista usuários "></i>
-    <i class="pi pi-list" routerLink="/product" alt="link para visualizar lista de produtos "></i>
-    <button style="background: none; border: none;" (click)="displaySidebar = true"> <i
-        class="icon pi pi-list"></i></button>
-
+    <i
+      class="pi pi-user-edit"
+      routerLink="/list-users"
+      alt="link para visualizar lista usuários "
+    ></i>
+    <i
+      class="pi pi-list"
+      routerLink="/product"
+      alt="link para visualizar lista de produtos "
+    ></i>
+    <button
+      style="background: none; border: none"
+      (click)="displaySidebar = true"
+    >
+      <i class="icon pi pi-bars"></i>
+    </button>
   </div>
 </div>
 <p-sidebar [(visible)]="displaySidebar" position="right">
-  <h2>Bem vindo,{{name}}</h2>
-  <button pButton icon="pi pi-power-off" class="p-button-help " style="margin: 7px ;display: block;border-radius: 0%;"
-    (click)="logout()">logout</button>
-  <button pButton icon="pi pi-table" class="p-button-help " style="margin: 7px ;display: block; border-radius: 0%;"
-    routerLink="/dashboard">dashboard</button>
-
+  <ng-template pTemplate="header"
+    ><h2 class="menu-title">Bem vindo,{{ name }}</h2></ng-template
+  >
+  <ng-template pTemplate="content">
+    <div class="container-content">
+      <div class="menu-option">
+        <button class="link-menu"  routerLink="/dashboard">Dashboard</button>
+        <i class="pi pi-th-large"></i>
+      </div>
+      <div class="menu-option">
+        <button class="link-menu" > Minhas compras</button>
+        <i class="pi pi-gift"></i>
+      </div>
+      <div class="menu-option">
+        <button class="link-menu" >Minha Conta</button>
+        <i class="pi pi-cog"></i>
+      </div>
+      <div class="menu-option">
+        <button class="link-menu"  (onclick)="logout()"> logout</button>
+        <i class="pi pi-sign-out"></i>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer"
+    ><h5 class="menu-footer">G4 Bebidas</h5></ng-template
+  >
 </p-sidebar>
