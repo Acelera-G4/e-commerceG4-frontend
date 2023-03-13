@@ -49,6 +49,15 @@
   border: 2px solid #fff;
   padding: 5px;
 }
+.user-container > button > i {
+  margin: 15px;
+  font-size: 20px;
+  color: #ffff;
+  background-color: #aa47bc61;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  padding: 5px;
+}
 
 .user-container > i:hover {
   background-color: #ab47bc;
@@ -72,4 +81,52 @@ button {
 
 .icons > i:hover {
   background-color: #ab47bc;
+}
+
+.container-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.menu-title{
+  color: #ab47bc;
+  font-weight: 600;
+}
+
+.menu-option {
+  color: #ab47bc;
+}
+.menu-option > a {
+  text-decoration: none;
+}
+.menu-option > i {
+  font-size: 1.5rem;
+  margin-left: 15px;
+}
+
+.link-menu{
+  color: #ab47bc;
+  background-color: #fff;
+  margin: 0;
+}
+
+.menu-footer {
+  text-align: center;
+  font-size: 0.6rem;
+}
+
+@media screen and (max-width: 870px) {
+  .menu {
+    display: none;
+  }
+
+  .title {
+    background-color: red;
+  }
+}
+@media screen and (max-width: 400px) {
+  .icon.pi.pi-shopping-cart {
+    display: none;
+  }
 }
