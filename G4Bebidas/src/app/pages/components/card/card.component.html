@@ -14,10 +14,10 @@
       </p>
     </div>
     <div class="buttons-card">
-      <div class="button button-radius-left">-</div>
-      <div class="button">1</div>
-      <div class="button">+</div>
-      <div class="button button-radius-right">
+      <div class="button button-radius-left" (click)="decreaseQuantity(product)">-</div>
+      <div class="button">{{ product.quantity }}</div>
+      <div class="button" (click)="increaseQuantity(product)">+</div>
+      <div class="button button-radius-right" (click)="addToCart(product)">
         <img
           src="../../../../assets/cart.svg"
           alt="icone de carrinho para comprar"
