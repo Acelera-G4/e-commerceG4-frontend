@@ -1,3 +1,4 @@
+import { ToastService } from 'angular-toastify';
 import { ImageUploadService } from './../../../services/image-upload.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CategoryService } from './../../../services/category.service';
@@ -9,10 +10,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-
   product: Product;
   products: Product[] = [];
   categories: Category[];
@@ -28,8 +28,13 @@ export class ProductsComponent implements OnInit {
   productId: any;
   isLoading: boolean = true;
 
-
-  constructor(private productService: ProductService, private categoryService: CategoryService, private imageUploadService: ImageUploadService, private formBuilder: FormBuilder) {
+  constructor(
+    private productService: ProductService,
+    private categoryService: CategoryService,
+    private imageUploadService: ImageUploadService,
+    private formBuilder: FormBuilder,
+    private toast: ToastService,
+  ) {
     this.product = new Product();
     this.listingProducts = true;
   }
@@ -44,21 +49,20 @@ export class ProductsComponent implements OnInit {
       description: [null],
       price: [null],
       category: [null],
-      file: [null]
-    }
-    )
+      file: [null],
+    });
   }
 
   getCategories() {
-    this.categoryService
-      .getCategories()
-      .subscribe({
-        next: (response) => {
-          this.categories = response;
-          this.categories = this.categories.filter(category => category.active == true);
-        },
-        error: (error) => this.error = error
-      });
+    this.categoryService.getCategories().subscribe({
+      next: (response) => {
+        this.categories = response;
+        this.categories = this.categories.filter(
+          (category) => category.active == true
+        );
+      },
+      error: (error) => (this.error = error),
+    });
   }
 
   closeDialog() {
@@ -82,8 +86,8 @@ export class ProductsComponent implements OnInit {
       next: (response) => {
         this.imageUrl = response.data.url;
         console.log(response);
-        let product = new Product();
-        let category = new Category();
+        const product = new Product();
+        const category = new Category();
         category.categoryId = this.productForm.value.category;
         product.name = this.productForm.value.name;
         product.description = this.productForm.value.description;
@@ -97,10 +101,10 @@ export class ProductsComponent implements OnInit {
             this.getProdutos();
             this.displayCreateProduct = false;
           },
-          error: (error) => this.error = error,
+          error: (error) => (this.error = error),
         });
       },
-      error: (error) => this.error = error,
+      error: (error) => (this.error = error),
     });
   }
 
@@ -114,18 +118,17 @@ export class ProductsComponent implements OnInit {
   }
 
   getProdutos() {
-    
-    this.productService
-      .getProducts()
-      .subscribe({
-        next: (response) => {
-          this.products = response;
-          this.products = this.products.filter(product => product.active == true);
-          this.size = this.products.length;
-          this.isLoading = false;
-        },
-        error: (error) => this.error = error
-      });
+    this.productService.getProducts().subscribe({
+      next: (response) => {
+        this.products = response;
+        this.products = this.products.filter(
+          (product) => product.active == true
+        );
+        this.size = this.products.length;
+        this.isLoading = false;
+      },
+      error: (error) => (this.error = error),
+    });
   }
 
   putProduct() {
@@ -145,24 +148,25 @@ export class ProductsComponent implements OnInit {
         product.productId = this.productId;
         console.log(this.productForm);
         console.log(product);
+        this.toast.success("Atualizado");
         this.productService.putProduct(product).subscribe({
           next: (response) => {
+
             this.getProdutos();
             this.displayUpdateProduct = false;
+
           },
-          error: (error) => this.error = error,
+          error: (error) => (this.error = error),
         });
       },
-      error: (error) => this.error = error,
+      error: (error) => (this.error = error),
     });
-    this.productService
-      .putProduct(this.product)
-      .subscribe({
-        next: (response) => {
-          this.product = response;
-        },
-        error: (error) => this.error = error
-      });
+    this.productService.putProduct(this.product).subscribe({
+      next: (response) => {
+        this.product = response;
+      },
+      error: (error) => (this.error = error),
+    });
   }
 
   inactiveProduct() {
@@ -185,19 +189,17 @@ export class ProductsComponent implements OnInit {
             this.getProdutos();
             this.displayUpdateProduct = false;
           },
-          error: (error) => this.error = error,
+          error: (error) => (this.error = error),
         });
       },
-      error: (error) => this.error = error,
+      error: (error) => (this.error = error),
     });
-    this.productService
-      .putProduct(this.product)
-      .subscribe({
-        next: (response) => {
-          this.product = response;
-        },
-        error: (error) => this.error = error
-      });
+    this.productService.putProduct(this.product).subscribe({
+      next: (response) => {
+        this.product = response;
+      },
+      error: (error) => (this.error = error),
+    });
   }
 
   showDialogUpdateProduct(product: Product) {
@@ -209,9 +211,8 @@ export class ProductsComponent implements OnInit {
       description: [product.description],
       price: [product.price],
       category: [product.category.categoryId],
-      file: [null]
-    }
-    )
+      file: [null],
+    });
   }
 
   deleteProduct(product: Product) {
@@ -221,11 +222,15 @@ export class ProductsComponent implements OnInit {
       next: (response) => {
         this.getProdutos();
       },
-      error: (error) => this.error = error,
+      error: (error) => (this.error = error),
     });
   }
 
   compare(val1: any, val2: any) {
     return val1.id === val2.id;
+  }
+
+  teste() {
+    alert('bibim ta ai?');
   }
 }

@@ -33,7 +33,9 @@ import { FormAddressComponent } from './pages/sign-up/components/form-address/fo
 import { CartComponent } from './pages/cart/cart.component';
 import { Sidebar, SidebarModule } from 'primeng/sidebar';
 import { CardModule } from 'primeng/card';
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CarouselComponent } from './pages/components/carousel/carousel.component';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     ModalMaiorIdadeComponent,
     CartComponent,
     CategoriesComponent,
+    CarouselComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     FormsModule,
     DropdownModule,
     CardModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    CarouselModule,
   ],
   exports: [AppRoutingModule],
   providers: [ToastService],
