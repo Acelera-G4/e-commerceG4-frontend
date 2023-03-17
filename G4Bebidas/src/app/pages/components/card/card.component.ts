@@ -20,6 +20,20 @@ export class CardComponent implements OnInit {
     this.getProducts();
   }
 
+  increaseQuantity(product: Product) {
+    product.quantity++;
+  }
+
+  decreaseQuantity(product: Product) {
+    if (product.quantity > 1) {
+      product.quantity--;
+            }
+  }
+
+  addToCart(product: Product) {
+    console.log("adicionei")
+  }
+
   getProducts() {
     this.productService.getProducts().subscribe({
       next: (response) => {

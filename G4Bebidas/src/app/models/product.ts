@@ -8,4 +8,5 @@ export class Product {
   public category: Category;
   public image: String;
   public active: boolean;
+  quantity: number = 1;
 }
