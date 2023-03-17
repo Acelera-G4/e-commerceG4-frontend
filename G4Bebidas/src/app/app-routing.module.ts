@@ -21,8 +21,8 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'product', component: ProductsComponent },
-  { path: 'category', component: CategoriesComponent},
-  {path: 'list-users', component: ListUsersComponent },
+  { path: 'category', component: CategoriesComponent },
+  { path: 'list-users', component: ListUsersComponent },
   { path: 'form-address', component: FormAddressComponent },
   { path: 'form-address/:id', component: FormAddressComponent },
   { path: 'modal-create-address', component: ModalCreateAddressComponent },
@@ -34,6 +34,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
