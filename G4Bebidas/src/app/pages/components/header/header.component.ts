@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/isLoggedIn.service';
 })
 export class HeaderComponent {
   displaySidebar = false;
+  displaySidebarDashboard = false;
   isDashboard = false;
   isLogin = false;
   isSignUp = false;
@@ -20,6 +21,7 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (
+        this.router.url === '/' ||
         this.router.url === '/login' ||
         this.router.url === '/sign-up' ||
         this.router.url.startsWith('/form-address')
@@ -35,6 +37,7 @@ export class HeaderComponent {
 
       if (
         this.router.url === '/dashboard' ||
+        this.router.url === '/category' ||
         this.router.url === '/list-users' ||
         this.router.url === '/product'
       ) {

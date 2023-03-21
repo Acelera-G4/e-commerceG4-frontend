@@ -34,16 +34,13 @@
   </div>
   <div *ngIf="isDashboard" class="icons">
     <!-- conteúdo ficará disponível no dashboard -->
-    <i
-      class="pi pi-user-edit"
-      routerLink="/list-users"
-      alt="link para visualizar lista usuários "
-    ></i>
-    <i
-      class="pi pi-list"
-      routerLink="/product"
-      alt="link para visualizar lista de produtos "
-    ></i>
+
+    <button
+      style="background: none; border: none"
+      (click)="displaySidebarDashboard = true"
+    >
+      <i class="icon pi pi-bars"></i>
+    </button>
     <button
       style="background: none; border: none"
       (click)="displaySidebar = true"
@@ -57,6 +54,68 @@
     ><h2 class="menu-title">Bem vindo,{{ name }}</h2></ng-template
   >
   <ng-template pTemplate="content">
+    <div class="container-content">
+      <div class="menu-option">
+        <button class="link-menu">Minhas compras</button>
+        <i class="pi pi-gift"></i>
+      </div>
+      <div class="menu-option">
+        <button class="link-menu">Minha Conta</button>
+        <i class="pi pi-cog"></i>
+      </div>
+      <div class="menu-option">
+        <button class="link-menu" (click)="logout()">logout</button>
+        <i class="pi pi-sign-out"></i>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer"
+    ><h5 class="menu-footer">G4 Bebidas</h5>
+  </ng-template>
+</p-sidebar>
+<p-sidebar [(visible)]="displaySidebarDashboard" position="right">
+  <ng-template pTemplate="header"
+    ><h2 class="menu-title">Bem vindo,{{ name }}</h2>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="container-content">
+      <div class="menu-option">
+        <button class="link-menu" routerLink="/dashboard">Dashboard</button>
+        <i class="pi pi-th-large"></i>
+      </div>
+      <div class="menu-option">
+        <button routerLink="/list-users" class="link-menu">
+          Lista de usuários
+        </button>
+        <i
+          class="pi pi-user-edit"
+          alt="link para visualizar lista usuários "
+        ></i>
+      </div>
+      
+      <div class="menu-option">
+        <button routerLink="/product" class="link-menu">
+          Lista de produtos
+        </button>
+        <i class="pi pi-list" alt="link para visualizar lista de produtos "></i>
+      </div>
+      <div class="menu-option">
+        <button routerLink="/category" class="link-menu">
+          Categoria de prod.
+        </button>
+        <i
+          class="pi pi-tags"
+          alt="link para visualizar lista de categoria "
+        ></i>
+      </div>
+      <div class="menu-option">
+        <button class="link-menu" (click)="logout()">logout</button>
+        <i class="pi pi-sign-out"></i>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- <ng-template pTemplate="content">
     <div class="container-content">
       <div class="menu-option">
         <button class="link-menu"  routerLink="/dashboard">Dashboard</button>
@@ -77,6 +136,5 @@
     </div>
   </ng-template>
   <ng-template pTemplate="footer"
-    ><h5 class="menu-footer">G4 Bebidas</h5></ng-template
-  >
+    ><h5 class="menu-footer">G4 Bebidas</h5></ng-template -->
 </p-sidebar>

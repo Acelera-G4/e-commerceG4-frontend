@@ -6,6 +6,7 @@ import { ProductService } from '../../../services/product.service';
 import { Category } from './../../../models/category';
 import { Product } from './../../../models/product';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -34,12 +35,16 @@ export class ProductsComponent implements OnInit {
     private imageUploadService: ImageUploadService,
     private formBuilder: FormBuilder,
     private toast: ToastService,
+    private router: Router
   ) {
     this.product = new Product();
     this.listingProducts = true;
   }
 
   ngOnInit(): void {
+    localStorage.getItem('log') == (null || 'false')
+      ? this.router.navigate(['/'])
+      : this.router.navigate(['/product']);
     this.isLoading = true;
     this.getProdutos();
     this.getCategories();
