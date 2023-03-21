@@ -96,6 +96,7 @@ button {
 
 .menu-option {
   color: #ab47bc;
+  text-align: right;
 }
 .menu-option > a {
   text-decoration: none;

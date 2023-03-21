@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CategoryService } from './../../../services/category.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Category } from './../../../models/category';
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-
   category: Category;
   categories: Category[] = [];
   size: number;
@@ -22,24 +22,29 @@ export class CategoriesComponent implements OnInit {
   selectedCategory: any;
   listingCategory: boolean;
 
-
-  constructor(private categoryService: CategoryService, private formBuilder: FormBuilder) {
+  constructor(
+    private categoryService: CategoryService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
     this.category = new Category();
     this.listingCategory = true;
   }
 
   ngOnInit(): void {
+    localStorage.getItem('log') == (null || 'false')
+      ? this.router.navigate(['/'])
+      : this.router.navigate(['/category']);
     this.getCategories();
     this.listingCategories = true;
     this.categoryForm = this.formBuilder.group({
       name: [null],
-      description: [null]
-    }
-    )
+      description: [null],
+    });
   }
 
   postCategory() {
-    let category = new Category;
+    let category = new Category();
     category.name = this.categoryForm.value.name;
     category.description = this.categoryForm.value.description;
     category.active = true;
@@ -48,9 +53,8 @@ export class CategoriesComponent implements OnInit {
         this.displayCreateCategory = false;
         this.getCategories();
       },
-      error: (error) => this.error = error,
+      error: (error) => (this.error = error),
     });
-
   }
   showDialogCreateCategory() {
     this.displayCreateCategory = true;
@@ -61,30 +65,28 @@ export class CategoriesComponent implements OnInit {
   }
 
   getCategories() {
-    this.categoryService
-      .getCategories()
-      .subscribe({
-        next: (response) => {
-          this.categories = response;
-          this.categories = this.categories.filter(category => category.active == true);
-          this.size = this.categories.length;
-        },
-        error: (error) => this.error = error
-      });
+    this.categoryService.getCategories().subscribe({
+      next: (response) => {
+        this.categories = response;
+        this.categories = this.categories.filter(
+          (category) => category.active == true
+        );
+        this.size = this.categories.length;
+      },
+      error: (error) => (this.error = error),
+    });
   }
 
   putCategory() {
     this.category.name = this.categoryForm.value.name;
     this.category.description = this.categoryForm.value.description;
-    this.categoryService
-      .putCategory(this.category)
-      .subscribe({
-        next: (response) => {
-          this.displayUpdateCategory = false;
-          this.getCategories();
-        },
-        error: (error) => this.error = error
-      });
+    this.categoryService.putCategory(this.category).subscribe({
+      next: (response) => {
+        this.displayUpdateCategory = false;
+        this.getCategories();
+      },
+      error: (error) => (this.error = error),
+    });
   }
 
   showDialogUpdateCategory(category: Category) {
@@ -92,9 +94,8 @@ export class CategoriesComponent implements OnInit {
     this.displayUpdateCategory = true;
     this.categoryForm = this.formBuilder.group({
       name: [category.name],
-      description: [category.description]
-    }
-    )
+      description: [category.description],
+    });
   }
 
   deleteCategory(category: Category) {
@@ -103,5 +104,3 @@ export class CategoriesComponent implements OnInit {
     this.putCategory();
   }
 }
-
-

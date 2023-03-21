@@ -33,9 +33,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.getItem('log') != (null || 'false')
-      ? this.router.navigate(['/home'])
-      : this.router.navigate(['/']);
+    // localStorage.getItem('log') != (null || 'false')
+    //   ? this.router.navigate(['/home'])
+    //   : this.router.navigate(['/']);
     this.showDialog();
     this.getProducts();
   }
