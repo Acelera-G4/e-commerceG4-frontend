@@ -1,6 +1,4 @@
-
-
-.spin{
+.spin {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +11,7 @@
   grid-gap: 5px;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 10px
+  padding: 10px;
 }
 .card {
   display: flex;
@@ -36,6 +34,10 @@
   border-radius: 8px 8px 0 0;
 }
 
+.container-cards {
+  cursor: pointer;
+}
+
 .content-card > h4 {
   margin: 15px;
   width: 90%;
@@ -45,10 +47,17 @@
   font-size: 1.3rem;
   line-height: 35px;
 }
+.content-card > h2 {
+  display: none;
+}
 
 .content-card > p {
   color: #491b89;
   margin: 15px;
+}
+
+.img-card {
+  cursor: pointer;
 }
 
 .price {

@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
     if (this.id) {
       this.formEmpty();
       this.userService.listUserById(this.id).subscribe({
-        next: (date) => this.formfilled(date),
-        error: (erro) => console.log('errouuuu', erro),
+        // next: (date) => this.formfilled(date),
+        // error: (erro) => console.log('errouuuu', erro),
       });
     } else {
       this.formEmpty();

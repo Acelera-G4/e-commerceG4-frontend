@@ -3,10 +3,11 @@
     <p-progressSpinner></p-progressSpinner>
   </div>
   <div class="card" *ngFor="let product of products">
-    <div class="img-card">
+    <div class="img-card" (click)="showProductDetails(product.productId)">
       <img src="{{ product.image }}" alt="Whisky Chivas" />
     </div>
     <div class="content-card">
+      <h2>{{ product.productId }}</h2>
       <h4>{{ product.name }}</h4>
       <p>{{ product.description }}</p>
       <p class="price">
@@ -14,7 +15,12 @@
       </p>
     </div>
     <div class="buttons-card">
-      <div class="button button-radius-left" (click)="decreaseQuantity(product)">-</div>
+      <div
+        class="button button-radius-left"
+        (click)="decreaseQuantity(product)"
+      >
+        -
+      </div>
       <div class="button">{{ product.quantity }}</div>
       <div class="button" (click)="increaseQuantity(product)">+</div>
       <div class="button button-radius-right" (click)="addToCart(product)">
@@ -26,3 +32,38 @@
     </div>
   </div>
 </div>
+
+<p-dialog
+  *ngIf="displayProductDetails == true"
+  [(visible)]="displayProductDetails"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+>
+  <div class="img-card">
+    <img src="{{ productDetails.image }}" alt="Whisky Chivas" />
+  </div>
+  <div class="content-card">
+    <h2>{{ productDetails.productId }}</h2>
+    <h4>{{ productDetails.name }}</h4>
+    <p>{{ productDetails.description }}</p>
+    <p class="price">
+      {{ productDetails.price | currency : "BRL" : "symbol" : "1.2-2" }}
+    </p>
+  </div>
+  <div class="buttons-card">
+    <div
+      class="button button-radius-left"
+      (click)="decreaseQuantity(productDetails)"
+    >
+      -
+    </div>
+    <div class="button">{{ productDetails.quantity }}</div>
+    <div class="button" (click)="increaseQuantity(productDetails)">+</div>
+    <div class="button button-radius-right" (click)="addToCart(productDetails)">
+      <img
+        src="../../../../assets/cart.svg"
+        alt="icone de carrinho para comprar"
+      />
+    </div>
+  </div>
+</p-dialog>

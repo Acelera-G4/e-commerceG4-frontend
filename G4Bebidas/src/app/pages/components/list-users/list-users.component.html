@@ -46,15 +46,6 @@
 </p-dialog>
 
 <p-dialog
-  header="Long Content"
-  [(visible)]="displayAddress"
-  [style]="{ width: '500vw' }"
-  [baseZIndex]="1000"
->
-  <app-modal-create-address></app-modal-create-address>
-</p-dialog>
-
-<p-dialog
   [(visible)]="displayUpdateUser"
   [style]="{ width: '70vw' }"
   [baseZIndex]="10000"
@@ -63,5 +54,7 @@
 </p-dialog>
 
 <ng-template #noUsers>
-  <p class="no-users-message">Não há usuários cadastrados para serem exibidos</p>
+  <p class="no-users-message">
+    Não há usuários cadastrados para serem exibidos
+  </p>
 </ng-template>

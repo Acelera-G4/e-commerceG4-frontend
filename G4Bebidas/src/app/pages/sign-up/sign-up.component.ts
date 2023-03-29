@@ -36,10 +36,10 @@ export class SignUpComponent implements OnInit {
     this.id = this.activeRouter.snapshot.params['id'];
     if (this.id) {
       this.formEmpty();
-      this.userService.listUserById(this.id).subscribe({
-        next: (date) => this.formfilled(date),
-        error: (erro) => console.log('errouuuu', erro),
-      });
+      // this.userService.listUserById(this.id).subscribe({
+      //   next: (date) => this.formfilled(date),
+      //   error: (erro) => console.log('errouuuu', erro),
+      // });
     } else {
       this.formEmpty();
     }

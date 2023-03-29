@@ -22,7 +22,7 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.url}`, this.header);
   }
 
-  public getProduct(id: Number): Observable<any> {
+  public getProduct(id: number): Observable<any> {
     return this.http.get<Product[]>(`${this.url}/${id}`, this.header);
   }
 

@@ -21,9 +21,20 @@ export class AddressService {
 
   constructor(private httpClient: HttpClient) {}
 
+  public buscaCep(cep: string): Observable<any> {
+    return this.httpClient.get(`http://viacep.com.br/ws/${cep}/json`);
+  }
+
   listAllAddress(): Observable<Address[]> {
     return this.httpClient.get<Address[]>(
       `${this.urlListAddress}`,
+      this.header
+    );
+  }
+
+  listAddresById(id: number): Observable<Address> {
+    return this.httpClient.get<Address>(
+      `${this.urlListAddress}/${id}`,
       this.header
     );
   }
@@ -36,6 +47,13 @@ export class AddressService {
   }
 
   createAddress(address: Address): Observable<Address> {
+    if (address.id) {
+      return this.httpClient.put<Address>(
+        `${this.urlListAddress}/${address.id}`,
+        address,
+        this.header
+      );
+    }
 
     return this.httpClient.post<Address>(
       `${this.urlListAddress}`,

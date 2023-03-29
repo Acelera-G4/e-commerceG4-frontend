@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/users.service';
 import { ListUsersComponent } from '../list-users/list-users.component';
-import { ModalCreateAddressComponent } from '../modal-create-address/modal-create-address.component';
+
 
 @Component({
   selector: 'app-modal-update-user',
@@ -14,11 +14,6 @@ import { ModalCreateAddressComponent } from '../modal-create-address/modal-creat
 export class ModalUpdateUserComponent {
 
 
-  @ViewChild(ModalCreateAddressComponent)
-  child: ModalCreateAddressComponent;
-
-  @ViewChild(ListUsersComponent)
-  child2: ListUsersComponent;
 
   id: number;
   formUser: FormGroup;
@@ -41,8 +36,8 @@ export class ModalUpdateUserComponent {
     if (this.id) {
       this.formEmpty();
       this.userService.listUserById(this.id).subscribe({
-        next: (date) => this.formfilled(date),
-        error: (erro) => console.log('errouuuu', erro),
+        // next: (date) => this.formfilled(date),
+        // error: (erro) => console.log('errouuuu', erro),
       });
     } else {
       this.formEmpty();
