@@ -1,12 +1,9 @@
-import { User } from 'src/app/models/user';
-
 export class Address {
   id: number;
   cep: string;
-  street: string;
-  number: string;
-  complement: string;
-  city: string;
+  logradouro: string;
+  localidade: string;
+  bairro: string;
+  complemento: string;
   uf: string;
-  user: User;
 }

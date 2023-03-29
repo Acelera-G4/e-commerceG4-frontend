@@ -1,0 +1,330 @@
+<div class="container table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="header-list">ID</th>
+        <th>Name</th>
+        <th>CPF</th>
+        <th>Birthday</th>
+        <th>Email</th>
+        <th>User Type</th>
+        <th>Phone</th>
+        <th></th>
+        <th>
+          <i class="pi pi-user-plus" (click)="showDialogCreateUser()"></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <div
+        class="no-users-message"
+        *ngIf="listUsers.length > 0; else noUsers"
+      ></div>
+      <tr *ngFor="let user of listUsers">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.cpf }}</td>
+        <td>{{ user.dateOfBirthday }}</td>
+        <td *ngIf="listUsers.length > 0; else noUsers">{{ user.email }}</td>
+        <td>{{ user.userType }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>
+          <i class="pi pi-user-edit" (click)="showDialogUpdateUser(user)"></i>
+        </td>
+        <td><i class="pi pi-times" (click)="deleteUserById(user.id)"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p-dialog
+  [(visible)]="displayCreateUser"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+>
+  <form [formGroup]="userForm">
+    <h2 class="title">User registration</h2>
+    <input
+      pInputText
+      placeholder="Name"
+      type="text"
+      id="name"
+      formControlName="name"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="CPF"
+      type="text"
+      id="cpf"
+      formControlName="cpf"
+      required
+    />
+
+    <input
+      pInputText
+      type="date"
+      id="dateOfBirthday"
+      formControlName="dateOfBirthday"
+      title="Insira sua data de nascimento neste campo"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="Email"
+      type="text"
+      id="email"
+      formControlName="email"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="User Type"
+      type="text"
+      id="userType"
+      formControlName="userType"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="Phone"
+      type="text"
+      id="userType"
+      formControlName="phoneNumber"
+      required
+    />
+    <div class="button">
+      <button class="button-create" type="submit" (click)="createUser()">
+        Save
+      </button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayAddress"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="1000"
+>
+  <form [formGroup]="Addressform">
+    <h2 class="title">Now Address</h2>
+
+    <input
+      pInputText
+      placeholder="CEP"
+      type="text"
+      id="cep"
+      name="cep"
+      formControlName="cep"
+      required
+    />
+    <input
+      pInputText
+      placeholder="Street"
+      type="text"
+      id="street"
+      name="street"
+      formControlName="street"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="Number"
+      type="text"
+      id="number"
+      name="number"
+      formControlName="number"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="Complement"
+      type="text"
+      id="complement"
+      name="complement"
+      formControlName="complement"
+    />
+    <input
+      pInputText
+      placeholder="City"
+      type="text"
+      id="city"
+      name="city"
+      formControlName="city"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="State"
+      type="text"
+      id="uf"
+      name="uf"
+      required
+      formControlName="uf"
+    />
+    <div class="button">
+      <input
+        class="button-create"
+        type="submit"
+        value="Salvar "
+      
+      />
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayUpdateUser"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+>
+  <form [formGroup]="userForm">
+    <h2 class="title">Updtade User</h2>
+    <input
+      pInputText
+      placeholder="Name"
+      type="text"
+      id="name"
+      formControlName="name"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="CPF"
+      type="text"
+      id="cpf"
+      formControlName="cpf"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="Date"
+      type="date"
+      id="dateOfBirthday"
+      formControlName="dateOfBirthday"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="Email"
+      type="text"
+      id="email"
+      formControlName="email"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="User Type"
+      type="text"
+      id="userType"
+      formControlName="userType"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="Phone"
+      type="text"
+      id="userType"
+      formControlName="phoneNumber"
+      required
+    />
+    <div class="button">
+      <button class="button-create" type="submit" (click)="updateUser()">
+        Save
+      </button>
+    </div>
+  </form>
+
+  <p-dialog
+  [(visible)]="displayUpdateAddress"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+>
+  <form [formGroup]="Addressform">
+    <h2 class="title">Now Address</h2>
+
+    <input
+      pInputText
+      placeholder="CEP"
+      type="text"
+      id="cep"
+      name="cep"
+      formControlName="cep"
+      required
+    />
+    <input
+      pInputText
+      placeholder="Street"
+      type="text"
+      id="street"
+      name="street"
+      formControlName="street"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="Number"
+      type="text"
+      id="number"
+      name="number"
+      formControlName="number"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="Complement"
+      type="text"
+      id="complement"
+      name="complement"
+      formControlName="complement"
+    />
+    <input
+      pInputText
+      placeholder="City"
+      type="text"
+      id="city"
+      name="city"
+      formControlName="city"
+      required
+    />
+
+    <input
+      pInputText
+      placeholder="State"
+      type="text"
+      id="uf"
+      name="uf"
+      required
+      formControlName="uf"
+    />
+    <div class="button">
+      <input
+        class="button-create"
+        type="submit"
+        value="Salvar "
+        (click)="updateAddress()"
+      />
+    </div>
+  </form>
+</p-dialog>
+</p-dialog>
+
+<ng-template #noUsers>
+  <p class="no-users-message">
+    Não há usuários cadastrados para serem exibidos
+  </p>
+</ng-template>

@@ -25,7 +25,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ModalCreateUserComponent } from './pages/components/modal-create-user/modal-create-user.component';
 import { ModalUpdateUserComponent } from './pages/components/modal-update-user/modal-update-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ModalCreateAddressComponent } from './pages/components/modal-create-address/modal-create-address.component';
+
 import { ModalMaiorIdadeComponent } from './pages/components/modal-maior-idade/modal-maior-idade.component';
 import { CategoriesComponent } from './pages/components/categories/categories.component';
 import { DropdownModule } from 'primeng/dropdown';
@@ -36,6 +36,7 @@ import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CarouselComponent } from './pages/components/carousel/carousel.component';
 import { CarouselModule } from 'primeng/carousel';
+import { UsersComponent } from './pages/components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -51,12 +52,12 @@ import { CarouselModule } from 'primeng/carousel';
     ListUsersComponent,
     ModalCreateUserComponent,
     ModalUpdateUserComponent,
-    ModalCreateAddressComponent,
     FormAddressComponent,
     ModalMaiorIdadeComponent,
     CartComponent,
     CategoriesComponent,
     CarouselComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

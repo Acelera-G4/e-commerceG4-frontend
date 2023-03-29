@@ -22,15 +22,22 @@ export class UserService {
     return this.httpClient.get<User[]>(`${this.url}`, this.header);
   }
 
-  listUserById(id: number): Observable<User> {
+  listUserById(id: number): any {
     return this.httpClient.get<User>(`${this.url}/${id}`, this.header);
+  }
+
+  createUser(user: User): Observable<User> {
+    return this.httpClient.post<User>(`${this.url}`, user, this.header);
+  }
+
+   updateUser(user: User, id:number): Observable<any> {
+    return this.httpClient.put<User[]>(`${this.url}/${id}`, user, this.header);
   }
 
   deleteUserById(id: number): Observable<User> {
     return this.httpClient.delete<User>(`${this.url}/${id}`, this.header);
   }
 
-  createUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.url}`, user, this.header);
-  }
+
+
 }

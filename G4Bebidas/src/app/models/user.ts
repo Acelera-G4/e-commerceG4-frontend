@@ -1,3 +1,5 @@
+import { Address } from "./address";
+
 export class User {
   id: number;
   name: string;
@@ -7,4 +9,6 @@ export class User {
   userType: string;
   phoneNumber: string;
   password: string;
+  active: boolean;
+  address: Address;
 }
