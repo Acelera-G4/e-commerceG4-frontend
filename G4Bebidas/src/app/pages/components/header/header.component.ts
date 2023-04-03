@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/isLoggedIn.service';
+import { CategoriesComponent } from '../categories/categories.component';
+import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +19,9 @@ export class HeaderComponent {
   isHome = false;
   isFormAddress = false;
   name: string | null = localStorage.getItem('name');
-  constructor(private router: Router, private auth: AuthService) {}
+  mainCategories: Category[] = [];
+  error: any;
+  constructor(private router: Router, private auth: AuthService, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
@@ -47,6 +52,17 @@ export class HeaderComponent {
         this.isDashboard = false;
         this.isHome = false;
       }
+    });
+    this.getMainCategories();
+  }
+
+  getMainCategories() {
+    this.categoryService.getMainCategories().subscribe({
+      next: (response) => {
+        this.mainCategories = response;
+        console.log(this.mainCategories);
+      },
+      error: (error) => (this.error = error),
     });
   }
 

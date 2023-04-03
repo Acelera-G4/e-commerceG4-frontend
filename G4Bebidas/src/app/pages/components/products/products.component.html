@@ -8,6 +8,7 @@
         <th>Preço</th>
         <th>Categoria</th>
         <th></th>
+        <th>Ativo?<p-inputSwitch [(ngModel)]="active" (click)="switchProducts()" required></p-inputSwitch></th>
         <th>
           <i class="pi pi-plus" (click)="showDialogCreateProduct()"></i>
         </th>
@@ -18,7 +19,7 @@
         class="no-users-message"
         *ngIf="products.length > 0; else noProducts"
       ></div>
-      <tr *ngFor="let product of products">
+      <tr *ngFor="let product of filteredProducts">
         <td>{{ product.productId }}</td>
         <td>{{ product.name }}</td>
         <td>{{ product.description }}</td>
@@ -101,6 +102,8 @@
       required
       (change)="handleUpload($event)"
     />
+    Ativo? <p-inputSwitch       formControlName="active"
+    required></p-inputSwitch>
 
     <div class="button">
       <button class="button-create" type="submit" (click)="postProduct()">
@@ -165,6 +168,9 @@
       required
       (change)="handleUpload($event)"
     />
+
+    Ativo? <p-inputSwitch       formControlName="active"
+    required></p-inputSwitch>
     <div class="button">
       <button class="button-create" type="submit" (click)="putProduct()">
         Atualizar Produto

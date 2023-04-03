@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { CategoryService } from './../../../services/category.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Category } from './../../../models/category';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 export class CategoriesComponent implements OnInit {
   category: Category;
   categories: Category[] = [];
+  filteredCategories: Category[] = [];
   size: number;
   response: any;
   error: any;
@@ -21,6 +22,7 @@ export class CategoriesComponent implements OnInit {
   categoryForm: FormGroup;
   selectedCategory: any;
   listingCategory: boolean;
+  active: boolean = true; 
 
   constructor(
     private categoryService: CategoryService,
@@ -36,10 +38,13 @@ export class CategoriesComponent implements OnInit {
       ? this.router.navigate(['/'])
       : this.router.navigate(['/category']);
     this.getCategories();
+    this.filterCategories();
     this.listingCategories = true;
     this.categoryForm = this.formBuilder.group({
       name: [null],
       description: [null],
+      active: new FormControl<boolean>(false),
+      main: new FormControl<boolean>(false)
     });
   }
 
@@ -47,16 +52,25 @@ export class CategoriesComponent implements OnInit {
     let category = new Category();
     category.name = this.categoryForm.value.name;
     category.description = this.categoryForm.value.description;
-    category.active = true;
+    category.active = this.categoryForm.value.active;
+    category.main = this.categoryForm.value.main;
+    console.log(category);
     this.categoryService.postCategory(category).subscribe({
       next: (response) => {
         this.displayCreateCategory = false;
         this.getCategories();
+        this.filterCategories();
       },
       error: (error) => (this.error = error),
     });
   }
   showDialogCreateCategory() {
+    this.categoryForm = this.formBuilder.group({
+      name: [null],
+      description: [null],
+      active: new FormControl<boolean>(false),
+      main: new FormControl<boolean>(false)
+    });
     this.displayCreateCategory = true;
   }
 
@@ -68,9 +82,6 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.getCategories().subscribe({
       next: (response) => {
         this.categories = response;
-        this.categories = this.categories.filter(
-          (category) => category.active == true
-        );
         this.size = this.categories.length;
       },
       error: (error) => (this.error = error),
@@ -80,10 +91,11 @@ export class CategoriesComponent implements OnInit {
   putCategory() {
     this.category.name = this.categoryForm.value.name;
     this.category.description = this.categoryForm.value.description;
+    this.category.active = this.categoryForm.value.active;
+    this.category.main = this.categoryForm.value.main;
     this.categoryService.putCategory(this.category).subscribe({
       next: (response) => {
         this.displayUpdateCategory = false;
-        this.getCategories();
       },
       error: (error) => (this.error = error),
     });
@@ -95,12 +107,32 @@ export class CategoriesComponent implements OnInit {
     this.categoryForm = this.formBuilder.group({
       name: [category.name],
       description: [category.description],
+      active: [category.active],
+      main: [category.main]
     });
   }
 
   deleteCategory(category: Category) {
     this.category = category;
     this.category.active = false;
+    this.category.main = false;
     this.putCategory();
   }
+
+  switchCategories() {
+    this.getCategories();
+    this.filterCategories();
+  }
+
+  filterCategories() {
+    if(this.active == true) {
+      this.filteredCategories = this.categories.filter(
+        (category) => category.active == true
+      );
+    } else {
+      this.filteredCategories = this.categories.filter(
+        (category) => category.active == false
+      );
+    }
+  } 
 }

@@ -22,6 +22,10 @@ export class CategoryService {
     return this.http.get<Category[]>(`${this.url}`, this.header);
   }
 
+  public getMainCategories(): Observable<any> {
+    return this.http.get<Category[]>(`${this.url}/main`, this.header);
+  }
+
   public getCategory(id: Number): Observable<any> {
     return this.http.get<Category[]>(`${this.url}/${id}`, this.header);
   }

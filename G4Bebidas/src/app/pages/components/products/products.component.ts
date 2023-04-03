@@ -1,12 +1,14 @@
 import { ToastService } from 'angular-toastify';
 import { ImageUploadService } from './../../../services/image-upload.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CategoryService } from './../../../services/category.service';
 import { ProductService } from '../../../services/product.service';
 import { Category } from './../../../models/category';
 import { Product } from './../../../models/product';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Buffer } from 'buffer/';
+
 
 @Component({
   selector: 'app-products',
@@ -16,6 +18,7 @@ import { Router } from '@angular/router';
 export class ProductsComponent implements OnInit {
   product: Product;
   products: Product[] = [];
+  filteredProducts: Product[] = [];
   categories: Category[];
   size: number;
   error: any;
@@ -28,6 +31,7 @@ export class ProductsComponent implements OnInit {
   imageUrl: String;
   productId: any;
   isLoading: boolean = true;
+  active: boolean = true;
 
   constructor(
     private productService: ProductService,
@@ -55,6 +59,7 @@ export class ProductsComponent implements OnInit {
       price: [null],
       category: [null],
       file: [null],
+      active: new FormControl<boolean>(false),
     });
   }
 
@@ -99,7 +104,7 @@ export class ProductsComponent implements OnInit {
         product.price = this.productForm.value.price;
         product.image = this.imageUrl;
         product.category = category;
-        product.active = true;
+        product.active = this.productForm.value.active;
         console.log(this.productForm);
         this.productService.postProduct(product).subscribe({
           next: (response) => {
@@ -114,7 +119,14 @@ export class ProductsComponent implements OnInit {
   }
 
   showDialogCreateProduct() {
-    this.product = new Product();
+    this.productForm = this.formBuilder.group({
+      name: [null],
+      description: [null],
+      price: [null],
+      category: [null],
+      file: [null],
+      active: new FormControl<boolean>(false),
+    });
     this.displayCreateProduct = true;
   }
 
@@ -126,9 +138,6 @@ export class ProductsComponent implements OnInit {
     this.productService.getProducts().subscribe({
       next: (response) => {
         this.products = response;
-        this.products = this.products.filter(
-          (product) => product.active == true
-        );
         this.size = this.products.length;
         this.isLoading = false;
       },
@@ -149,7 +158,7 @@ export class ProductsComponent implements OnInit {
         product.price = this.productForm.value.price;
         product.image = this.imageUrl;
         product.category = category;
-        product.active = true;
+        product.active = this.productForm.value.active;
         product.productId = this.productId;
         console.log(this.productForm);
         console.log(product);
@@ -211,13 +220,46 @@ export class ProductsComponent implements OnInit {
     this.product = product;
     this.productId = this.product.productId;
     this.displayUpdateProduct = true;
+    this.convertImageToBase64(product.image, this.setImage)
+  }
+
+  setImage(value : any) {
+    console.log(value);
+    //this.file = fetch(value).then(res => res.blob())
+    //this.file = new Blob([base64])
     this.productForm = this.formBuilder.group({
-      name: [product.name],
-      description: [product.description],
-      price: [product.price],
-      category: [product.category.categoryId],
+      name: [this.product.name],
+      description: [this.product.description],
+      price: [this.product.price],
+      category: [this.product.category.categoryId],
+      active: [this.product.active],
       file: [null],
     });
+  }
+
+  dataUrlToFile(dataUrl: string, filename: string): File | undefined {
+    const arr = dataUrl.split(',');
+    if (arr.length < 2) { return undefined; }
+    const mimeArr = arr[0].match(/:(.*?);/);
+    if (!mimeArr || mimeArr.length < 2) { return undefined; }
+    const mime = mimeArr[1];
+    const buff = Buffer.from(arr[1], 'base64');
+    return new File([buff], filename, {type:mime});
+  }
+
+   convertImageToBase64(imgUrl: any, callback: any) {
+    const image = new Image();
+    image.crossOrigin='anonymous';
+    image.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas?.getContext('2d');
+      canvas.height = image.naturalHeight;
+      canvas.width = image.naturalWidth;
+      ctx.drawImage(image, 0, 0);
+      const dataUrl = canvas.toDataURL();
+      callback && callback(dataUrl)
+    }
+    image.src = imgUrl;
   }
 
   deleteProduct(product: Product) {
@@ -235,7 +277,21 @@ export class ProductsComponent implements OnInit {
     return val1.id === val2.id;
   }
 
-  teste() {
-    alert('bibim ta ai?');
+  switchProducts() {
+    this.getProdutos();
+    this.filterProducts();
   }
+
+  filterProducts() {
+    if(this.active == true) {
+      this.filteredProducts = this.products.filter(
+        (product) => product.active == true
+      );
+    } else {
+      this.filteredProducts = this.products.filter(
+        (product) => product.active == false
+      );
+    }
+    console.log(this.filteredProducts);
+  } 
 }
