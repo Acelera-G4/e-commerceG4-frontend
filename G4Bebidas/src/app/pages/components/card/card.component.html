@@ -36,34 +36,39 @@
 <p-dialog
   *ngIf="displayProductDetails == true"
   [(visible)]="displayProductDetails"
-  [style]="{ width: '70vw' }"
+  [style]="{ width: '50vw' }"
   [baseZIndex]="10000"
 >
-  <div class="img-card">
-    <img src="{{ productDetails.image }}" alt="Whisky Chivas" />
-  </div>
-  <div class="content-card">
-    <h2>{{ productDetails.productId }}</h2>
-    <h4>{{ productDetails.name }}</h4>
-    <p>{{ productDetails.description }}</p>
-    <p class="price">
-      {{ productDetails.price | currency : "BRL" : "symbol" : "1.2-2" }}
-    </p>
-  </div>
-  <div class="buttons-card">
-    <div
-      class="button button-radius-left"
-      (click)="decreaseQuantity(productDetails)"
-    >
-      -
+  <div class="container-modal">
+    <div class="img-card modal">
+      <img class="img" src="{{ productDetails.image }}" alt="Whisky Chivas" />
     </div>
-    <div class="button">{{ productDetails.quantity }}</div>
-    <div class="button" (click)="increaseQuantity(productDetails)">+</div>
-    <div class="button button-radius-right" (click)="addToCart(productDetails)">
-      <img
-        src="../../../../assets/cart.svg"
-        alt="icone de carrinho para comprar"
-      />
+    <div class="content-card-modal">
+      <h2>{{ productDetails.productId }}</h2>
+      <h4>{{ productDetails.name }}</h4>
+      <p>{{ productDetails.description }}</p>
+      <p class="price">
+        {{ productDetails.price | currency : "BRL" : "symbol" : "1.2-2" }}
+      </p>
+      <div class="buttons-card">
+        <div
+          class="button button-radius-left"
+          (click)="decreaseQuantity(productDetails)"
+        >
+          -
+        </div>
+        <div class="button">{{ productDetails.quantity }}</div>
+        <div class="button" (click)="increaseQuantity(productDetails)">+</div>
+        <div
+          class="button button-radius-right"
+          (click)="addToCart(productDetails)"
+        >
+          <img
+            src="../../../../assets/cart.svg"
+            alt="icone de carrinho para comprar"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </p-dialog>

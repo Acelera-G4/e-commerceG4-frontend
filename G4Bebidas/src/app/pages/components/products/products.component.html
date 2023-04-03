@@ -8,7 +8,13 @@
         <th>Preço</th>
         <th>Categoria</th>
         <th></th>
-        <th>Ativo?<p-inputSwitch [(ngModel)]="active" (click)="switchProducts()" required></p-inputSwitch></th>
+        <th>
+          Ativo?<p-inputSwitch
+            [(ngModel)]="active"
+            (click)="switchProducts()"
+            required
+          ></p-inputSwitch>
+        </th>
         <th>
           <i class="pi pi-plus" (click)="showDialogCreateProduct()"></i>
         </th>
@@ -38,7 +44,6 @@
 </div>
 
 <ng-template #noProducts>
-  
   <p class="no-products-message">Não há produtos cadastrados.</p>
 </ng-template>
 
@@ -48,67 +53,77 @@
   [baseZIndex]="10000"
 >
   <form [formGroup]="productForm">
-    <h2 class="title">Novo Produto</h2>
-    <input
-      pInputText
-      placeholder="Nome"
-      type="text"
-      id="name"
-      formControlName="name"
-      required
-    />
-
-    <input
-      pInputText
-      placeholder="Descrição"
-      type="text"
-      id="description"
-      formControlName="description"
-      required
-    />
-
-    <input
-      pInputText
-      placeholder="Preço"
-      type="number"
-      id="price"
-      formControlName="price"
-      step=".01"
-      required
-    />
-    <div class="container-select">
-      <label for="category">Category</label>
-      <select
-        name="category"
-        id="category"
-        formControlName="category"
-        [compareWith]="compare"
+    <i
+      class="icon pi pi-tags"
+      style="font-size: 2rem; color: blueviolet"
+      alt="icone de produto"
+    ></i>
+    <div class="container-input">
+      <input
+        pInputText
+        placeholder="Nome"
+        type="text"
+        id="name"
+        formControlName="name"
         required
-      >
-        <option value="">Selecione a Categoria</option>
-        <option
-          *ngFor="let category of categories"
-          value="{{ category.categoryId }}"
-        >
-          {{ category.name }}
-        </option>
-      </select>
-    </div>
-    <input
-      placeholder="Imagem"
-      type="file"
-      id="file"
-      formControlName="file"
-      required
-      (change)="handleUpload($event)"
-    />
-    Ativo? <p-inputSwitch       formControlName="active"
-    required></p-inputSwitch>
+      />
 
-    <div class="button">
-      <button class="button-create" type="submit" (click)="postProduct()">
-        Criar Produto
-      </button>
+      <input
+        pInputText
+        placeholder="Descrição"
+        type="text"
+        id="description"
+        formControlName="description"
+        required
+      />
+
+      <input
+        pInputText
+        placeholder="Preço"
+        type="number"
+        id="price"
+        formControlName="price"
+        step=".01"
+        required
+      />
+      <div class="container-select">
+        <!-- <label for="category">Category</label>
+        <select
+          name="category"
+          id="category"
+          formControlName="category"
+          [compareWith]="compare"
+          required
+        >
+          <option value="">Selecione a Categoria</option>
+          <option
+            *ngFor="let category of categories"
+            value="{{ category.categoryId }}"
+          >
+            {{ category.name }}
+          </option>
+        </select> -->
+
+        <p-dropdown
+          formControlName="city"
+          [options]="categories"
+          optionLabel="name"
+        ></p-dropdown>
+      </div>
+      <input
+        placeholder="Imagem"
+        type="file"
+        id="file"
+        formControlName="file"
+        required
+        (change)="handleUpload($event)"
+      />
+
+      <div class="button">
+        <button class="button-create" type="submit" (click)="postProduct()">
+          Criar Produto
+        </button>
+      </div>
     </div>
   </form>
 </p-dialog>
@@ -119,58 +134,68 @@
   [baseZIndex]="10000"
 >
   <form [formGroup]="productForm" *ngIf="displayUpdateProduct">
-    <h2 class="title">Atualizar Produto</h2>
-    <input
-      pInputText
-      placeholder="Nome"
-      type="text"
-      id="name"
-      formControlName="name"
-      required
-    />
-    <input
-      pInputText
-      placeholder="Descrição"
-      type="text"
-      id="description"
-      formControlName="description"
-      required
-    />
-    <input
-      pInputText
-      placeholder="Preço"
-      type="number"
-      id="price"
-      formControlName="price"
-      step=".01"
-      required
-    />
-    <select
-      name="category"
-      id="category"
-      formControlName="category"
-      [compareWith]="compare"
-      required
-    >
-      <option
-        *ngFor="let category of categories"
-        value="{{ category.categoryId }}"
-      >
-        {{ category.name }}
-      </option>
-    </select>
-    <input
-      pInputText
-      placeholder="Imagem"
-      type="file"
-      id="file"
-      formControlName="file"
-      required
-      (change)="handleUpload($event)"
-    />
-
-    Ativo? <p-inputSwitch       formControlName="active"
-    required></p-inputSwitch>
+    <i
+      class="icon pi pi-tags"
+      style="font-size: 2rem; color: blueviolet"
+      alt="icone de produto"
+    ></i>
+    <div class="container-input">
+      <input
+        pInputText
+        placeholder="Nome"
+        type="text"
+        id="name"
+        formControlName="name"
+        required
+      />
+      <input
+        pInputText
+        placeholder="Descrição"
+        type="text"
+        id="description"
+        formControlName="description"
+        required
+      />
+      <input
+        pInputText
+        placeholder="Preço"
+        type="number"
+        id="price"
+        formControlName="price"
+        step=".01"
+        required
+      />
+      <div class="container-select">
+                <!-- <select
+                name="category"
+                id="category"
+                formControlName="category"
+                [compareWith]="compare"
+                required
+              >
+                <option
+                  *ngFor="let category of categories"
+                  value="{{ category.categoryId }}"
+                >
+                  {{ category.name }}
+                </option>
+              </select> -->
+        <p-dropdown
+          formControlName="city"
+          [options]="categories"
+          optionLabel="name"
+        ></p-dropdown>
+      </div>
+      <input
+        pInputText
+        placeholder="Imagem"
+        type="file"
+        id="file"
+        formControlName="file"
+        required
+        (change)="handleUpload($event)"
+      />
+    </div>
     <div class="button">
       <button class="button-create" type="submit" (click)="putProduct()">
         Atualizar Produto

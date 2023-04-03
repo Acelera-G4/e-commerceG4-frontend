@@ -1,5 +1,5 @@
+import { ListUsersComponent } from './../list-users/list-users.component';
 import { AddressService } from 'src/app/services/address.service';
-
 
 import { UserService } from './../../../services/users.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,14 +17,14 @@ export class ModalCreateUserComponent implements OnInit {
   formUser: FormGroup;
   formAddress: FormGroup;
   user: User;
-  displayAddress: boolean = false;
-
+  displayCreateUser: boolean = false;
   usuario: User;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private addressService: AddressService,
+    private functionListUsers: ListUsersComponent,
     private router: Router
   ) {}
 
@@ -46,7 +46,7 @@ export class ModalCreateUserComponent implements OnInit {
       email: [null],
       userType: [null],
       phoneNumber: [null],
-      cep: [null],
+      address: [this.formAddress],
     });
     this.formAddress = this.fb.group({
       cep: [null],
@@ -77,10 +77,10 @@ export class ModalCreateUserComponent implements OnInit {
       email: [user.email],
       userType: [user.userType],
       phoneNumber: [user.phoneNumber],
-      cep: [user.address.cep],
+      address: [this.formAddress],
     });
     this.formAddress = this.fb.group({
-      id: [user.address.id],
+      cep: [user.address.cep],
       logradouro: [user.address.logradouro],
       complemento: [user.address.complemento],
       localidade: [user.address.localidade],
@@ -95,14 +95,16 @@ export class ModalCreateUserComponent implements OnInit {
         console.log('ID ', registered.id);
         this.user = registered;
         console.log(this.user);
-        this.displayAddress = true;
+        this.functionListUsers.closeDialogs();
+        this.functionListUsers.listAllUsers();
       },
       error: (erro) => alert('Preencha todos os campos!'),
     });
+    console.log(this.formUser);
   }
 
   searchCep() {
-    const cepForm = this.formUser.value.cep;
+    const cepForm = this.formAddress.value.cep;
     this.addressService.buscaCep(cepForm).subscribe({
       next: (response) => {
         this.formAddress.setValue(response);

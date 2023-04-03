@@ -4,45 +4,33 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/users.service';
 import { ListUsersComponent } from '../list-users/list-users.component';
-
+import { AddressService } from 'src/app/services/address.service';
 
 @Component({
   selector: 'app-modal-update-user',
   templateUrl: './modal-update-user.component.html',
-  styleUrls: ['./modal-update-user.component.css']
+  styleUrls: ['./modal-update-user.component.css'],
 })
 export class ModalUpdateUserComponent {
-
-
-
   id: number;
+  formAddress: FormGroup;
   formUser: FormGroup;
   user: User;
   displayAddress: boolean = false;
 
-  usuario : User;
+  usuario: User;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private addressService: AddressService,
     private router: Router,
-    private activeRouter: ActivatedRoute,
+    private activeRouter: ActivatedRoute
   ) {}
-  // ngAfterViewInit(): void {
-  // }
 
   ngOnInit(): void {
-    this.id = this.activeRouter.snapshot.params['id'];
-    if (this.id) {
-      this.formEmpty();
-      this.userService.listUserById(this.id).subscribe({
-        // next: (date) => this.formfilled(date),
-        // error: (erro) => console.log('errouuuu', erro),
-      });
-    } else {
-      this.formEmpty();
-      console.log(this.formUser.value.id);
-    }
+    this.formEmpty();
+    this.userService.listUserById(this.id).subscribe({});
   }
 
   formEmpty() {
@@ -54,8 +42,22 @@ export class ModalUpdateUserComponent {
       email: [null],
       userType: [null],
       phoneNumber: [null],
+      address: [this.formAddress],
+    });
+    this.formAddress = this.fb.group({
+      cep: [null],
+      logradouro: [null],
+      complemento: [null],
+      localidade: [null],
+      bairro: [null],
+      uf: [null],
+      ddd: [null],
+      gia: [null],
+      ibge: [null],
+      siafi: [null],
     });
   }
+
   formfilled(user: User) {
     const dateOfBirthday = new Date(user.dateOfBirthday)
       .toISOString()
@@ -71,24 +73,30 @@ export class ModalUpdateUserComponent {
       email: [user.email],
       userType: [user.userType],
       phoneNumber: [user.phoneNumber],
+      address: [this.formAddress],
+    });
+    this.formAddress = this.fb.group({
+      cep: [user.address.cep],
+      logradouro: [user.address.logradouro],
+      complemento: [user.address.complemento],
+      localidade: [user.address.localidade],
+      bairro: [user.address.bairro],
+      uf: [user.address.uf],
     });
   }
 
-  atualizarCliente(id: number) {
-    this.router.navigate(["/", id]);
-  }
+  updateUser() {}
 
-  createUser() {
-    this.userService.createUser(this.formUser.value).subscribe({
-      next: (registered) => {
-        console.log('ID ', registered.id);
-        this.user = registered;
-        console.log(this.user);
-        this.displayAddress = true;
-        
+  searchCep() {
+    const cepForm = this.formAddress.value.cep;
+    this.addressService.buscaCep(cepForm).subscribe({
+      next: (response) => {
+        this.formAddress.setValue(response);
+        console.log(this.formAddress);
       },
-      error: (erro) => alert('Preencha todos os campos!'),
+      error: (error) => console.error(error),
     });
-  }
 
+    console.log(cepForm);
+  }
 }

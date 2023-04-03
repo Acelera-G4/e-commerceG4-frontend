@@ -42,8 +42,13 @@
   [style]="{ width: '70vw' }"
   [baseZIndex]="10000"
 >
-  <form [formGroup]="userForm">
-    <h2 class="title">User registration</h2>
+ <form [formGroup]="userForm" >
+  <i
+    class="icon pi pi-user"
+    style="font-size: 2rem; color: blueviolet"
+    alt="icone de usuário"
+  ></i>
+  <div class="container-input">
     <input
       pInputText
       placeholder="Name"
@@ -97,48 +102,52 @@
       formControlName="phoneNumber"
       required
     />
-    <div class="button">
-      <button class="button-create" type="submit" (click)="createUser()">
-        Save
-      </button>
-    </div>
-  </form>
-</p-dialog>
-
-<p-dialog
-  [(visible)]="displayAddress"
-  [style]="{ width: '70vw' }"
-  [baseZIndex]="1000"
->
-  <form [formGroup]="Addressform">
-    <h2 class="title">Now Address</h2>
-
     <input
+    style="display:none;"
       pInputText
-      placeholder="CEP"
+      placeholder="address"
       type="text"
-      id="cep"
-      name="cep"
-      formControlName="cep"
+      id="address"
+      formControlName="address"
       required
     />
+  </div>
+</form>
+<form [formGroup]="Addressform">
+  <i
+    class="icon pi pi-home"
+    style="font-size: 2rem; color: blueviolet"
+    alt="icone de usuário"
+  ></i>
+  <div class="container-input">
+    <input
+      pInputText
+      placeholder="Cep"
+      type="text"
+      id="cep"
+      formControlName="cep"
+      required
+      #cepInput
+      (blur)="searchCep()"
+    />
+
     <input
       pInputText
       placeholder="Street"
       type="text"
       id="street"
       name="street"
-      formControlName="street"
+      formControlName="logradouro"
       required
     />
 
     <input
       pInputText
-      placeholder="Number"
+      placeholder="Neighborhood"
       type="text"
       id="number"
       name="number"
-      formControlName="number"
+      formControlName="bairro"
       required
     />
 
@@ -148,7 +157,7 @@
       type="text"
       id="complement"
       name="complement"
-      formControlName="complement"
+      formControlName="complemento"
     />
     <input
       pInputText
@@ -156,7 +165,7 @@
       type="text"
       id="city"
       name="city"
-      formControlName="city"
+      formControlName="localidade"
       required
     />
 
@@ -169,24 +178,28 @@
       required
       formControlName="uf"
     />
-    <div class="button">
-      <input
-        class="button-create"
-        type="submit"
-        value="Salvar "
-      
-      />
-    </div>
-  </form>
+  </div>
+</form>
+<div class="button">
+  <button class="button-create" type="submit" (click)="createUser()">
+    Save
+  </button>
+</div>
 </p-dialog>
+
 
 <p-dialog
   [(visible)]="displayUpdateUser"
   [style]="{ width: '70vw' }"
   [baseZIndex]="10000"
 >
-  <form [formGroup]="userForm">
-    <h2 class="title">Updtade User</h2>
+<form [formGroup]="userForm" >
+  <i
+    class="icon pi pi-user"
+    style="font-size: 2rem; color: blueviolet"
+    alt="icone de usuário"
+  ></i>
+  <div class="container-input">
     <input
       pInputText
       placeholder="Name"
@@ -207,10 +220,10 @@
 
     <input
       pInputText
-      placeholder="Date"
       type="date"
       id="dateOfBirthday"
       formControlName="dateOfBirthday"
+      title="Insira sua data de nascimento neste campo"
       required
     />
 
@@ -240,47 +253,52 @@
       formControlName="phoneNumber"
       required
     />
-    <div class="button">
-      <button class="button-create" type="submit" (click)="updateUser()">
-        Save
-      </button>
-    </div>
-  </form>
-
-  <p-dialog
-  [(visible)]="displayUpdateAddress"
-  [style]="{ width: '70vw' }"
-  [baseZIndex]="10000"
->
-  <form [formGroup]="Addressform">
-    <h2 class="title">Now Address</h2>
-
     <input
+    style="display:none;"
       pInputText
-      placeholder="CEP"
+      placeholder="address"
       type="text"
-      id="cep"
-      name="cep"
-      formControlName="cep"
+      id="address"
+      formControlName="address"
       required
     />
+  </div>
+</form>
+<form [formGroup]="Addressform">
+  <i
+    class="icon pi pi-home"
+    style="font-size: 2rem; color: blueviolet"
+    alt="icone de usuário"
+  ></i>
+  <div class="container-input">
+    <input
+      pInputText
+      placeholder="Cep"
+      type="text"
+      id="cep"
+      formControlName="cep"
+      required
+      #cepInput
+      (blur)="searchCep()"
+    />
+
     <input
       pInputText
       placeholder="Street"
       type="text"
       id="street"
       name="street"
-      formControlName="street"
+      formControlName="logradouro"
       required
     />
 
     <input
       pInputText
-      placeholder="Number"
+      placeholder="Neighborhood"
       type="text"
       id="number"
       name="number"
-      formControlName="number"
+      formControlName="bairro"
       required
     />
 
@@ -290,7 +308,7 @@
       type="text"
       id="complement"
       name="complement"
-      formControlName="complement"
+      formControlName="complemento"
     />
     <input
       pInputText
@@ -298,7 +316,7 @@
       type="text"
       id="city"
       name="city"
-      formControlName="city"
+      formControlName="localidade"
       required
     />
 
@@ -311,17 +329,15 @@
       required
       formControlName="uf"
     />
-    <div class="button">
-      <input
-        class="button-create"
-        type="submit"
-        value="Salvar "
-        (click)="updateAddress()"
-      />
-    </div>
-  </form>
+  </div>
+</form>
+<div class="button">
+  <button class="button-create" type="submit" (click)="updateUser()">
+    Save
+  </button>
+</div>
 </p-dialog>
-</p-dialog>
+
 
 <ng-template #noUsers>
   <p class="no-users-message">

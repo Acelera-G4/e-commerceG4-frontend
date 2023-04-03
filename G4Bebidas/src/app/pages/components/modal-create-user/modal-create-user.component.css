@@ -1,54 +1,39 @@
-.title {
-  font-size: 1.6rem;
-  color: #6e2c9d;
-}
-
 form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
- 
-  
-}
-form > input {
-  width: 70%;
-  border: none;
-  border-bottom: 1px solid #ab47bc;
-}
-form > input:hover {
-  border-bottom: 1px solid #6e2c9d;
-}
-form > input::placeholder {
-  color: #ab47bc;
-  font-size: 0.8rem;
-}
-form > #dateOfBirthday {
-  color: #ab47bc !important;
-  font-size: 0.8rem;
+  margin-bottom: 20px;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  filter: invert(1) brightness(10090%) sepia(100%) saturate(10000%)
-    hue-rotate(200deg);
+.icon{
+  margin-bottom: 5px;
 }
 
-form > .button {
-  margin-top: 25px;
-  width: 70%;
-  display: flex;
-  justify-content: center;
+.container-input{
+  /* display: flex;
+  flex-wrap: wrap; */
+  display: grid;
+  grid-template-rows: repeat(2, 1fr); /* duas linhas */
+  grid-template-columns: repeat(3, 1fr); /* três colunas */
+  gap: 5px;
 }
-.button > .button-create {
-  background-color: #ab47bc;
-  box-shadow: 1px 1px 5px #6e2c9d;
+
+.button{
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  background-color: #fff;
   border-radius: 8px;
   border: none;
+  box-shadow: 1px 1px 5px #ab47bc;
   height: 30px;
   width: 150px;
   font-weight: 600;
-  color: #ffff;
+  color: #5c1fb1;
   cursor: pointer;
   transition: 0.3s;
+}
+
+button:hover {
+  color: #fff;
+  background-color: #5c1fb1;
 }

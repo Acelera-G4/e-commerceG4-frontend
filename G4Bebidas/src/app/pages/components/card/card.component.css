@@ -13,6 +13,7 @@
   justify-content: center;
   padding: 10px;
 }
+
 .card {
   display: flex;
   flex-direction: column;
@@ -28,11 +29,51 @@
 .img-card > img {
   padding: 20px;
   width: 100%;
-  max-height: 200px;
-  height: auto;
+  /* max-height: 200px; */
+  height: 100%;
   object-fit: contain;
   border-radius: 8px 8px 0 0;
 }
+
+/* MODAL PRODUCT DETAILS */
+.container-modal {
+  display: flex;
+  justify-content: space-around;
+}
+
+.img-card.modal {
+  object-fit: contain;
+  height: 350px;
+}
+
+.content-card-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.content-card-modal > h4 {
+  margin: 15px;
+  width: 90%;
+  font-weight: 600;
+  text-align: left;
+  color: #a581d9;
+  font-size: 2.0rem;
+  line-height: 35px;
+}
+.content-card-modal > h2 {
+  display: none;
+}
+
+.content-card-modal > p {
+  color: #491b89;
+  margin: 15px;
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+/* MODAL PRODUCT DETAILS */
 
 .container-cards {
   cursor: pointer;
