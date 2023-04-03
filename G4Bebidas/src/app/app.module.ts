@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './pages/components/products/products.component';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ModalCreateUserComponent } from './pages/components/modal-create-user/modal-create-user.component';
 import { ModalUpdateUserComponent } from './pages/components/modal-update-user/modal-update-user.component';
@@ -79,6 +80,7 @@ import { UsersComponent } from './pages/components/users/users.component';
     CardModule,
     ProgressSpinnerModule,
     CarouselModule,
+    InputSwitchModule
   ],
   exports: [AppRoutingModule],
   providers: [ToastService],
