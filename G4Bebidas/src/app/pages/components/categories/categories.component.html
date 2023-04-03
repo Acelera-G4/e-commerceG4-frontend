@@ -5,15 +5,16 @@
         <th class="header-list">ID</th>
         <th>Nome</th>
         <th>Descrição</th>
-        <th></th>
+        <th>Ativa?<p-inputSwitch [(ngModel)]="active" (click)="switchCategories()" required></p-inputSwitch></th>
+        
         <th>
-          <i class="pi pi-user-plus" (click)="showDialogCreateCategory()"></i>
+          <i class="pi pi-plus" (click)="showDialogCreateCategory()"></i>
         </th>
       </tr>
     </thead>
     <tbody>
       <div class="no-categories-message" *ngIf="categories.length > 0; else noCategories"></div>
-      <tr *ngFor="let category of categories">
+      <tr *ngFor="let category of filteredCategories">
         <td>{{ category.categoryId }}</td>
         <td>{{ category.name }}</td>
         <td>{{ category.description }}</td>
@@ -36,9 +37,11 @@
   <form [formGroup]="categoryForm">
     <h2 class="title">Nova Categoria</h2>
     <input pInputText placeholder="Nome" type="text" id="name" formControlName="name" required />
-
     <input pInputText placeholder="Descrição" type="text" id="description" formControlName="description" required />
-
+    <h1 class="title">Categoria Ativa?</h1>
+    <p-inputSwitch formControlName="active" required></p-inputSwitch>
+    <h2 class="title">Categoria Principal</h2>
+    <p-inputSwitch formControlName="main" required></p-inputSwitch>
     <div class="button">
       <button class="button-create" type="submit" (click)="postCategory()">
         Criar Categoria
@@ -52,6 +55,13 @@
     <h2 class="title">Atualizar Categoria</h2>
     <input pInputText placeholder="Nome" type="text" id="name" formControlName="name" required />
     <input pInputText placeholder="Descrição" type="text" id="description" formControlName="description" required />
+    <h1 class="title">Categoria Ativa?</h1>
+    <p-inputSwitch formControlName="active" required></p-inputSwitch>
+    <h1 class="title">Categoria Principal?</h1>
+    <p-inputSwitch formControlName="main" required></p-inputSwitch>
+
+
+
     <div class="button">
       <button class="button-create" type="submit" (click)="putCategory()">
         Atualizar Categoria

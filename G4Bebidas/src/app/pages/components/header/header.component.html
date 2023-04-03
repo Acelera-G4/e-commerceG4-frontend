@@ -9,12 +9,7 @@
   </div>
   <div *ngIf="!isHome" class="menu-container">
     <nav class="menu">
-      <a class="menu_link" href="#">MASTERTIPS</a>
-      <a class="menu_link" href="#">VODKA</a>
-      <a class="menu_link" href="#">WHISKY</a>
-      <a class="menu_link" href="#">GIM</a>
-      <a class="menu_link" href="#">NÃO-ALCOÓLICOS</a>
-      <a class="menu_link" href="#">KITS</a>
+      <a *ngFor="let category of mainCategories" class="menu_link" href="#">{{category.name}}</a>
     </nav>
   </div>
 
