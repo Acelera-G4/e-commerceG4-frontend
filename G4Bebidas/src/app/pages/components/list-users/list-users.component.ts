@@ -1,8 +1,9 @@
 import { Router } from '@angular/router';
 import { UserService } from './../../../services/users.service';
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { take } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-list-users',
@@ -11,12 +12,18 @@ import { take } from 'rxjs';
 })
 export class ListUsersComponent {
   listUsers: User[] = [];
-  displayCreateUser: boolean = false;
+  @Input() displayCreateUser: boolean = false;
   displayAddress: boolean = false;
   displayUpdateUser: boolean = false;
   newUser: User;
-  id: number;
-  constructor(private userService: UserService, private router: Router) {}
+  newUserId: any;
+  userForm: FormGroup;
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     localStorage.getItem('log') != (null || 'false')
@@ -36,8 +43,8 @@ export class ListUsersComponent {
   }
 
   showDialogUpdateUser(user: User) {
-    console.log('funfei', user);
-    this.displayUpdateUser = true;
+    this.displayCreateUser = true;
+    console.log(user);
   }
 
   listAllUsers() {
@@ -59,7 +66,7 @@ export class ListUsersComponent {
 
   closeDialogs() {
     this.displayCreateUser = false;
-    this.displayAddress = false;
+
     console.log('cliquei no ' + this.displayCreateUser);
   }
 }

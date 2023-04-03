@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
+import { ListUsersComponent } from '../list-users/list-users.component';
 
 @Component({
   selector: 'app-users',
@@ -51,7 +52,10 @@ export class UsersComponent {
       : this.router.navigate(['/users']);
     this.isLoading = true;
     this.getUsers();
-    // this.getAddres();
+    this.formEmpty();
+  }
+
+  formEmpty() {
     this.userForm = this.formBuilder.group({
       id: [null],
       name: [null],
@@ -60,16 +64,46 @@ export class UsersComponent {
       email: [null],
       userType: [null],
       phoneNumber: [null],
-      address: [[null]],
+      address: [this.Addressform],
     });
     this.Addressform = this.formBuilder.group({
-      id: [null],
       cep: [null],
-      street: [null],
-      number: [null],
-      complement: [null],
-      city: [null],
+      logradouro: [null],
+      complemento: [null],
+      localidade: [null],
+      bairro: [null],
       uf: [null],
+      ddd: [null],
+      gia: [null],
+      ibge: [null],
+      siafi: [null],
+    });
+  }
+
+  formfilled(user: User) {
+    const dateOfBirthday = new Date(user.dateOfBirthday)
+      .toISOString()
+      .slice(0, 10)
+      .split('-')
+      .reverse()
+      .join('-');
+    this.userForm = this.formBuilder.group({
+      id: [user.id],
+      name: [user.name],
+      cpf: [user.cpf],
+      dateOfBirthday: [dateOfBirthday],
+      email: [user.email],
+      userType: [user.userType],
+      phoneNumber: [user.phoneNumber],
+      address: [this.Addressform],
+    });
+    this.Addressform = this.formBuilder.group({
+      cep: [user.address.cep],
+      logradouro: [user.address.logradouro],
+      complemento: [user.address.complemento],
+      localidade: [user.address.localidade],
+      bairro: [user.address.bairro],
+      uf: [user.address.uf],
     });
   }
 
@@ -84,16 +118,16 @@ export class UsersComponent {
     });
   }
 
-  // getAddres(){
-  //   this.addressService.listAllAddress().subscribe({
-  //     next:(response)=>{
-  //       this.listAddress = response;
-  //       this.size = this.listUsers.length;
-  //       this.isLoading = false;
-  //     },
-  //     error:(error) => (this.error = error),
-  //   })
-  // }
+  getAddres() {
+    this.addressService.listAllAddress().subscribe({
+      next: (response) => {
+        this.listAddress = response;
+        this.size = this.listUsers.length;
+        this.isLoading = false;
+      },
+      error: (error) => (this.error = error),
+    });
+  }
 
   showDialogCreateUser() {
     this.user = new User();
@@ -101,29 +135,41 @@ export class UsersComponent {
   }
 
   createUser() {
-    const user = new User();
-    user.id = this.userForm.value.id;
-    user.name = this.userForm.value.name;
-    user.cpf = this.userForm.value.cpf;
-    user.dateOfBirthday = this.userForm.value.dateOfBirthday;
-    user.email = this.userForm.value.email;
-    user.userType = this.userForm.value.userType;
-    user.phoneNumber = this.userForm.value.phoneNumber;
-    user.address = this.userForm.value.address;
-    console.log(this.userForm);
-
-    this.userService.createUser(user).subscribe({
-      next: (Response) => {
-        //CRIAR TRATAMENTO DE ERRO AQUI
-        console.log('ID', Response.id);
-        this.user = Response;
-        this.getUsers();
+    this.userService.createUser(this.userForm.value).subscribe({
+      next: (registered) => {
+        console.log('ID ', registered.id);
+        this.user = registered;
+        console.log(this.user);
         this.displayCreateUser = false;
+        this.getUsers();
       },
-      error: (error) => (this.error = error),
+      error: (erro) => alert('Preencha todos os campos!'),
     });
-    this.displayAddress = true;
+    // console.log(this.formUser);
   }
+  // createUser() {
+  //   const user = new User();
+  //   user.id = this.userForm.value.id;
+  //   user.name = this.userForm.value.name;
+  //   user.cpf = this.userForm.value.cpf;
+  //   user.dateOfBirthday = this.userForm.value.dateOfBirthday;
+  //   user.email = this.userForm.value.email;
+  //   user.userType = this.userForm.value.userType;
+  //   user.phoneNumber = this.userForm.value.phoneNumber;
+  //   user.address = this.userForm.value.address;
+  //   console.log(this.userForm);
+
+  //   this.userService.createUser(user).subscribe({
+  //     next: (Response) => {
+  //       //CRIAR TRATAMENTO DE ERRO AQUI
+  //       console.log('ID', Response.id);
+  //       this.user = Response;
+  //       this.displayCreateUser = false;
+  //       this.getUsers();
+  //     },
+  //     error: (error) => (this.error = error),
+  //   });
+  // }
 
   showDialogUpdateUser(user: User) {
     this.user = user;
@@ -140,9 +186,7 @@ export class UsersComponent {
     });
   }
 
-  showDialogUpdateAddress(address: Address) {
-    
-  }
+  showDialogUpdateAddress(address: Address) {}
 
   updateUser() {
     let newUser = new User();
@@ -179,5 +223,18 @@ export class UsersComponent {
       },
       error: (error) => (this.error = error),
     });
+  }
+
+  searchCep() {
+    const cepForm = this.Addressform.value.cep;
+    this.addressService.buscaCep(cepForm).subscribe({
+      next: (response) => {
+        this.Addressform.setValue(response);
+        console.log(this.Addressform);
+      },
+      error: (error) => console.error(error),
+    });
+
+    console.log(cepForm);
   }
 }

@@ -38,6 +38,7 @@ import { CarouselComponent } from './pages/components/carousel/carousel.componen
 import { CarouselModule } from 'primeng/carousel';
 import { UsersComponent } from './pages/components/users/users.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
