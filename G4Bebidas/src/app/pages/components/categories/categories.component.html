@@ -5,24 +5,58 @@
         <th class="header-list">ID</th>
         <th>Nome</th>
         <th>Descrição</th>
-        <th>Ativa?<p-inputSwitch [(ngModel)]="active" (click)="switchCategories()" required></p-inputSwitch></th>
-        
+        <th>
+          <p-inputSwitch
+            [(ngModel)]="activeSwitch"
+            (click)="switchCategories()"
+            required
+          ></p-inputSwitch>
+        </th>
+
         <th>
           <i class="pi pi-plus" (click)="showDialogCreateCategory()"></i>
         </th>
       </tr>
     </thead>
     <tbody>
-      <div class="no-categories-message" *ngIf="categories.length > 0; else noCategories"></div>
-      <tr *ngFor="let category of filteredCategories">
-        <td>{{ category.categoryId }}</td>
-        <td>{{ category.name }}</td>
-        <td>{{ category.description }}</td>
-        <td>
-          <i class="pi pi-pencil" (click)="showDialogUpdateCategory(category)"></i>
-        </td>
-        <td><i class="pi pi-trash" (click)="deleteCategory(category)"></i></td>
-      </tr>
+      <div
+        class="no-categories-message"
+        *ngIf="categories.length > 0; else noCategories"
+      ></div>
+      <div *ngIf="activeSwitch == true">
+        <tr *ngFor="let category of categories">
+          <div *ngIf="category.active == true">
+            <td>{{ category.categoryId }}</td>
+            <td>{{ category.name }}</td>
+            <td>{{ category.description }}</td>
+            <td>
+              <i
+                class="pi pi-pencil"
+                (click)="showDialogUpdateCategory(category)"
+              ></i>
+            </td>
+            <td>
+              <i class="pi pi-trash" (click)="deleteCategory(category)"></i>
+            </td>
+          </div>
+      <div *ngIf="activeSwitch == false">
+        <tr *ngFor="let category of categories">
+          <div *ngIf="category.active == false">
+            <td>{{ category.categoryId }}</td>
+            <td>{{ category.name }}</td>
+            <td>{{ category.description }}</td>
+            <td>
+              <i
+                class="pi pi-pencil"
+                (click)="showDialogUpdateCategory(category)"
+              ></i>
+            </td>
+            <td>
+              <i class="pi pi-trash" (click)="deleteCategory(category)"></i>
+            </td>
+          </div>
+        </tr>
+      </div>
     </tbody>
   </table>
 </div>
@@ -31,13 +65,29 @@
   <p class="no-categories-message">Não há categorias cadastradas.</p>
 </ng-template>
 
-
-
-<p-dialog [(visible)]="displayCreateCategory" [style]="{ width: '70vw' }" [baseZIndex]="10000">
+<p-dialog
+  [(visible)]="displayCreateCategory"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+>
   <form [formGroup]="categoryForm">
     <h2 class="title">Nova Categoria</h2>
-    <input pInputText placeholder="Nome" type="text" id="name" formControlName="name" required />
-    <input pInputText placeholder="Descrição" type="text" id="description" formControlName="description" required />
+    <input
+      pInputText
+      placeholder="Nome"
+      type="text"
+      id="name"
+      formControlName="name"
+      required
+    />
+    <input
+      pInputText
+      placeholder="Descrição"
+      type="text"
+      id="description"
+      formControlName="description"
+      required
+    />
     <h1 class="title">Categoria Ativa?</h1>
     <p-inputSwitch formControlName="active" required></p-inputSwitch>
     <h2 class="title">Categoria Principal</h2>
@@ -50,17 +100,33 @@
   </form>
 </p-dialog>
 
-<p-dialog [(visible)]="displayUpdateCategory" [style]="{ width: '70vw' }" [baseZIndex]="10000">
+<p-dialog
+  [(visible)]="displayUpdateCategory"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+>
   <form [formGroup]="categoryForm" *ngIf="displayUpdateCategory">
     <h2 class="title">Atualizar Categoria</h2>
-    <input pInputText placeholder="Nome" type="text" id="name" formControlName="name" required />
-    <input pInputText placeholder="Descrição" type="text" id="description" formControlName="description" required />
+    <input
+      pInputText
+      placeholder="Nome"
+      type="text"
+      id="name"
+      formControlName="name"
+      required
+    />
+    <input
+      pInputText
+      placeholder="Descrição"
+      type="text"
+      id="description"
+      formControlName="description"
+      required
+    />
     <h1 class="title">Categoria Ativa?</h1>
     <p-inputSwitch formControlName="active" required></p-inputSwitch>
     <h1 class="title">Categoria Principal?</h1>
     <p-inputSwitch formControlName="main" required></p-inputSwitch>
-
-
 
     <div class="button">
       <button class="button-create" type="submit" (click)="putCategory()">

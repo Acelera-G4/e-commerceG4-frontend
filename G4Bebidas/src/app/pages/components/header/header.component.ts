@@ -21,7 +21,11 @@ export class HeaderComponent {
   name: string | null = localStorage.getItem('name');
   mainCategories: Category[] = [];
   error: any;
-  constructor(private router: Router, private auth: AuthService, private categoryService: CategoryService) {}
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
@@ -61,7 +65,7 @@ export class HeaderComponent {
     this.categoryService.getMainCategories().subscribe({
       next: (response) => {
         this.mainCategories = response;
-        console.log(this.mainCategories);
+        console.log('CHEGUEI NAS CATEGORIAS', this.mainCategories);
       },
       error: (error) => (this.error = error),
     });

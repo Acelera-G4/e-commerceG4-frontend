@@ -1,4 +1,64 @@
 <div class="container table-responsive" *ngIf="listingProducts">
+  <p-table
+    [value]="products"
+    [rows]="5"
+    [paginator]="true"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[2, 10, 30]"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    responsiveLayout="stack"
+    [breakpoint]="'660px'"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template
+      pTemplate="header"
+      style="background-color: #ab47bc"
+      let-columns
+    >
+      <tr>
+        <th id="header-list">ID</th>
+        <th id="header-list">Nome</th>
+        <th id="header-list">Descrição</th>
+        <th id="header-list">Preço</th>
+        <th id="header-list">Categoria</th>
+        <th id="header-list"></th>
+        <th id="header-list">
+          <p-inputSwitch
+            [(ngModel)]="active"
+            (click)="switchProducts()"
+            required
+          ></p-inputSwitch>
+        </th>
+        <th id="header-list">
+          <i class="pi pi-plus" (click)="showDialogCreateProduct()"></i>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-columns="columns">
+      <tr *ngFor="let product of filteredProducts">
+        <td>{{ product.productId }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.category.name }}</td>
+        <td></td>
+        <td>
+          <i
+            class="pi pi-pencil"
+            (click)="showDialogUpdateProduct(product)"
+          ></i>
+        </td>
+        <td>
+          <i class="pi pi-trash" (click)="deleteProduct(product)"></i>
+        </td></tr
+    ></ng-template>
+
+    <ng-template pTemplate="paginatorleft"> </ng-template>
+    <ng-template pTemplate="paginatorright"> </ng-template>
+  </p-table>
+</div>
+
+<div class="container table-responsive" *ngIf="listingProducts">
   <table class="table">
     <thead>
       <tr>
@@ -111,6 +171,7 @@
         ></p-dropdown>
       </div>
       <input
+        pInputFile
         placeholder="Imagem"
         type="file"
         id="file"
@@ -166,7 +227,7 @@
         required
       />
       <div class="container-select">
-                <!-- <select
+        <!-- <select
                 name="category"
                 id="category"
                 formControlName="category"
@@ -195,11 +256,11 @@
         required
         (change)="handleUpload($event)"
       />
-    </div>
-    <div class="button">
-      <button class="button-create" type="submit" (click)="putProduct()">
-        Atualizar Produto
-      </button>
+      <div class="button">
+        <button class="button-create" type="submit" (click)="putProduct()">
+          Atualizar Produto
+        </button>
+      </div>
     </div>
   </form>
 </p-dialog>
