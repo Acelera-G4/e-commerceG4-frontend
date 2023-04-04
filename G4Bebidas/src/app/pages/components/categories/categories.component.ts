@@ -22,7 +22,8 @@ export class CategoriesComponent implements OnInit {
   categoryForm: FormGroup;
   selectedCategory: any;
   listingCategory: boolean;
-  active: boolean = true; 
+  active: boolean = false; 
+  activeSwitch: boolean; 
 
   constructor(
     private categoryService: CategoryService,
@@ -38,21 +39,23 @@ export class CategoriesComponent implements OnInit {
       ? this.router.navigate(['/'])
       : this.router.navigate(['/category']);
     this.getCategories();
-    this.filterCategories();
+    // this.filterCategories();
     this.listingCategories = true;
     this.categoryForm = this.formBuilder.group({
       name: [null],
       description: [null],
-      active: new FormControl<boolean>(false),
+      activeSwitch: new FormControl<boolean>(false),
       main: new FormControl<boolean>(false)
     });
+    this.activeSwitch = false;
+
   }
 
   postCategory() {
     let category = new Category();
     category.name = this.categoryForm.value.name;
     category.description = this.categoryForm.value.description;
-    category.active = this.categoryForm.value.active;
+    category.active = this.categoryForm.value.activeSwitch;
     category.main = this.categoryForm.value.main;
     console.log(category);
     this.categoryService.postCategory(category).subscribe({
@@ -68,7 +71,7 @@ export class CategoriesComponent implements OnInit {
     this.categoryForm = this.formBuilder.group({
       name: [null],
       description: [null],
-      active: new FormControl<boolean>(false),
+      activeSwitch: new FormControl<boolean>(false),
       main: new FormControl<boolean>(false)
     });
     this.displayCreateCategory = true;
@@ -91,7 +94,7 @@ export class CategoriesComponent implements OnInit {
   putCategory() {
     this.category.name = this.categoryForm.value.name;
     this.category.description = this.categoryForm.value.description;
-    this.category.active = this.categoryForm.value.active;
+    this.category.active = this.categoryForm.value.activeSwitch;
     this.category.main = this.categoryForm.value.main;
     this.categoryService.putCategory(this.category).subscribe({
       next: (response) => {
@@ -107,7 +110,7 @@ export class CategoriesComponent implements OnInit {
     this.categoryForm = this.formBuilder.group({
       name: [category.name],
       description: [category.description],
-      active: [category.active],
+      activeSwitch: [category.active],
       main: [category.main]
     });
   }
@@ -120,12 +123,12 @@ export class CategoriesComponent implements OnInit {
   }
 
   switchCategories() {
-    this.getCategories();
+    // this.getCategories();
     this.filterCategories();
   }
 
   filterCategories() {
-    if(this.active == true) {
+    if(this.activeSwitch == true) {
       this.filteredCategories = this.categories.filter(
         (category) => category.active == true
       );
@@ -134,5 +137,6 @@ export class CategoriesComponent implements OnInit {
         (category) => category.active == false
       );
     }
+    console.log("sou o filtro",this.filteredCategories)
   } 
 }

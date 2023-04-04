@@ -1,4 +1,55 @@
 <div class="container table-responsive">
+  <p-table
+    [value]="listUsers"
+    [rows]="5"
+    [paginator]="true"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 30]"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    headerStyle="background-color: blue; color: white; border: 1px solid black"
+    responsiveLayout="stack"
+    [breakpoint]="'660px'"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template
+      pTemplate="header"
+      style="background-color: #ab47bc"
+      let-columns
+    >
+      <tr>
+        <th id="header-list">ID</th>
+        <th id="header-list">Name</th>
+        <th id="header-list">CPF</th>
+        <th id="header-list">Birthday</th>
+        <th id="header-list">Email</th>
+        <th id="header-list">User Type</th>
+        <th id="header-list">Phone</th>
+        <th id="header-list"></th>
+        <th id="header-list">
+          <i class="pi pi-user-plus" (click)="showDialogCreateUser()"></i>
+        </th></tr
+    ></ng-template>
+    <ng-template pTemplate="body" let-user let-columns="columns">
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.cpf }}</td>
+        <td>{{ user.dateOfBirthday }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.userType }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>
+          <i class="pi pi-user-edit" (click)="showDialogUpdateUser(user)"></i>
+        </td>
+        <td><i class="pi pi-times" (click)="deleteUserById(user.id)"></i></td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft"> </ng-template>
+    <ng-template pTemplate="paginatorright"> </ng-template>
+  </p-table>
+</div>
+
+<!-- <div class="container table-responsive">
   <table class="table">
     <thead>
       <tr>
@@ -25,7 +76,7 @@
         <td>{{ user.name }}</td>
         <td>{{ user.cpf }}</td>
         <td>{{ user.dateOfBirthday }}</td>
-        <td *ngIf="listUsers.length > 0; else noUsers">{{ user.email }}</td>
+        <td>{{ user.email }}</td>
         <td>{{ user.userType }}</td>
         <td>{{ user.phoneNumber }}</td>
         <td>
@@ -35,14 +86,14 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
 
 <p-dialog
   [(visible)]="displayCreateUser"
   [style]="{ width: '70vw' }"
   [baseZIndex]="10000"
 >
-  <app-modal-create-user ></app-modal-create-user>
+  <app-modal-create-user></app-modal-create-user>
 </p-dialog>
 
 <p-dialog
