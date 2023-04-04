@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { CategoryService } from './../../../services/category.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Category } from './../../../models/category';
+import { ToastService } from 'angular-toastify';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -22,12 +23,13 @@ export class CategoriesComponent implements OnInit {
   categoryForm: FormGroup;
   selectedCategory: any;
   listingCategory: boolean;
-  active: boolean = false; 
-  activeSwitch: boolean; 
+  activeSwitch: boolean = true;
+  active: boolean = false;
 
   constructor(
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
+    private toast: ToastService,
     private router: Router
   ) {
     this.category = new Category();
@@ -38,17 +40,14 @@ export class CategoriesComponent implements OnInit {
     localStorage.getItem('log') == (null || 'false')
       ? this.router.navigate(['/'])
       : this.router.navigate(['/category']);
-    this.getCategories();
-    // this.filterCategories();
+
     this.listingCategories = true;
     this.categoryForm = this.formBuilder.group({
       name: [null],
       description: [null],
       activeSwitch: new FormControl<boolean>(false),
-      main: new FormControl<boolean>(false)
+      main: new FormControl<boolean>(false),
     });
-    this.activeSwitch = false;
-
   }
 
   postCategory() {
@@ -57,11 +56,11 @@ export class CategoriesComponent implements OnInit {
     category.description = this.categoryForm.value.description;
     category.active = this.categoryForm.value.activeSwitch;
     category.main = this.categoryForm.value.main;
-    console.log(category);
+    console.log('category ', category);
     this.categoryService.postCategory(category).subscribe({
       next: (response) => {
         this.displayCreateCategory = false;
-        this.getCategories();
+        this.getCategoriesList();
         this.filterCategories();
       },
       error: (error) => (this.error = error),
@@ -72,7 +71,7 @@ export class CategoriesComponent implements OnInit {
       name: [null],
       description: [null],
       activeSwitch: new FormControl<boolean>(false),
-      main: new FormControl<boolean>(false)
+      main: new FormControl<boolean>(false),
     });
     this.displayCreateCategory = true;
   }
@@ -81,10 +80,12 @@ export class CategoriesComponent implements OnInit {
     this.selectedCategory = category;
   }
 
-  getCategories() {
+  getCategoriesList() {
     this.categoryService.getCategories().subscribe({
       next: (response) => {
+        console.log('response', response);
         this.categories = response;
+        this.filterCategories();
         this.size = this.categories.length;
       },
       error: (error) => (this.error = error),
@@ -96,6 +97,7 @@ export class CategoriesComponent implements OnInit {
     this.category.description = this.categoryForm.value.description;
     this.category.active = this.categoryForm.value.activeSwitch;
     this.category.main = this.categoryForm.value.main;
+    this.filterCategories();
     this.categoryService.putCategory(this.category).subscribe({
       next: (response) => {
         this.displayUpdateCategory = false;
@@ -105,13 +107,13 @@ export class CategoriesComponent implements OnInit {
   }
 
   showDialogUpdateCategory(category: Category) {
-    this.category = category;
     this.displayUpdateCategory = true;
+    this.category = category;
     this.categoryForm = this.formBuilder.group({
       name: [category.name],
       description: [category.description],
       activeSwitch: [category.active],
-      main: [category.main]
+      main: [category.main],
     });
   }
 
@@ -119,24 +121,24 @@ export class CategoriesComponent implements OnInit {
     this.category = category;
     this.category.active = false;
     this.category.main = false;
-    this.putCategory();
   }
 
   switchCategories() {
-    // this.getCategories();
     this.filterCategories();
   }
 
   filterCategories() {
-    if(this.activeSwitch == true) {
+    if (this.activeSwitch === true || this.activeSwitch == undefined) {
+      this.toast.info('Mostrandos os ativos');
       this.filteredCategories = this.categories.filter(
         (category) => category.active == true
       );
-    } else {
+    }
+    if (this.activeSwitch == false) {
+      this.toast.error('Mostrandos os inativos');
       this.filteredCategories = this.categories.filter(
         (category) => category.active == false
       );
     }
-    console.log("sou o filtro",this.filteredCategories)
-  } 
+  }
 }

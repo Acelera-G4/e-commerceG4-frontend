@@ -52,6 +52,7 @@ export class UsersComponent {
       : this.router.navigate(['/users']);
     this.isLoading = true;
     this.getUsers();
+    console.log(this.listUsers);
     this.formEmpty();
   }
 
