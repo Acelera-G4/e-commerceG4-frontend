@@ -26,7 +26,7 @@ export class UsersComponent {
   displayUpdateAddress: boolean;
   displayUpdateUser: boolean;
   userForm: FormGroup;
-  Addressform: FormGroup;
+  addressform: FormGroup;
   newUser: User;
   newAddress: Address;
   id: number;
@@ -65,9 +65,9 @@ export class UsersComponent {
       email: [null],
       userType: [null],
       phoneNumber: [null],
-      address: [this.Addressform],
+      address: [this.addressform],
     });
-    this.Addressform = this.formBuilder.group({
+    this.addressform = this.formBuilder.group({
       cep: [null],
       logradouro: [null],
       complemento: [null],
@@ -96,15 +96,15 @@ export class UsersComponent {
       email: [user.email],
       userType: [user.userType],
       phoneNumber: [user.phoneNumber],
-      address: [this.Addressform],
+      address: [this.addressform],
     });
-    this.Addressform = this.formBuilder.group({
-      cep: [user.address.cep],
-      logradouro: [user.address.logradouro],
-      complemento: [user.address.complemento],
-      localidade: [user.address.localidade],
-      bairro: [user.address.bairro],
-      uf: [user.address.uf],
+    this.addressform = this.formBuilder.group({
+      cep: [user.address[0].cep],
+      logradouro: [user.address[0].logradouro],
+      complemento: [user.address[0].complemento],
+      localidade: [user.address[0].localidade],
+      bairro: [user.address[0].bairro],
+      uf: [user.address[0].uf],
     });
   }
 
@@ -135,42 +135,44 @@ export class UsersComponent {
     this.displayCreateUser = true;
   }
 
-  createUser() {
-    this.userService.createUser(this.userForm.value).subscribe({
-      next: (registered) => {
-        console.log('ID ', registered.id);
-        this.user = registered;
-        console.log(this.user);
-        this.displayCreateUser = false;
-        this.getUsers();
-      },
-      error: (erro) => alert('Preencha todos os campos!'),
-    });
-    // console.log(this.formUser);
-  }
   // createUser() {
-  //   const user = new User();
-  //   user.id = this.userForm.value.id;
-  //   user.name = this.userForm.value.name;
-  //   user.cpf = this.userForm.value.cpf;
-  //   user.dateOfBirthday = this.userForm.value.dateOfBirthday;
-  //   user.email = this.userForm.value.email;
-  //   user.userType = this.userForm.value.userType;
-  //   user.phoneNumber = this.userForm.value.phoneNumber;
-  //   user.address = this.userForm.value.address;
-  //   console.log(this.userForm);
 
-  //   this.userService.createUser(user).subscribe({
-  //     next: (Response) => {
-  //       //CRIAR TRATAMENTO DE ERRO AQUI
-  //       console.log('ID', Response.id);
-  //       this.user = Response;
+  //   this.userService.createUser(this.userForm.value).subscribe({
+  //     next: (registered) => {
+  //       console.log('ID ', registered.id);
+  //       this.user = registered;
+  //       console.log(this.user);
   //       this.displayCreateUser = false;
   //       this.getUsers();
   //     },
-  //     error: (error) => (this.error = error),
+  //     error: (erro) => alert('Preencha todos os campos!'),
   //   });
+  //   this.addressService.createAddress(this.addressform.value)
+  //   // console.log(this.formUser);
   // }
+  createUser() {
+    const user = new User();
+    user.id = this.userForm.value.id;
+    user.name = this.userForm.value.name;
+    user.cpf = this.userForm.value.cpf;
+    user.dateOfBirthday = this.userForm.value.dateOfBirthday;
+    user.email = this.userForm.value.email;
+    user.userType = this.userForm.value.userType;
+    user.phoneNumber = this.userForm.value.phoneNumber;
+    user.address.push(this.addressform.value);
+    console.log(JSON.stringify(user));
+
+    this.userService.createUser(user).subscribe({
+      next: (Response) => {
+        //CRIAR TRATAMENTO DE ERRO AQUI
+        console.log('ID', Response.id);
+        this.user = Response;
+        this.displayCreateUser = false;
+        this.getUsers();
+      },
+      error: (error) => (this.error = error),
+    });
+  }
 
   showDialogUpdateUser(user: User) {
     this.user = user;
@@ -184,6 +186,7 @@ export class UsersComponent {
       email: [user.email],
       userType: [user.userType],
       phoneNumber: [user.phoneNumber],
+      address: [user.address],
     });
   }
 
@@ -191,6 +194,7 @@ export class UsersComponent {
 
   updateUser() {
     let newUser = new User();
+    let newAdress = new Address();
     newUser.id = this.userForm.value.id;
     newUser.name = this.userForm.value.name;
     newUser.cpf = this.userForm.value.cpf;
@@ -198,24 +202,27 @@ export class UsersComponent {
     newUser.email = this.userForm.value.email;
     newUser.userType = this.userForm.value.userType;
     newUser.phoneNumber = this.userForm.value.phoneNumber;
-
-    this.userService.updateUser(newUser, newUser.id).subscribe({
+    newUser.address = this.userForm.value.address;
+    console.log('sou log do erro', newUser);
+    this.userService.updateUser(newUser).subscribe({
       next: (response) => {
         //fazer tratamento de erro aqui
         this.getUsers();
-        this.displayCreateUser = false;
-        this.displayUpdateAddress = true;
+        this.displayUpdateUser = false;
+        // this.displayUpdateAddress = true;
         this.listUsersById = this.userService.listUserById(newUser.id);
+
         console.log('Address', this.listUsersById);
       },
       error: (error) => (this.error = error),
     });
-  }
-
-  updateAddress() {
-    let newAddres = new Address();
     // this.addressService.
   }
+
+  // updateAddress() {
+  //   let newAddres = new Address();
+  //   // this.addressService.
+  // }
 
   deleteUserById(id: number) {
     this.userService.deleteUserById(id).subscribe({
@@ -227,11 +234,11 @@ export class UsersComponent {
   }
 
   searchCep() {
-    const cepForm = this.Addressform.value.cep;
+    const cepForm = this.addressform.value.cep;
     this.addressService.buscaCep(cepForm).subscribe({
       next: (response) => {
-        this.Addressform.setValue(response);
-        console.log(this.Addressform);
+        this.addressform.setValue(response);
+        console.log(this.addressform);
       },
       error: (error) => console.error(error),
     });

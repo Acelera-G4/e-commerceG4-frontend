@@ -76,12 +76,12 @@ export class ModalUpdateUserComponent {
       address: [this.formAddress],
     });
     this.formAddress = this.fb.group({
-      cep: [user.address.cep],
-      logradouro: [user.address.logradouro],
-      complemento: [user.address.complemento],
-      localidade: [user.address.localidade],
-      bairro: [user.address.bairro],
-      uf: [user.address.uf],
+      cep: [user.address[0].cep],
+      logradouro: [user.address[0].logradouro],
+      complemento: [user.address[0].complemento],
+      localidade: [user.address[0].localidade],
+      bairro: [user.address[0].bairro],
+      uf: [user.address[0].uf],
     });
   }
 

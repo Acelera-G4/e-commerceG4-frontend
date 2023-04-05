@@ -140,9 +140,11 @@ export class ProductsComponent implements OnInit {
         this.products = response;
         this.size = this.products.length;
         this.isLoading = false;
+        this.filterProducts();
       },
       error: (error) => (this.error = error),
     });
+    console.log("MENSAGEM PARA O GABRIEL",this.product)
   }
 
   putProduct() {
@@ -221,6 +223,14 @@ export class ProductsComponent implements OnInit {
     this.productId = this.product.productId;
     this.displayUpdateProduct = true;
     this.convertImageToBase64(product.image, this.setImage)
+    this.productForm = this.formBuilder.group({
+      name: [product.name],
+      description: [product.description],
+      price: [product.price],
+      category: [product.category],
+      file: [null], //recuperar iga
+      active: new FormControl<boolean>(false),
+    });
   }
 
   setImage(value : any) {
