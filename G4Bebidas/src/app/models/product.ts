@@ -7,6 +7,6 @@ export class Product {
   public price: number;
   public category: Category;
   public image: String;
-  public active: boolean;
+  public active: boolean = true;
   quantity: number = 1;
 }

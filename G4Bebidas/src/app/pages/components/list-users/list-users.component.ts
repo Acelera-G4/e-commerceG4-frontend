@@ -15,7 +15,7 @@ export class ListUsersComponent {
   @Input() displayCreateUser: boolean = false;
   displayAddress: boolean = false;
   displayUpdateUser: boolean = false;
-  newUser: User;
+   newUser: User;
   newUserId: any;
   userForm: FormGroup;
 
@@ -43,8 +43,18 @@ export class ListUsersComponent {
   }
 
   showDialogUpdateUser(user: User) {
-    this.displayCreateUser = true;
-    console.log(user);
+    this.displayUpdateUser = true;
+    this.userForm = this.formBuilder.group({
+      id: [user.id],
+      name: [user.name],
+      cpf: [user.cpf],
+      dateOfBirthday: [user.dateOfBirthday],
+      email: [user.email],
+      userType: [user.userType],
+      phoneNumber: [user.phoneNumber],
+      address: [user.address],
+    });
+    // console.log(user);
   }
 
   listAllUsers() {

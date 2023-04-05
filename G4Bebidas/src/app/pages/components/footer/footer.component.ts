@@ -18,7 +18,7 @@ export class FooterComponent {
         this.router.url === '/' ||
         this.router.url === '/dashboard' ||
         this.router.url === '/category' ||
-        this.router.url === '/user' ||
+        this.router.url === '/users' ||
         this.router.url === '/product' ||
         this.router.url === '/login' ||
         this.router.url === '/sign-up' ||

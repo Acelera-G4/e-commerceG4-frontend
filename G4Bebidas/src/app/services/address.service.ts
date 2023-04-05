@@ -61,4 +61,8 @@ export class AddressService {
       this.header
     );
   }
+
+  public putProduct(address: Address): Observable<any> {
+    return this.httpClient.put<Address[]>(`${this.urlListAddress}/${address.id}`, address, this.header);
+  }
 }

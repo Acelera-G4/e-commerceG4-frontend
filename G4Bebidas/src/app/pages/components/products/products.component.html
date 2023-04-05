@@ -146,30 +146,7 @@
         step=".01"
         required
       />
-      <div class="container-select">
-        <!-- <label for="category">Category</label>
-        <select
-          name="category"
-          id="category"
-          formControlName="category"
-          [compareWith]="compare"
-          required
-        >
-          <option value="">Selecione a Categoria</option>
-          <option
-            *ngFor="let category of categories"
-            value="{{ category.categoryId }}"
-          >
-            {{ category.name }}
-          </option>
-        </select> -->
-
-        <p-dropdown
-          formControlName="city"
-          [options]="categories"
-          optionLabel="name"
-        ></p-dropdown>
-      </div>
+    
       <input
         pInputFile
         placeholder="Imagem"
@@ -226,27 +203,7 @@
         step=".01"
         required
       />
-      <div class="container-select">
-        <!-- <select
-                name="category"
-                id="category"
-                formControlName="category"
-                [compareWith]="compare"
-                required
-              >
-                <option
-                  *ngFor="let category of categories"
-                  value="{{ category.categoryId }}"
-                >
-                  {{ category.name }}
-                </option>
-              </select> -->
-        <p-dropdown
-          formControlName="city"
-          [options]="categories"
-          optionLabel="name"
-        ></p-dropdown>
-      </div>
+   
       <input
         pInputText
         placeholder="Imagem"

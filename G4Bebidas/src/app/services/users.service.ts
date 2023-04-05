@@ -30,8 +30,8 @@ export class UserService {
     return this.httpClient.post<User>(`${this.url}`, user, this.header);
   }
 
-   updateUser(user: User, id:number): Observable<any> {
-    return this.httpClient.put<User[]>(`${this.url}/${id}`, user, this.header);
+   updateUser(user: User): Observable<any> {
+    return this.httpClient.put<User[]>(`${this.url}`, user, this.header);
   }
 
   deleteUserById(id: number): Observable<User> {

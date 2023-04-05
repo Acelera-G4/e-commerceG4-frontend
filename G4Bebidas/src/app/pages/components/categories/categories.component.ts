@@ -40,7 +40,7 @@ export class CategoriesComponent implements OnInit {
     localStorage.getItem('log') == (null || 'false')
       ? this.router.navigate(['/'])
       : this.router.navigate(['/category']);
-
+    this.getCategoriesList();
     this.listingCategories = true;
     this.categoryForm = this.formBuilder.group({
       name: [null],
