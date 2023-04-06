@@ -1,20 +1,16 @@
 <div class="container table-responsive" *ngIf="listingProducts">
   <p-table
-    [value]="products"
+    [value]="filteredProducts"
     [rows]="5"
     [paginator]="true"
     [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[2, 10, 30]"
+    [rowsPerPageOptions]="[5, 10, 30]"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     responsiveLayout="stack"
     [breakpoint]="'660px'"
     [tableStyle]="{ 'min-width': '50rem' }"
   >
-    <ng-template
-      pTemplate="header"
-      style="background-color: #ab47bc"
-      let-columns
-    >
+    <ng-template pTemplate="header" style="background-color: #ab47bc">
       <tr>
         <th id="header-list">ID</th>
         <th id="header-list">Nome</th>
@@ -34,8 +30,8 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product let-columns="columns">
-      <tr *ngFor="let product of filteredProducts">
+    <ng-template pTemplate="body" let-product>
+      <tr>
         <td>{{ product.productId }}</td>
         <td>{{ product.name }}</td>
         <td>{{ product.description }}</td>
@@ -146,7 +142,7 @@
         step=".01"
         required
       />
-    
+
       <input
         pInputFile
         placeholder="Imagem"
@@ -203,7 +199,7 @@
         step=".01"
         required
       />
-   
+
       <input
         pInputText
         placeholder="Imagem"

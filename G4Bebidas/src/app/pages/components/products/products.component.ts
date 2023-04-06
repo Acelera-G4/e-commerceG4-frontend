@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Buffer } from 'buffer/';
 
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -59,7 +58,7 @@ export class ProductsComponent implements OnInit {
       price: [null],
       category: [null],
       file: [null],
-      active: new FormControl<boolean>(false),
+      active: new FormControl<boolean>(true),
     });
   }
 
@@ -96,17 +95,17 @@ export class ProductsComponent implements OnInit {
       next: (response) => {
         this.imageUrl = response.data.url;
         console.log(response);
-        const product = new Product();
+        // const product = new Product();
         const category = new Category();
         category.categoryId = this.productForm.value.category;
-        product.name = this.productForm.value.name;
-        product.description = this.productForm.value.description;
-        product.price = this.productForm.value.price;
-        product.image = this.imageUrl;
-        product.category = category;
-        product.active = this.productForm.value.active;
-        console.log(this.productForm);
-        this.productService.postProduct(product).subscribe({
+        this.product.name = this.productForm.value.name;
+        this.product.description = this.productForm.value.description;
+        this.product.price = this.productForm.value.price;
+        this.product.image = this.imageUrl;
+        this.product.category = category;
+        this.product.active = true;
+
+        this.productService.postProduct(this.product).subscribe({
           next: (response) => {
             this.getProdutos();
             this.displayCreateProduct = false;
@@ -144,7 +143,7 @@ export class ProductsComponent implements OnInit {
       },
       error: (error) => (this.error = error),
     });
-    console.log("MENSAGEM PARA O GABRIEL",this.product)
+    console.log('MENSAGEM PARA O GABRIEL', this.product);
   }
 
   putProduct() {
@@ -164,13 +163,11 @@ export class ProductsComponent implements OnInit {
         product.productId = this.productId;
         console.log(this.productForm);
         console.log(product);
-        this.toast.success("Atualizado");
+        this.toast.success('Atualizado');
         this.productService.putProduct(product).subscribe({
           next: (response) => {
-
             this.getProdutos();
             this.displayUpdateProduct = false;
-
           },
           error: (error) => (this.error = error),
         });
@@ -222,7 +219,7 @@ export class ProductsComponent implements OnInit {
     this.product = product;
     this.productId = this.product.productId;
     this.displayUpdateProduct = true;
-    this.convertImageToBase64(product.image, this.setImage)
+    this.convertImageToBase64(product.image, this.setImage);
     this.productForm = this.formBuilder.group({
       name: [product.name],
       description: [product.description],
@@ -233,7 +230,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  setImage(value : any) {
+  setImage(value: any) {
     console.log(value);
     //this.file = fetch(value).then(res => res.blob())
     //this.file = new Blob([base64])
@@ -249,17 +246,21 @@ export class ProductsComponent implements OnInit {
 
   dataUrlToFile(dataUrl: string, filename: string): File | undefined {
     const arr = dataUrl.split(',');
-    if (arr.length < 2) { return undefined; }
+    if (arr.length < 2) {
+      return undefined;
+    }
     const mimeArr = arr[0].match(/:(.*?);/);
-    if (!mimeArr || mimeArr.length < 2) { return undefined; }
+    if (!mimeArr || mimeArr.length < 2) {
+      return undefined;
+    }
     const mime = mimeArr[1];
     const buff = Buffer.from(arr[1], 'base64');
-    return new File([buff], filename, {type:mime});
+    return new File([buff], filename, { type: mime });
   }
 
-   convertImageToBase64(imgUrl: any, callback: any) {
+  convertImageToBase64(imgUrl: any, callback: any) {
     const image = new Image();
-    image.crossOrigin='anonymous';
+    image.crossOrigin = 'anonymous';
     image.onload = () => {
       const canvas = document.createElement('canvas');
       const ctx = canvas?.getContext('2d');
@@ -267,8 +268,8 @@ export class ProductsComponent implements OnInit {
       canvas.width = image.naturalWidth;
       ctx.drawImage(image, 0, 0);
       const dataUrl = canvas.toDataURL();
-      callback && callback(dataUrl)
-    }
+      callback && callback(dataUrl);
+    };
     image.src = imgUrl;
   }
 
@@ -293,7 +294,7 @@ export class ProductsComponent implements OnInit {
   }
 
   filterProducts() {
-    if(this.active == true) {
+    if (this.active == true) {
       this.filteredProducts = this.products.filter(
         (product) => product.active == true
       );
@@ -302,6 +303,6 @@ export class ProductsComponent implements OnInit {
         (product) => product.active == false
       );
     }
-    console.log(this.filteredProducts);
-  } 
+    console.log('estamos aqui, me ouve?', this.filteredProducts);
+  }
 }
