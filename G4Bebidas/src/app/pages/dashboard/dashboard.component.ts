@@ -1,6 +1,12 @@
+import { UserService } from 'src/app/services/users.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/isLoggedIn.service';
+import { ProductService } from 'src/app/services/product.service';
+import { forkJoin } from 'rxjs';
+import { CategoriesComponent } from '../components/categories/categories.component';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,21 +15,35 @@ import { AuthService } from 'src/app/services/isLoggedIn.service';
 })
 export class DashboardComponent {
   data: any;
+  listUsers: User[];
 
-  constructor(private router: Router, private auth: AuthService) {
-    this.data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
-        },
-        {
-          label: 'Second Dataset',
-          data: [28, 48, 40, 19, 86, 27, 90],
-        },
-      ],
-    };
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private userService: UserService,
+    private productService: ProductService,
+    private categoryService: CategoryService
+  ) {
+    this.userService.listAllUsers().subscribe((users) => {
+      const userCount = users.length;
+
+      this.productService.getProducts().subscribe((products) => {
+        const productCount = products.length;
+
+        this.categoryService.getCategories().subscribe((categories) => {
+          const categoriesCount = categories.length;
+          this.data = {
+            labels: ['Users', 'Products', 'Categories'],
+            datasets: [
+              {
+                label: 'First Dataset',
+                data: [userCount, productCount, categoriesCount],
+              },
+            ],
+          };
+        });
+      });
+    });
   }
   ngOnInit(): void {
     localStorage.getItem('log') != (null || 'false')
@@ -31,27 +51,27 @@ export class DashboardComponent {
       : this.router.navigate(['/']);
   }
 
-  update(event: Event) {
-    this.data = {
-      labels: [
-        'Geladeira',
-        'Fogão',
-        'Máquina de lavar',
-        'TV',
-        'Rádio',
-        'Fone',
-        'Mesa',
-      ],
-      datasets: [
-        {
-          label: 'First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
-        },
-        {
-          label: 'Second Dataset',
-          data: [28, 48, 40, 19, 86, 27, 90],
-        },
-      ],
-    };
-  }
+  // update(event: Event) {
+  //   this.data = {
+  //     labels: [
+  //       'Geladeira',
+  //       'Fogão',
+  //       'Máquina de lavar',
+  //       'TV',
+  //       'Rádio',
+  //       'Fone',
+  //       'Mesa',
+  //     ],
+  //     datasets: [
+  //       {
+  //         label: 'First Dataset',
+  //         data: [65, 59, 80, 81, 56, 55, 40],
+  //       },
+  //       {
+  //         label: 'Second Dataset',
+  //         data: [28, 48, 40, 19, 86, 27, 90],
+  //       },
+  //     ],
+  //   };
+  // }
 }

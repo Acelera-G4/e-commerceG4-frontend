@@ -1,65 +1,76 @@
 <div class="container">
-  <form [formGroup]="formAddress" class="form-address">
-    <h2 class="title">Address</h2>
-    <div class="container-inputs">
-    
-      <input pInputText
-      placeholder="CEP" type="text" id="cep" name="cep" formControlName="cep" required />
+  <div class="content-login">
+    <form [formGroup]="formAddress" class="form-address">
+      <h2 class="title">Address</h2>
+      <div class="container-inputs">
+        <input
+          pInputText
+          placeholder="CEP"
+          type="text"
+          id="cep"
+          name="cep"
+          formControlName="cep"
+          required
+        />
 
-      <input
-        pInputText
-        placeholder="Street"
-        type="text"
-        id="street"
-        name="street"
-        formControlName="street"
-        required
-      />
+        <input
+          pInputText
+          placeholder="Street"
+          type="text"
+          id="street"
+          name="street"
+          formControlName="street"
+          required
+        />
 
-      <input
-        pInputText
-        placeholder="Number"
-        type="text"
-        id="number"
-        name="number"
-        formControlName="number"
-        required
-      />
+        <input
+          pInputText
+          placeholder="Number"
+          type="text"
+          id="number"
+          name="number"
+          formControlName="number"
+          required
+        />
 
-      <input
-        pInputText
-        placeholder="complement"
-        type="text"
-        id="complement"
-        name="complement"
-        formControlName="complement"
-      />
+        <input
+          pInputText
+          placeholder="complement"
+          type="text"
+          id="complement"
+          name="complement"
+          formControlName="complement"
+        />
 
-      <input
-        pInputText
-        placeholder="City"
-        type="text"
-        id="city"
-        name="city"
-        formControlName="city"
-        required
-      />
+        <input
+          pInputText
+          placeholder="City"
+          type="text"
+          id="city"
+          name="city"
+          formControlName="city"
+          required
+        />
 
-      <input
-        pInputText
-        placeholder="UF"
-        type="text"
-        id="uf"
-        name="uf"
-        required
-        formControlName="uf"
-      />
+        <input
+          pInputText
+          placeholder="UF"
+          type="text"
+          id="uf"
+          name="uf"
+          required
+          formControlName="uf"
+        />
+      </div>
+      <div class="button">
+        <input type="submit" value="Criar " (click)="teste()" />
+      </div>
+      <div class="link">
+        <a routerLink="/">Cancelar</a>
+      </div>
+    </form>
+    <div class="img-singIn">
+      sou imagem
     </div>
-    <div class="button">
-      <input type="submit" value="Criar " (click)="teste()" />
-    </div>
-    <div class="link">
-      <a routerLink="/">Cancelar</a>
-    </div>
-  </form>
+  </div>
 </div>

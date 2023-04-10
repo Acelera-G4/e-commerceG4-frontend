@@ -8,5 +8,5 @@ export class Product {
   category: Category;
   image: String;
   active: boolean;
-  quantity: number = 1;
+  quantity: number;
 }
