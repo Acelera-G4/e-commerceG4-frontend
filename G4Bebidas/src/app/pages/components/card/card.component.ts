@@ -2,6 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-card',
@@ -16,11 +17,15 @@ export class CardComponent implements OnInit {
   product: Product;
   productDetails: Product;
   products: Product[] = [];
+  cartProductList: Product[] = [];
   size: any;
   error: any;
   isLoading: boolean = true;
   displayProductDetails: boolean = false;
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit() {
     this.getProducts();
@@ -28,6 +33,7 @@ export class CardComponent implements OnInit {
 
   increaseQuantity(product: Product) {
     product.quantity++;
+    console.log(product);
   }
 
   decreaseQuantity(product: Product) {
@@ -37,7 +43,17 @@ export class CardComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    console.log('adicionei');
+    const existingProduct = this.cartProductList.find(
+      (w) => w.productId === product.productId
+    );
+    if (existingProduct) {
+      this.increaseQuantity(existingProduct);
+      // this.orderService.createOrUpdateOrder();
+      console.log('adicionei', this.cartProductList);
+    } else {
+      this.cartProductList.push(product);
+      console.log('adicionei', this.cartProductList);
+    }
   }
 
   getProducts() {

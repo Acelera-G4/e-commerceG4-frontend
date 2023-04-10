@@ -1,9 +1,12 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 40px;
+  margin: 50px 50px 0 50px;
 }
+
+#header-list {
+  background-color: #ab47bc;
+  color: white;
+}
+
 .table {
   width: 90%;
   max-width: 100%;
@@ -33,7 +36,6 @@
 
 .table tbody + tbody {
   border-top: 2px solid #ffff;
-
 }
 
 .pi {
@@ -64,8 +66,6 @@
   color: #6e2c9d;
 }
 
-
-
 @media (max-width: 644px) {
   .table-responsive {
     display: block;
@@ -85,7 +85,32 @@
   }
 }
 
-.title {
+.pi.pi-tags {
+  padding: 10px;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.container-inputs {
+  display: flex;
+  gap: 5px;
+  width: 50%;
+  flex-direction: column;
+}
+
+.container-check-box > h1,
+h2 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6e2c9d;
+}
+/* .title {
   font-size: 1.6rem;
   color: #6e2c9d;
 }
@@ -109,7 +134,7 @@ form > input:hover {
 form > input::placeholder {
   color: #ab47bc;
   font-size: 0.8rem;
-}
+} */
 
 form > .button {
   margin-top: 25px;
@@ -129,3 +154,10 @@ form > .button {
   cursor: pointer;
   transition: 0.3s;
 }
+
+.button > .button-create:hover {
+  background-color: #6e2c9d;
+  
+}
+
+

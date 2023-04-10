@@ -1,109 +1,60 @@
 .container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  
+  align-items: center;
+  width: 100%;
+  color: #fff;
+}
+
+.content-login {
+  margin-top: 45px;
+  background-image: linear-gradient(#ab47bc, #5c1fb1);
+  display: flex;
+  width: 650px;
+  height: 100%;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #5c1fb18e;
 }
 
 .form-login {
-  width: 550px;
-  margin-top: 150px;
-  border-radius: 8px;
-  background-image: linear-gradient(#ab47bc, #5c1fb1);
-  box-shadow: 1px 1px 10px #ab47bc;
-  color: #fff;
+  width: 50%;
 }
 
 .header-form {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  margin-top: 45px;
+  align-items: center;
+  padding: 25px;
 }
 
 .header-form > img {
-  height: 90px;
-  margin: 15px 0;
+  width: 80px;
 }
-.header-form > h2 {
-  font-size: 2.5rem;
+
+.img-login {
+  width: 50%;
+  background-color: #00000054;
+}
+.img-login > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0 5px 5px 0;
+  opacity: 0.7;
 }
 
 .body-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 10px;
+  gap: 10px;
 }
-
 .container-input {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 70%;
-  
+  width: 100%;
 }
 
 .container-input > input {
-  border: none;
-  border-bottom: 1px solid #ab47bc;
-  border-color: #fff;
-  background: transparent;
-  padding: 0;
-  margin: 10px;
-}
-.container-input > input::placeholder {
-  position: absolute;
-  left: 15px;
-  color: #fff;
-  font-size: 1rem;
-  
-}
-
-.container-checkbox {
-  margin: 25px;
-
-  width: 60%;
-  display: flex;
-}
-
-.container-checkbox > input {
-  margin-left: 5px;
-}
-
-.container-checkbox > label {
-  margin-left: 5px;
-  font-size: 0.7rem;
-}
-
-.container-footer {
-  text-align: center;
-}
-
-.container-footer,
-p:nth-child(1) {
-  margin: 20px;
-}
-
-.container-footer,
-a {
-  text-decoration: none;
-  color: rgb(211, 206, 206);
-}
-
-a:hover {
-  color: #ab47bc;
-}
-
-.container-footer > p:nth-child(3) {
-  cursor: pointer;
-}
-.container-footer > p:nth-child(3):hover {
-  color: #ab47bc;
-}
-
-.button {
-  margin: 10px;
+  margin-bottom: 5px;
+  width: 100%;
 }
 
 .button > button {
@@ -117,9 +68,33 @@ a:hover {
   color: #5c1fb1;
   cursor: pointer;
   transition: 0.3s;
+  text-align: center;
 }
 
 .button > button:hover {
   color: #fff;
   background-color: #5c1fb1;
+}
+
+.container-footer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.container-footer > P {
+  margin: 0 0 10px 0;
+  font-size: 0.7rem;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #78288b;
+}
+i:hover {
+  color: #78288b;
+  cursor: pointer;
 }
