@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   error: any;
 
   constructor(
-  private productService: ProductService,
+    private productService: ProductService,
     private router: Router,
     private activeRouter: ActivatedRoute,
     private toast: ToastService,
@@ -41,15 +41,15 @@ export class HomeComponent implements OnInit {
   }
 
   getProducts() {
-    this.productService
-        .getProducts()
-        .subscribe({
-          next: (response) => {
-            this.products = response;
-            this.products = this.products.filter(product => product.active == true);
-            this.size = this.products.length;
-          },
-          error: (error) => this.error = error
-        });
+    this.productService.getProducts().subscribe({
+      next: (response) => {
+        this.products = response;
+        this.products = this.products.filter(
+          (product) => product.active == true
+        );
+        this.size = this.products.length;
+      },
+      error: (error) => (this.error = error),
+    });
   }
 }

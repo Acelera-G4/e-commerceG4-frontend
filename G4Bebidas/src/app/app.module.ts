@@ -38,8 +38,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CarouselComponent } from './pages/components/carousel/carousel.component';
 import { CarouselModule } from 'primeng/carousel';
 import { UsersComponent } from './pages/components/users/users.component';
-
-
+import { SplitterModule } from 'primeng/splitter';
 
 @NgModule({
   declarations: [
@@ -81,7 +80,8 @@ import { UsersComponent } from './pages/components/users/users.component';
     CardModule,
     ProgressSpinnerModule,
     CarouselModule,
-    InputSwitchModule
+    InputSwitchModule,
+    SplitterModule,
   ],
   exports: [AppRoutingModule],
   providers: [ToastService],

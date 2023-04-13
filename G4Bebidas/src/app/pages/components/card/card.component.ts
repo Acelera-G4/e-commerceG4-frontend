@@ -4,6 +4,8 @@ import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { OrderProduct } from 'src/app/models/orderProduct';
 import { OrderService } from 'src/app/services/order.service';
+import { Order } from 'src/app/models/order';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -13,23 +15,31 @@ import { OrderService } from 'src/app/services/order.service';
 export class CardComponent implements OnInit {
   @Input() productId: Product;
 
-  productForm: FormGroup;
   display: boolean = false;
   product: Product;
   productDetails: Product;
   products: Product[] = [];
+  order: Order;
   orderProduct: OrderProduct[] = [];
   size: any;
   error: any;
   isLoading: boolean = true;
   displayProductDetails: boolean = false;
-  constructor(
-    private productService: ProductService,
-    private orderService: OrderService
-  ) {}
+  navigate: any;
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit() {
     this.getProducts();
+    this.verifyProductLocalStorege();
+  }
+
+  verifyProductLocalStorege() {
+    if (this.orderProduct.length == 0) {
+      let aa = JSON.parse(localStorage.getItem('mega_store'));
+      if (aa.length > 1) {
+        this.orderProduct = aa.at(1);
+      }
+    }
   }
 
   increaseQuantity(product: Product) {
@@ -38,46 +48,50 @@ export class CardComponent implements OnInit {
     orderProduct.price = product.price;
     orderProduct.IdProduct = product.productId;
     orderProduct.quantity++;
-    console.log('orderProduct antes', this.orderProduct);
-    let aa = this.orderProduct
+    let filterQuantityProduct = this.orderProduct
       .map((e) => e.IdProduct)
       .includes(product.productId);
-    console.log('aa', aa);
-    if (aa == true) {
-      console.log('foi');
+    if (filterQuantityProduct == true) {
       this.orderProduct.map((e) => {
-        if (e.IdProduct == product.productId) e.quantity++;
+        if (e.IdProduct == product.productId) {
+          e.quantity++;
+          e.price = product.price * e.quantity;
+        }
       });
-      console.log('orderProduct', this.orderProduct);
     } else {
       this.orderProduct.push(orderProduct);
-      console.log('orderProduct', this.orderProduct);
     }
+    this.addToCart();
   }
 
   decreaseQuantity(product: Product) {
     if (this.showQuantity(product.productId) > 0) {
       let orderProduct = new OrderProduct();
       orderProduct.name = product.name;
-      orderProduct.price = product.price;
       orderProduct.IdProduct = product.productId;
       orderProduct.quantity--;
-      console.log('orderProduct antes', this.orderProduct);
-      let aa = this.orderProduct
+      let filterQuantityProduct = this.orderProduct
         .map((e) => e.IdProduct)
         .includes(product.productId);
-      console.log('aa', aa);
-      if (aa == true) {
-        console.log('foi');
+      if (filterQuantityProduct == true) {
         this.orderProduct.map((e) => {
-          if (e.IdProduct == product.productId) e.quantity--;
+          if (e.IdProduct == product.productId) {
+            e.quantity--;
+            e.price = product.price * e.quantity;
+          }
         });
-        console.log('orderProduct', this.orderProduct);
-      } else {
-        this.orderProduct.push(orderProduct);
-        console.log('orderProduct', this.orderProduct);
+        if (this.orderProduct.some((e) => e.quantity == 0)) {
+          console.log('entrando no pop');
+          this.removeQuantity();
+        }
       }
     }
+    this.addToCart();
+  }
+
+  removeQuantity() {
+    let indexProduct = this.orderProduct.findIndex((e) => e.quantity == 0);
+    this.orderProduct.splice(indexProduct, 1);
   }
 
   showQuantity(productId: number): number {
@@ -92,7 +106,23 @@ export class CardComponent implements OnInit {
     }
   }
 
-  addToCart() {}
+  addToCart() {
+    if (this.orderProduct.length > 0) {
+      localStorage.setItem(
+        'mega_store',
+        ` ${JSON.stringify([{ cart: 'true' }, this.orderProduct])}`
+      );
+    } else {
+      localStorage.setItem(
+        'mega_store',
+        ` ${JSON.stringify([{ cart: 'false' }])}`
+      );
+    }
+  }
+
+  goToCart() {
+    this.router.navigate(['/cart']);
+  }
 
   getProducts() {
     this.productService.getProducts().subscribe({
@@ -103,6 +133,7 @@ export class CardComponent implements OnInit {
         );
         this.size = this.products.length;
         this.isLoading = false;
+        console.log(this.products);
       },
       error: (error) => (this.error = error),
     });
@@ -110,11 +141,9 @@ export class CardComponent implements OnInit {
 
   showProductDetails(id: number) {
     this.displayProductDetails = true;
-    console.log(id);
     this.productService.getProduct(id).subscribe({
       next: (response) => {
         this.productDetails = response;
-        console.log(this.productDetails);
       },
       error: (error) => (this.error = error),
     });

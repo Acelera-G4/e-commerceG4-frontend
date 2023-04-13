@@ -1,17 +1,49 @@
-<div class="container">
-  <i
-    routerLink="/"
-    class="pi pi-shopping-cart"
-    alt="icone carrinho de compras"
-  ></i>
-  <h3>Seu carrinho está vazio</h3>
+<div class="container table-responsive" *ngIf="cart">
+  <p-table [value]="listProducts" [rows]="5" [paginator]="true" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 30]" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    responsiveLayout="stack" [breakpoint]="'660px'" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header" style="background-color: #ab47bc">
+      <tr>
+        <th id="header-list">Nome</th>
+        <th id="header-list">Quantidade</th>
+        <th id="header-list">Preço</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-listProduct>
+      <tr>
+        <td>{{ listProduct.name }}</td>
+        <td>{{ listProduct.quantity }}</td>
+        <td>{{ listProduct.price }}</td>
 
-  <div class="button">
-    <button
-      pButton
-      type="button"
-      routerLink="/"
-      label="Continue comprando"
-    ></button>
-  </div>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="paginatorleft"></ng-template>
+    <ng-template pTemplate="paginatorright"> </ng-template>
+  </p-table>
+
+</div>
+
+
+<div class="card">
+  <p-splitter [gutterSize]="0" [style]="{ height: '100px' }" styleClass="mb-5">
+    <ng-template pTemplate>
+      <div class="col flex align-items-center justify-content-center"><button pButton
+          style="width: auto; justify-content: center;  margin-left:60px ;" (click)="home()">Continuar
+          comprando</button></div>
+    </ng-template>
+    <ng-template pTemplate>
+      <div class="col flex align-items-center justify-content-center">
+        <button pButton style="width: auto; margin-left:30px ;">finalizar
+          compra</button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate>
+      <div class="col flex align-items-center justify-content-center">
+        <h2 style="display: inline-block; margin-right: 20px;">Total a pagar</h2>
+        <p style="display: inline-block; margin: 0 50px; font-size: 20px;" class="price">{{total | currency : "BRL" :
+          "symbol" : "1.2-2" }}</p>
+      </div>
+    </ng-template>
+  </p-splitter>
 </div>
