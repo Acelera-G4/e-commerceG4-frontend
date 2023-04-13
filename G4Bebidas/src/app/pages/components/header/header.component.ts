@@ -65,7 +65,6 @@ export class HeaderComponent {
     this.categoryService.getMainCategories().subscribe({
       next: (response) => {
         this.mainCategories = response;
-        console.log('CHEGUEI NAS CATEGORIAS', this.mainCategories);
       },
       error: (error) => (this.error = error),
     });
