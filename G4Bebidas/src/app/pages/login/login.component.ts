@@ -29,9 +29,9 @@ export class LoginComponent implements OnInit {
     private auth: AuthService
   ) {}
   ngOnInit(): void {
-    localStorage.getItem('log') == (null || 'false')
-      ? this.router.navigate(['/'])
-      : this.router.navigate(['/home']);
+    // localStorage.getItem('log') == (null || 'false')
+    //   ? this.router.navigate(['/'])
+    //   : this.router.navigate(['/home']);
     this.listAllUsers();
     this.id = this.activeRouter.snapshot.params['id'];
     if (this.id) {
@@ -74,13 +74,31 @@ export class LoginComponent implements OnInit {
     let iPassword: any = this.listUsers
       .map((element) => element.password)
       .includes(e.password);
+    let type = this.listUsers.find((el) => el.email == e.email);
+
+    console.log('type', type.userType);
 
     if (iEmail && iPassword) {
-      this.toast.success('Bem vindo');
-      iEmail = !iEmail;
-      iPassword = !iPassword;
-      this.auth.login();
-      this.router.navigate(['/home']);
+      if (type.userType == 'admin') {
+        iEmail = !iEmail;
+        iPassword = !iPassword;
+        this.auth.login();
+        this.toast.success('Bem vindo ADMIN');
+        this.router.navigate(['/dashboard']);
+      }
+      if (JSON.parse(localStorage.getItem('mega_store')).at(0).cart == 'true') {
+        this.toast.success('Continue as compras');
+        iEmail = !iEmail;
+        iPassword = !iPassword;
+        this.auth.login();
+        this.router.navigate(['/cart']);
+      } else {
+        this.toast.success('Bem vindo');
+        iEmail = !iEmail;
+        iPassword = !iPassword;
+        this.auth.login();
+        this.router.navigate(['/home']);
+      }
     } else {
       if (!iEmail) {
         this.toast.error('email incorreto!');
@@ -91,10 +109,6 @@ export class LoginComponent implements OnInit {
     }
     iName = this.listUsers.find((el) => el.email === e.email);
 
-    console.log(e);
-
     localStorage.setItem('name', iName.name);
-
-    console.log(iName.name);
   }
 }

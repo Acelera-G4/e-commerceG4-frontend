@@ -24,15 +24,11 @@ export class CartComponent implements OnInit {
   }
 
   getOrderProductList() {
-    let aa = JSON.parse(localStorage.getItem('mega_store'));
-    this.listProducts = aa[1];
-    this.cart = aa.at(0).cart;
-    console.log('cart', this.cart);
-    let bb = this.listProducts.map((e) => e.price);
-    console.log(bb);
-
-    this.total = bb.reduce(this.totalPayable);
-    console.log(this.total);
+    let cartFull = JSON.parse(localStorage.getItem('mega_store'));
+    this.listProducts = cartFull[1];
+    this.cart = cartFull.at(0).cart;
+    let valueProductsCart = this.listProducts.map((e) => e.price);
+    this.total = valueProductsCart.reduce(this.totalPayable);
   }
 
   totalPayable(total: number, num: number) {
@@ -40,6 +36,22 @@ export class CartComponent implements OnInit {
   }
 
   home() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
+  }
+
+  login() {
+    console.log(localStorage.getItem('log'));
+    if (
+      localStorage.getItem('log') == null ||
+      localStorage.getItem('log') == 'false'
+    ) {
+      console.log('vai para login');
+      this.router.navigate(['/login']);
+    } else if (localStorage.getItem('log') == 'true') {
+      console.log('abre modal para finalizar o pedido');
+    } else {
+      console.log('erro erro erro');
+    }
+    // this.router.navigate(['/login'])
   }
 }

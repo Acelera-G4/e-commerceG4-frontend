@@ -15,6 +15,7 @@ export class AuthService {
     localStorage.setItem('log', JSON.stringify(this.isLogIn));
     localStorage.setItem('maiorIdadeCheckbox', 'false');
     localStorage.removeItem('name');
+    localStorage.removeItem('mega_store');
     this.router.navigate(['/']);
   }
 
