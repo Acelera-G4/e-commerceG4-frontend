@@ -35,9 +35,9 @@ export class CardComponent implements OnInit {
 
   verifyProductLocalStorege() {
     if (this.orderProduct.length == 0) {
-      let aa = JSON.parse(localStorage.getItem('mega_store'));
-      if (aa.length > 1) {
-        this.orderProduct = aa.at(1);
+      let verifyProducts = JSON.parse(localStorage.getItem('mega_store'));
+      if (verifyProducts.length > 1) {
+        this.orderProduct = verifyProducts.at(1);
       }
     }
   }

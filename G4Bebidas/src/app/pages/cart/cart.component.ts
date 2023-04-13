@@ -17,8 +17,9 @@ export class CartComponent implements OnInit {
   listProducts: OrderProduct[] = [];
   cart: boolean;
   total: number;
+  visiblePayment: boolean = false;
 
-  constructor(private router: Router, private orderService: OrderService) {}
+  constructor(private router: Router) {}
   ngOnInit(): void {
     this.getOrderProductList();
   }
@@ -27,27 +28,23 @@ export class CartComponent implements OnInit {
     let cartFull = JSON.parse(localStorage.getItem('mega_store'));
     this.listProducts = cartFull[1];
     this.cart = cartFull.at(0).cart;
-    let valueProductsCart = this.listProducts.map((e) => e.price);
-    this.total = valueProductsCart.reduce(this.totalPayable);
+    this.total = this.listProducts
+      .map((e) => e.price)
+      .reduce(this.totalPayable);
   }
 
-  totalPayable(total: number, num: number) {
-    return total + num;
-  }
-
-  home() {
-    this.router.navigate(['/home']);
+  totalPayable(num1: number, num2: number) {
+    return num1 + num2;
   }
 
   login() {
-    console.log(localStorage.getItem('log'));
     if (
       localStorage.getItem('log') == null ||
       localStorage.getItem('log') == 'false'
     ) {
-      console.log('vai para login');
       this.router.navigate(['/login']);
     } else if (localStorage.getItem('log') == 'true') {
+      this.visiblePayment = true;
       console.log('abre modal para finalizar o pedido');
     } else {
       console.log('erro erro erro');

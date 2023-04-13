@@ -85,14 +85,15 @@ export class LoginComponent implements OnInit {
         this.auth.login();
         this.toast.success('Bem vindo ADMIN');
         this.router.navigate(['/dashboard']);
-      }
-      if (JSON.parse(localStorage.getItem('mega_store')).at(0).cart == 'true') {
-        this.toast.success('Continue as compras');
+      } 
+      if(JSON.parse(localStorage.getItem("mega_store")).at(0).cart == 'true') {
+        this.toast.success('Bem vindo');
         iEmail = !iEmail;
         iPassword = !iPassword;
         this.auth.login();
         this.router.navigate(['/cart']);
-      } else {
+      }
+      if(JSON.parse(localStorage.getItem("mega_store")).at(0).cart == 'false') {
         this.toast.success('Bem vindo');
         iEmail = !iEmail;
         iPassword = !iPassword;

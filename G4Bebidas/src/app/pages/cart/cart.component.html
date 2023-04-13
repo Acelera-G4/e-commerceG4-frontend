@@ -29,7 +29,7 @@
   <p-splitter [gutterSize]="0" [style]="{ height: '100px' }" styleClass="mb-5">
     <ng-template pTemplate>
       <div class="col flex align-items-center justify-content-center"><button pButton
-          style="width: auto; justify-content: center;  margin-left:60px ;" (click)="home()">Continuar
+          style="width: auto; justify-content: center;  margin-left:60px ;" routerLink="/home">Continuar
           comprando</button></div>
     </ng-template>
     <ng-template pTemplate>
@@ -47,3 +47,7 @@
     </ng-template>
   </p-splitter>
 </div>
+
+<p-dialog header="Hora do Pagamento" [(visible)]="visiblePayment" [style]="{width: '50vw'}">
+  <app-modal-payment></app-modal-payment>
+</p-dialog>
