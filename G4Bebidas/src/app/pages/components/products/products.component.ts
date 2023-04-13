@@ -85,7 +85,6 @@ export class ProductsComponent implements OnInit {
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
         this.file = event.target.result.split(',')[1];
-        console.log(event.target.result.split(',')[1]);
       };
     }
   }
@@ -94,8 +93,7 @@ export class ProductsComponent implements OnInit {
     this.imageUploadService.postImage(this.file).subscribe({
       next: (response) => {
         this.imageUrl = response.data.url;
-        console.log(response);
-        // const product = new Product();
+        const product = new Product();
         const category = new Category();
         category.categoryId = this.productForm.value.category;
         this.product.name = this.productForm.value.name;
@@ -118,6 +116,7 @@ export class ProductsComponent implements OnInit {
   }
 
   showDialogCreateProduct() {
+    this.getCategories();
     this.productForm = this.formBuilder.group({
       name: [null],
       description: [null],
@@ -143,16 +142,15 @@ export class ProductsComponent implements OnInit {
       },
       error: (error) => (this.error = error),
     });
-    console.log('MENSAGEM PARA O GABRIEL', this.product);
   }
 
   putProduct() {
     this.imageUploadService.postImage(this.file).subscribe({
       next: (response) => {
         this.imageUrl = response.data.url;
-        console.log(response);
         let product = new Product();
         let category = new Category();
+
         category.categoryId = this.productForm.value.category;
         product.name = this.productForm.value.name;
         product.description = this.productForm.value.description;
@@ -161,8 +159,7 @@ export class ProductsComponent implements OnInit {
         product.category = category;
         product.active = this.productForm.value.active;
         product.productId = this.productId;
-        console.log(this.productForm);
-        console.log(product);
+
         this.toast.success('Atualizado');
         this.productService.putProduct(product).subscribe({
           next: (response) => {
@@ -186,7 +183,6 @@ export class ProductsComponent implements OnInit {
     this.imageUploadService.postImage(this.file).subscribe({
       next: (response) => {
         this.imageUrl = response.data.url;
-        console.log(response);
         let product = new Product();
         let category = new Category();
         category.categoryId = this.productForm.value.category;
@@ -231,9 +227,6 @@ export class ProductsComponent implements OnInit {
   }
 
   setImage(value: any) {
-    console.log(value);
-    //this.file = fetch(value).then(res => res.blob())
-    //this.file = new Blob([base64])
     this.productForm = this.formBuilder.group({
       name: [this.product.name],
       description: [this.product.description],
@@ -303,6 +296,5 @@ export class ProductsComponent implements OnInit {
         (product) => product.active == false
       );
     }
-    console.log('estamos aqui, me ouve?', this.filteredProducts);
   }
 }

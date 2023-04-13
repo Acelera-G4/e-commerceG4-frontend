@@ -2,6 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { OrderProduct } from 'src/app/models/orderProduct';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class CardComponent implements OnInit {
   product: Product;
   productDetails: Product;
   products: Product[] = [];
-  cartProductList: Product[] = [];
+  orderProduct: OrderProduct[] = [];
   size: any;
   error: any;
   isLoading: boolean = true;
@@ -32,29 +33,66 @@ export class CardComponent implements OnInit {
   }
 
   increaseQuantity(product: Product) {
-    product.quantity++;
-    console.log(product);
+    let orderProduct = new OrderProduct();
+    orderProduct.name = product.name;
+    orderProduct.price = product.price;
+    orderProduct.IdProduct = product.productId;
+    orderProduct.quantity++;
+    console.log('orderProduct antes', this.orderProduct);
+    let aa = this.orderProduct
+      .map((e) => e.IdProduct)
+      .includes(product.productId);
+    console.log('aa', aa);
+    if (aa == true) {
+      console.log('foi');
+      this.orderProduct.map((e) => {
+        if (e.IdProduct == product.productId) e.quantity++;
+      });
+      console.log('orderProduct', this.orderProduct);
+    } else {
+      this.orderProduct.push(orderProduct);
+      console.log('orderProduct', this.orderProduct);
+    }
   }
 
   decreaseQuantity(product: Product) {
-    if (product.quantity > 1) {
-      product.quantity--;
+    if (this.showQuantity(product.productId) > 0) {
+      let orderProduct = new OrderProduct();
+      orderProduct.name = product.name;
+      orderProduct.price = product.price;
+      orderProduct.IdProduct = product.productId;
+      orderProduct.quantity--;
+      console.log('orderProduct antes', this.orderProduct);
+      let aa = this.orderProduct
+        .map((e) => e.IdProduct)
+        .includes(product.productId);
+      console.log('aa', aa);
+      if (aa == true) {
+        console.log('foi');
+        this.orderProduct.map((e) => {
+          if (e.IdProduct == product.productId) e.quantity--;
+        });
+        console.log('orderProduct', this.orderProduct);
+      } else {
+        this.orderProduct.push(orderProduct);
+        console.log('orderProduct', this.orderProduct);
+      }
     }
   }
 
-  addToCart(product: Product) {
-    const existingProduct = this.cartProductList.find(
-      (w) => w.productId === product.productId
+  showQuantity(productId: number): number {
+    let filterQuantityOrderProduct: OrderProduct;
+    filterQuantityOrderProduct = this.orderProduct.find(
+      (e) => e.IdProduct == productId
     );
-    if (existingProduct) {
-      this.increaseQuantity(existingProduct);
-      // this.orderService.createOrUpdateOrder();
-      console.log('adicionei', this.cartProductList);
+    if (filterQuantityOrderProduct == undefined) {
+      return 0;
     } else {
-      this.cartProductList.push(product);
-      console.log('adicionei', this.cartProductList);
+      return filterQuantityOrderProduct.quantity;
     }
   }
+
+  addToCart() {}
 
   getProducts() {
     this.productService.getProducts().subscribe({

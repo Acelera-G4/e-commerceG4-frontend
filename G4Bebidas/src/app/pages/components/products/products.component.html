@@ -1,15 +1,7 @@
 <div class="container table-responsive" *ngIf="listingProducts">
-  <p-table
-    [value]="filteredProducts"
-    [rows]="5"
-    [paginator]="true"
-    [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[5, 10, 30]"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    responsiveLayout="stack"
-    [breakpoint]="'660px'"
-    [tableStyle]="{ 'min-width': '50rem' }"
-  >
+  <p-table [value]="filteredProducts" [rows]="5" [paginator]="true" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 30]" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    responsiveLayout="stack" [breakpoint]="'660px'" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header" style="background-color: #ab47bc">
       <tr>
         <th id="header-list">ID</th>
@@ -19,11 +11,7 @@
         <th id="header-list">Categoria</th>
         <th id="header-list"></th>
         <th id="header-list">
-          <p-inputSwitch
-            [(ngModel)]="active"
-            (click)="switchProducts()"
-            required
-          ></p-inputSwitch>
+          <p-inputSwitch [(ngModel)]="active" (click)="switchProducts()" required></p-inputSwitch>
         </th>
         <th id="header-list">
           <i class="pi pi-plus" (click)="showDialogCreateProduct()"></i>
@@ -39,119 +27,44 @@
         <td>{{ product.category.name }}</td>
         <td></td>
         <td>
-          <i
-            class="pi pi-pencil"
-            (click)="showDialogUpdateProduct(product)"
-          ></i>
+          <i class="pi pi-pencil" (click)="showDialogUpdateProduct(product)"></i>
         </td>
         <td>
           <i class="pi pi-trash" (click)="deleteProduct(product)"></i>
-        </td></tr
-    ></ng-template>
+        </td>
+      </tr>
+    </ng-template>
 
     <ng-template pTemplate="paginatorleft"> </ng-template>
     <ng-template pTemplate="paginatorright"> </ng-template>
   </p-table>
 </div>
 
-<!-- <div class="container table-responsive" *ngIf="listingProducts">
-  <table class="table">
-    <thead>
-      <tr>
-        <th class="header-list">ID</th>
-        <th>Nome</th>
-        <th>Descrição</th>
-        <th>Preço</th>
-        <th>Categoria</th>
-        <th></th>
-        <th>
-          Ativo?<p-inputSwitch
-            [(ngModel)]="active"
-            (click)="switchProducts()"
-            required
-          ></p-inputSwitch>
-        </th>
-        <th>
-          <i class="pi pi-plus" (click)="showDialogCreateProduct()"></i>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <div
-        class="no-users-message"
-        *ngIf="products.length > 0; else noProducts"
-      ></div>
-      <tr *ngFor="let product of filteredProducts">
-        <td>{{ product.productId }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.price }}</td>
-        <td>{{ product.category.name }}</td>
-        <td>
-          <i
-            class="pi pi-pencil"
-            (click)="showDialogUpdateProduct(product)"
-          ></i>
-        </td>
-        <td><i class="pi pi-trash" (click)="deleteProduct(product)"></i></td>
-      </tr>
-    </tbody>
-  </table>
-</div> -->
-
 <ng-template #noProducts>
   <p class="no-products-message">Não há produtos cadastrados.</p>
 </ng-template>
 
-<p-dialog
-  [(visible)]="displayCreateProduct"
-  [style]="{ width: '70vw' }"
-  [baseZIndex]="10000"
->
+<p-dialog [(visible)]="displayCreateProduct" [style]="{ width: '70vw' }" [baseZIndex]="10000">
   <form [formGroup]="productForm">
-    <i
-      class="icon pi pi-tags"
-      style="font-size: 2rem; color: blueviolet"
-      alt="icone de produto"
-    ></i>
+    <i class="icon pi pi-tags" style="font-size: 2rem; color: blueviolet" alt="icone de produto"></i>
     <div class="container-input">
-      <input
-        pInputText
-        placeholder="Nome"
-        type="text"
-        id="name"
-        formControlName="name"
-        required
-      />
+      <input pInputText placeholder="Nome" type="text" id="name" formControlName="name" required />
 
-      <input
-        pInputText
-        placeholder="Descrição"
-        type="text"
-        id="description"
-        formControlName="description"
-        required
-      />
+      <input pInputText placeholder="Descrição" type="text" id="description" formControlName="description" required />
 
-      <input
-        pInputText
-        placeholder="Preço"
-        type="number"
-        id="price"
-        formControlName="price"
-        step=".01"
-        required
-      />
+      <input pInputText placeholder="Preço" type="number" id="price" formControlName="price" step=".01" required />
+      <div class="container-select">
+        <label for="category">Category</label>
+        <select name="category" id="category" formControlName="category" [compareWith]="compare" required>
+          <option value="">Selecione a Categoria</option>
+          <option *ngFor="let category of categories" value="{{ category.categoryId }}">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
 
-      <input
-        pInputFile
-        placeholder="Imagem"
-        type="file"
-        id="file"
-        formControlName="file"
-        required
-        (change)="handleUpload($event)"
-      />
+      <input pInputFile placeholder="Imagem" type="file" id="file" formControlName="file" required
+        (change)="handleUpload($event)" />
 
       <div class="button">
         <button class="button-create" type="submit" (click)="postProduct()">
@@ -162,53 +75,16 @@
   </form>
 </p-dialog>
 
-<p-dialog
-  [(visible)]="displayUpdateProduct"
-  [style]="{ width: '70vw' }"
-  [baseZIndex]="10000"
->
+<p-dialog [(visible)]="displayUpdateProduct" [style]="{ width: '70vw' }" [baseZIndex]="10000">
   <form [formGroup]="productForm" *ngIf="displayUpdateProduct">
-    <i
-      class="icon pi pi-tags"
-      style="font-size: 2rem; color: blueviolet"
-      alt="icone de produto"
-    ></i>
+    <i class="icon pi pi-tags" style="font-size: 2rem; color: blueviolet" alt="icone de produto"></i>
     <div class="container-input">
-      <input
-        pInputText
-        placeholder="Nome"
-        type="text"
-        id="name"
-        formControlName="name"
-        required
-      />
-      <input
-        pInputText
-        placeholder="Descrição"
-        type="text"
-        id="description"
-        formControlName="description"
-        required
-      />
-      <input
-        pInputText
-        placeholder="Preço"
-        type="number"
-        id="price"
-        formControlName="price"
-        step=".01"
-        required
-      />
+      <input pInputText placeholder="Nome" type="text" id="name" formControlName="name" required />
+      <input pInputText placeholder="Descrição" type="text" id="description" formControlName="description" required />
+      <input pInputText placeholder="Preço" type="number" id="price" formControlName="price" step=".01" required />
 
-      <input
-        pInputText
-        placeholder="Imagem"
-        type="file"
-        id="file"
-        formControlName="file"
-        required
-        (change)="handleUpload($event)"
-      />
+      <input pInputText placeholder="Imagem" type="file" id="file" formControlName="file" required
+        (change)="handleUpload($event)" />
       <div class="button">
         <button class="button-create" type="submit" (click)="putProduct()">
           Atualizar Produto
