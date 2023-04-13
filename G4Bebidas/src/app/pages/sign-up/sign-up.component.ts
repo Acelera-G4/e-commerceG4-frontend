@@ -7,6 +7,7 @@ import { AddressService } from 'src/app/services/address.service';
 import { UserService } from 'src/app/services/users.service';
 import { ListUsersComponent } from '../components/list-users/list-users.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastService } from 'angular-toastify';
 
 @Component({
   selector: 'app-sign-up',
@@ -28,21 +29,13 @@ export class SignUpComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private activeRouter: ActivatedRoute
+    private activeRouter: ActivatedRoute,
+    private toast: ToastService
   ) {}
   ngAfterViewInit(): void {}
 
   ngOnInit(): void {
-    this.id = this.activeRouter.snapshot.params['id'];
-    if (this.id) {
-      this.formEmpty();
-      // this.userService.listUserById(this.id).subscribe({
-      //   next: (date) => this.formfilled(date),
-      //   error: (erro) => console.log('errouuuu', erro),
-      // });
-    } else {
-      this.formEmpty();
-    }
+    this.formEmpty();
   }
 
   formEmpty() {
@@ -79,26 +72,39 @@ export class SignUpComponent implements OnInit {
     const user = this.formUser.value;
 
     if (!user.name) {
-      alert('Por favor, informe o nome');
+      this.toast.error('Por favor, informe o nome');
+      return;
+    }
+    if (!user.cpf) {
+      this.toast.error('Por favor, informe o cpf');
       return;
     }
 
     if (!user.email) {
-      alert('Por favor, informe o e-mail');
+      this.toast.error('Por favor, informe o e-mail');
+      return;
+    }
+
+    if (!user.dateOfBirthday) {
+      this.toast.error('Por favor, informe a data de aniversário');
       return;
     }
 
     if (!user.phoneNumber) {
-      alert('Por favor, informe o telefone');
+      this.toast.error('Por favor, informe o telefone');
+      return;
+    }
+    if (!user.password) {
+      this.toast.error('Por favor, informe uma senha');
       return;
     }
 
     this.userService.createUser(this.formUser.value).subscribe({
       next: (cadastrado) => {
         console.log('cadastrado', cadastrado.id);
-        this.router.navigate(['/form-address', cadastrado.id]);
+        this.router.navigate(['/login']);
       },
-      error: (erro) => console.log('errouuu'),
+      error: (erro) => this.toast.error("Existem erros no formulário, corrija-os"),
     });
   }
 

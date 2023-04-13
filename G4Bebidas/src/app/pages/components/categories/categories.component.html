@@ -1,4 +1,57 @@
 <div class="container table-responsive" *ngIf="listingCategories">
+  <p-table
+    [value]="filteredCategories"
+    [rows]="5"
+    [paginator]="true"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 30]"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    responsiveLayout="stack"
+    [breakpoint]="'660px'"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="header-list">ID</th>
+        <th id="header-list">Nome</th>
+        <th id="header-list">Descrição</th>
+        <th id="header-list">
+          <p-inputSwitch
+            [(ngModel)]="activeSwitch"
+            (click)="switchCategories()"
+            required
+          ></p-inputSwitch>
+        </th>
+
+        <th id="header-list">
+          <i class="pi pi-plus" (click)="showDialogCreateCategory()"></i>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-category>
+      <div
+        class="no-categories-message"
+        *ngIf="categories.length > 0; else noCategories"
+      ></div>
+      <tr>
+        <td>{{ category.categoryId }}</td>
+        <td>{{ category.name }}</td>
+        <td>{{ category.description }}</td>
+        <td>
+          <i
+            class="pi pi-pencil"
+            (click)="showDialogUpdateCategory(category)"
+          ></i>
+        </td>
+        <td>
+          <i class="pi pi-trash" (click)="deleteCategory(category)"></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- <div class="container table-responsive" *ngIf="listingCategories">
   <table class="table">
     <thead>
       <tr>
@@ -29,21 +82,49 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
 
 <ng-template #noCategories>
   <p class="no-categories-message">Não há categorias cadastradas.</p>
 </ng-template>
 
-<p-dialog [(visible)]="displayCreateCategory" [style]="{ width: '70vw' }" [baseZIndex]="10000">
+<p-dialog
+  [(visible)]="displayCreateCategory"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+>
+  <i class="pi pi-tags" alt="link para visualizar lista de categoria "></i>
   <form [formGroup]="categoryForm">
-    <h2 class="title">Nova Categoria</h2>
-    <input pInputText placeholder="Nome" type="text" id="name" formControlName="name" required />
-    <input pInputText placeholder="Descrição" type="text" id="description" formControlName="description" required />
-    <h1 class="title">Categoria Ativa?</h1>
-    <p-inputSwitch formControlName="activeSwitch" required></p-inputSwitch>
-    <h2 class="title">Categoria Principal</h2>
-    <p-inputSwitch formControlName="main" required></p-inputSwitch>
+    <div class="container-inputs">
+      <input
+        pInputText
+        placeholder="Nome"
+        type="text"
+        id="name"
+        formControlName="name"
+        required
+      />
+      <input
+        pInputText
+        placeholder="Descrição"
+        type="text"
+        id="description"
+        formControlName="description"
+        required
+      />
+    </div>
+    <div class="container-check-box">
+      <h2 class="title">Categoria Ativa?</h2>
+      <p-inputSwitch
+        style="font-size: 1rem"
+        formControlName="activeSwitch"
+        required
+      ></p-inputSwitch>
+    </div>
+    <div class="container-check-box">
+      <h2 class="title">Categoria Principal</h2>
+      <p-inputSwitch formControlName="main" required></p-inputSwitch>
+    </div>
     <div class="button">
       <button class="button-create" type="submit" (click)="postCategory()">
         Criar Categoria
@@ -52,16 +133,39 @@
   </form>
 </p-dialog>
 
-<p-dialog [(visible)]="displayUpdateCategory" [style]="{ width: '70vw' }" [baseZIndex]="10000">
+<p-dialog
+  [(visible)]="displayUpdateCategory"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+>
+  <i class="pi pi-tags" alt="link para visualizar lista de categoria "></i>
   <form [formGroup]="categoryForm" *ngIf="displayUpdateCategory">
-    <h2 class="title">Atualizar Categoria</h2>
-    <input pInputText placeholder="Nome" type="text" id="name" formControlName="name" required />
-    <input pInputText placeholder="Descrição" type="text" id="description" formControlName="description" required />
-    <h1 class="title">Categoria Ativa?</h1>
-    <p-inputSwitch formControlName="activeSwitch" required></p-inputSwitch>
-    <h1 class="title">Categoria Principal?</h1>
-    <p-inputSwitch formControlName="main" required></p-inputSwitch>
-
+    <div class="container-inputs">
+      <input
+        pInputText
+        placeholder="Nome"
+        type="text"
+        id="name"
+        formControlName="name"
+        required
+      />
+      <input
+        pInputText
+        placeholder="Descrição"
+        type="text"
+        id="description"
+        formControlName="description"
+        required
+      />
+    </div>
+    <div class="container-check-box">
+      <h2 class="title">Categoria Ativa?</h2>
+      <p-inputSwitch formControlName="activeSwitch" required></p-inputSwitch>
+    </div>
+    <div class="container-check-box">
+      <h2 class="title">Categoria Principal?</h2>
+      <p-inputSwitch formControlName="main" required></p-inputSwitch>
+    </div>
     <div class="button">
       <button class="button-create" type="submit" (click)="putCategory()">
         Atualizar Categoria

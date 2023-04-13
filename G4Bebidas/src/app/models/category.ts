@@ -1,7 +1,7 @@
-export class Category{
-  public categoryId: number;
-  public name: string;
-  public description: string;
-  public active: boolean;
-  public main: boolean;
+export class Category {
+  categoryId: number;
+  name: string;
+  description: string;
+  active: boolean;
+  main: boolean;
 }

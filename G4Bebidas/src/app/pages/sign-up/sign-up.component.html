@@ -1,21 +1,67 @@
 <div class="container">
-  <form [formGroup]="formUser" class="form-sign-up">
-    <div class="img-perfil">
-      <img src="../../../assets/img-perfil.svg" alt="click here to change your image" />
-    </div>
-    <div class="container-inputs">
-      <input pInputText placeholder="Name" type="text" name="name" id="name" formControlName="name" />
-      <input pInputText type="text" name="cpf" id="cpf" placeholder="CPF" formControlName="cpf" />
-      <input pInputText type="date" name="dateOfBirthday" id="dateOfBirthday" formControlName="dateOfBirthday"
-        placeholder="dateOfBirthday" />
-      <input pInputText type="email" name="email" id="email" placeholder="Email" formControlName="email" />
-      <input pInputText type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone"
-        formControlName="phoneNumber" />
-      <input pInputText type="password" name="password" id="password" placeholder="Password"
-        formControlName="password" />
-    </div>
-    <div class="button">
-      <button class="button-create" (click)="createUser()">SIGN UP</button>
-    </div>
-  </form>
+  <div class="content-singIn">
+    <form [formGroup]="formUser" class="form-sign-up">
+      <div class="img-perfil">
+        <img
+          src="../../../assets/img-perfil.svg"
+          alt="click here to change your image"
+        />
+      </div>
+      <div class="container-inputs">
+        <input
+          pInputText
+          placeholder="Name"
+          type="text"
+          name="name"
+          id="name"
+          formControlName="name"
+        />
+        <input
+        class="input"
+          pInputText
+          type="text"
+          name="cpf"
+          id="cpf"
+          placeholder="CPF"
+          formControlName="cpf"
+          style="color: #fff;"
+        />
+        <input
+          pInputText
+          type="date"
+          name="dateOfBirthday"
+          id="dateOfBirthday"
+          formControlName="dateOfBirthday"
+          placeholder="dateOfBirthday"
+        />
+        <input
+          pInputText
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email"
+          formControlName="email"
+        />
+        <input
+          pInputText
+          type="tel"
+          name="phoneNumber"
+          id="phoneNumber"
+          placeholder="Phone"
+          formControlName="phoneNumber"
+        />
+        <input
+          pInputText
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </div>
+      <div class="button">
+        <button class="button-create" (click)="createUser()">SIGN UP</button>
+      </div>
+    </form>
+  </div>
 </div>
