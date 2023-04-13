@@ -1,21 +1,9 @@
 <div class="container table-responsive">
-  <p-table
-    [value]="listUsers"
-    [rows]="5"
-    [paginator]="true"
-    [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[5, 10, 30]"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    headerStyle="background-color: blue; color: white; border: 1px solid black"
-    responsiveLayout="stack"
-    [breakpoint]="'660px'"
-    [tableStyle]="{ 'min-width': '50rem' }"
-  >
-    <ng-template
-      pTemplate="header"
-      style="background-color: #ab47bc"
-      let-columns
-    >
+  <p-table [value]="listUsers" [rows]="5" [paginator]="true" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 30]" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    headerStyle="background-color: blue; color: white; border: 1px solid black" responsiveLayout="stack"
+    [breakpoint]="'660px'" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header" style="background-color: #ab47bc" let-columns>
       <tr>
         <th id="header-list">ID</th>
         <th id="header-list">Name</th>
@@ -27,8 +15,9 @@
         <th id="header-list"></th>
         <th id="header-list">
           <i class="pi pi-user-plus" (click)="showDialogCreateUser()"></i>
-        </th></tr
-    ></ng-template>
+        </th>
+      </tr>
+    </ng-template>
     <ng-template pTemplate="body" let-user let-columns="columns">
       <tr>
         <td>{{ user.id }}</td>
@@ -49,344 +38,98 @@
   </p-table>
 </div>
 
-<!-- <div class="container table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th class="header-list">ID</th>
-        <th>Name</th>
-        <th>CPF</th>
-        <th>Birthday</th>
-        <th>Email</th>
-        <th>User Type</th>
-        <th>Phone</th>
-        <th></th>
-        <th>
-          <i class="pi pi-user-plus" (click)="showDialogCreateUser()"></i>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <div
-        class="no-users-message"
-        *ngIf="listUsers.length > 0; else noUsers"
-      ></div>
-      <tr *ngFor="let user of listUsers">
-        <td>{{ user.id }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.cpf }}</td>
-        <td>{{ user.dateOfBirthday }}</td>
-        <td *ngIf="listUsers.length > 0; else noUsers">{{ user.email }}</td>
-        <td>{{ user.userType }}</td>
-        <td>{{ user.phoneNumber }}</td>
-        <td>
-          <i class="pi pi-user-edit" (click)="showDialogUpdateUser(user)"></i>
-        </td>
-        <td><i class="pi pi-times" (click)="deleteUserById(user.id)"></i></td>
-      </tr>
-    </tbody>
-  </table>
-</div> -->
+<p-dialog [(visible)]="displayCreateUser" [style]="{ width: '70vw' }" [baseZIndex]="10000">
+  <form [formGroup]="userForm">
+    <i class="icon pi pi-user" style="font-size: 2rem; color: blueviolet; padding: 5px; margin-bottom: 5px;"
+      alt="icone de usuário"></i>
+    <div class="container-input">
+      <input pInputText placeholder="Name" type="text" id="name" formControlName="name" required />
 
-<p-dialog
-  [(visible)]="displayCreateUser"
-  [style]="{ width: '70vw' }"
-  [baseZIndex]="10000"
->
- <form [formGroup]="userForm" >
-  <i
-    class="icon pi pi-user"
-    style="font-size: 2rem; color: blueviolet; padding: 5px; margin-bottom: 5px;"
-    alt="icone de usuário"
-  ></i>
-  <div class="container-input">
-    <input
-      pInputText
-      placeholder="Name"
-      type="text"
-      id="name"
-      formControlName="name"
-      required
-    />
+      <input pInputText placeholder="CPF" type="text" id="cpf" formControlName="cpf" required />
 
-    <input
-      pInputText
-      placeholder="CPF"
-      type="text"
-      id="cpf"
-      formControlName="cpf"
-      required
-    />
+      <input pInputText type="date" id="dateOfBirthday" formControlName="dateOfBirthday"
+        title="Insira sua data de nascimento neste campo" required />
 
-    <input
-      pInputText
-      type="date"
-      id="dateOfBirthday"
-      formControlName="dateOfBirthday"
-      title="Insira sua data de nascimento neste campo"
-      required
-    />
+      <input pInputText placeholder="Email" type="text" id="email" formControlName="email" required />
 
-    <input
-      pInputText
-      placeholder="Email"
-      type="text"
-      id="email"
-      formControlName="email"
-      required
-    />
+      <input pInputText placeholder="User Type" type="text" id="userType" formControlName="userType" required />
 
-    <input
-      pInputText
-      placeholder="User Type"
-      type="text"
-      id="userType"
-      formControlName="userType"
-      required
-    />
+      <input pInputText placeholder="Phone" type="text" id="userType" formControlName="phoneNumber" required />
+      <input style="display:none;" pInputText placeholder="address" type="text" id="address" formControlName="address"
+        required />
+    </div>
+  </form>
+  <form [formGroup]="addressform">
+    <i class="icon pi pi-home" style="font-size: 2rem; color: blueviolet" alt="icone de usuário"></i>
+    <div class="container-input">
+      <input pInputText placeholder="Cep" type="text" id="cep" formControlName="cep" required #cepInput
+        (blur)="searchCep()" />
 
-    <input
-      pInputText
-      placeholder="Phone"
-      type="text"
-      id="userType"
-      formControlName="phoneNumber"
-      required
-    />
-    <input
-    style="display:none;"
-      pInputText
-      placeholder="address"
-      type="text"
-      id="address"
-      formControlName="address"
-      required
-    />
+      <input pInputText placeholder="Street" type="text" id="street" name="street" formControlName="logradouro"
+        required />
+
+      <input pInputText placeholder="Neighborhood" type="text" id="number" name="number" formControlName="bairro"
+        required />
+
+      <input pInputText placeholder="Complement" type="text" id="complement" name="complement"
+        formControlName="complemento" />
+      <input pInputText placeholder="City" type="text" id="city" name="city" formControlName="localidade" required />
+
+      <input pInputText placeholder="State" type="text" id="uf" name="uf" required formControlName="uf" />
+    </div>
+  </form>
+  <div class="button">
+    <button class="button-create" type="submit" (click)="createUser()">
+      Save
+    </button>
   </div>
-</form>
-<form [formGroup]="addressform">
-  <i
-    class="icon pi pi-home"
-    style="font-size: 2rem; color: blueviolet"
-    alt="icone de usuário"
-  ></i>
-  <div class="container-input">
-    <input
-      pInputText
-      placeholder="Cep"
-      type="text"
-      id="cep"
-      formControlName="cep"
-      required
-      #cepInput
-      (blur)="searchCep()"
-    />
-
-    <input
-      pInputText
-      placeholder="Street"
-      type="text"
-      id="street"
-      name="street"
-      formControlName="logradouro"
-      required
-    />
-
-    <input
-      pInputText
-      placeholder="Neighborhood"
-      type="text"
-      id="number"
-      name="number"
-      formControlName="bairro"
-      required
-    />
-
-    <input
-      pInputText
-      placeholder="Complement"
-      type="text"
-      id="complement"
-      name="complement"
-      formControlName="complemento"
-    />
-    <input
-      pInputText
-      placeholder="City"
-      type="text"
-      id="city"
-      name="city"
-      formControlName="localidade"
-      required
-    />
-
-    <input
-      pInputText
-      placeholder="State"
-      type="text"
-      id="uf"
-      name="uf"
-      required
-      formControlName="uf"
-    />
-  </div>
-</form>
-<div class="button">
-  <button class="button-create" type="submit" (click)="createUser()">
-    Save
-  </button>
-</div>
 </p-dialog>
 
 
-<p-dialog
-  [(visible)]="displayUpdateUser"
-  [style]="{ width: '70vw' }"
-  [baseZIndex]="10000"
->
-<form [formGroup]="userForm" >
-  <i
-    class="icon pi pi-user"
-    style="font-size: 2rem; color: blueviolet"
-    alt="icone de usuário"
-  ></i>
-  <div class="container-input">
-    <input
-      pInputText
-      placeholder="Name"
-      type="text"
-      id="name"
-      formControlName="name"
-      required
-    />
+<p-dialog [(visible)]="displayUpdateUser" [style]="{ width: '70vw' }" [baseZIndex]="10000">
+  <form [formGroup]="userForm">
+    <i class="icon pi pi-user" style="font-size: 2rem; color: blueviolet" alt="icone de usuário"></i>
+    <div class="container-input">
+      <input pInputText placeholder="Name" type="text" id="name" formControlName="name" required />
 
-    <input
-      pInputText
-      placeholder="CPF"
-      type="text"
-      id="cpf"
-      formControlName="cpf"
-      required
-    />
+      <input pInputText placeholder="CPF" type="text" id="cpf" formControlName="cpf" required />
 
-    <input
-      pInputText
-      type="date"
-      id="dateOfBirthday"
-      formControlName="dateOfBirthday"
-      title="Insira sua data de nascimento neste campo"
-      required
-    />
+      <input pInputText type="date" id="dateOfBirthday" formControlName="dateOfBirthday"
+        title="Insira sua data de nascimento neste campo" required />
 
-    <input
-      pInputText
-      placeholder="Email"
-      type="text"
-      id="email"
-      formControlName="email"
-      required
-    />
+      <input pInputText placeholder="Email" type="text" id="email" formControlName="email" required />
 
-    <input
-      pInputText
-      placeholder="User Type"
-      type="text"
-      id="userType"
-      formControlName="userType"
-      required
-    />
+      <input pInputText placeholder="User Type" type="text" id="userType" formControlName="userType" required />
 
-    <input
-      pInputText
-      placeholder="Phone"
-      type="text"
-      id="userType"
-      formControlName="phoneNumber"
-      required
-    />
-    <input
-    style="display:none;"
-      pInputText
-      placeholder="address"
-      type="text"
-      id="address"
-      formControlName="address"
-      required
-    />
+      <input pInputText placeholder="Phone" type="text" id="userType" formControlName="phoneNumber" required />
+      <input style="display:none;" pInputText placeholder="address" type="text" id="address" formControlName="address"
+        required />
+    </div>
+  </form>
+  <form [formGroup]="addressform">
+    <i class="icon pi pi-home" style="font-size: 2rem; color: blueviolet" alt="icone de usuário"></i>
+    <div class="container-input">
+      <input pInputText placeholder="Cep" type="text" id="cep" formControlName="cep" required #cepInput
+        (blur)="searchCep()" />
+
+      <input pInputText placeholder="Street" type="text" id="street" name="street" formControlName="logradouro"
+        required />
+
+      <input pInputText placeholder="Neighborhood" type="text" id="number" name="number" formControlName="bairro"
+        required />
+
+      <input pInputText placeholder="Complement" type="text" id="complement" name="complement"
+        formControlName="complemento" />
+      <input pInputText placeholder="City" type="text" id="city" name="city" formControlName="localidade" required />
+
+      <input pInputText placeholder="State" type="text" id="uf" name="uf" required formControlName="uf" />
+    </div>
+  </form>
+  <div class="button">
+    <button class="button-create" type="submit" (click)="updateUser()">
+      Save
+    </button>
   </div>
-</form>
-<form [formGroup]="addressform">
-  <i
-    class="icon pi pi-home"
-    style="font-size: 2rem; color: blueviolet"
-    alt="icone de usuário"
-  ></i>
-  <div class="container-input">
-    <input
-      pInputText
-      placeholder="Cep"
-      type="text"
-      id="cep"
-      formControlName="cep"
-      required
-      #cepInput
-      (blur)="searchCep()"
-    />
-
-    <input
-      pInputText
-      placeholder="Street"
-      type="text"
-      id="street"
-      name="street"
-      formControlName="logradouro"
-      required
-    />
-
-    <input
-      pInputText
-      placeholder="Neighborhood"
-      type="text"
-      id="number"
-      name="number"
-      formControlName="bairro"
-      required
-    />
-
-    <input
-      pInputText
-      placeholder="Complement"
-      type="text"
-      id="complement"
-      name="complement"
-      formControlName="complemento"
-    />
-    <input
-      pInputText
-      placeholder="City"
-      type="text"
-      id="city"
-      name="city"
-      formControlName="localidade"
-      required
-    />
-
-    <input
-      pInputText
-      placeholder="State"
-      type="text"
-      id="uf"
-      name="uf"
-      required
-      formControlName="uf"
-    />
-  </div>
-</form>
-<div class="button">
-  <button class="button-create" type="submit" (click)="updateUser()">
-    Save
-  </button>
-</div>
 </p-dialog>
 
 
