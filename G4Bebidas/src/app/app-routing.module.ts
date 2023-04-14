@@ -16,22 +16,80 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { ListUsersComponent } from './pages/components/list-users/list-users.component';
 import { UsersComponent } from './pages/components/users/users.component';
+import { UnauthenticatedUserGuard } from './services/guards/unauthenticated-user/unauthenticated-user.guard';
+import { AuthenticatedAdminGuard } from './services/guards/authenticator-admin/authenticated-admin.guard';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'product', component: ProductsComponent },
-  { path: 'users', component: UsersComponent },
-  { path: 'category', component: CategoriesComponent },
-  { path: 'list-users', component: ListUsersComponent },
-  { path: 'form-address', component: FormAddressComponent },
-  { path: 'form-address/:id', component: FormAddressComponent },
-  { path: 'modal-create-user', component: ModalCreateUserComponent },
-  { path: 'modal-create-user/:id', component: ModalCreateUserComponent },
-  { path: 'cart', component: CartComponent },
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthenticatedAdminGuard],
+  },
+  {
+    path: 'product',
+    component: ProductsComponent,
+    canActivate: [AuthenticatedAdminGuard],
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivate: [AuthenticatedAdminGuard],
+  },
+  {
+    path: 'category',
+    component: CategoriesComponent,
+    canActivate: [AuthenticatedAdminGuard],
+  },
+  {
+    path: 'list-users',
+    component: ListUsersComponent,
+    canActivate: [AuthenticatedAdminGuard],
+  },
+  {
+    path: 'form-address',
+    component: FormAddressComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'form-address/:id',
+    component: FormAddressComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'modal-create-user',
+    component: ModalCreateUserComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'modal-create-user/:id',
+    component: ModalCreateUserComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
 ];
 
 @NgModule({
