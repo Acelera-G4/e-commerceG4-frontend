@@ -77,7 +77,10 @@ export class LoginComponent implements OnInit {
     let type = this.listUsers.find((el) => el.email == e.email);
 
     console.log('type', type.userType);
-
+    let cart = localStorage.getItem('mega_store');
+    cart == null
+      ? null
+      : JSON.parse(localStorage.getItem('mega_store')).at(0).cart;
     if (iEmail && iPassword) {
       if (type.userType == 'admin') {
         iEmail = !iEmail;
@@ -85,15 +88,17 @@ export class LoginComponent implements OnInit {
         this.auth.login();
         this.toast.success('Bem vindo ADMIN');
         this.router.navigate(['/dashboard']);
-      } 
-      if(JSON.parse(localStorage.getItem("mega_store")).at(0).cart == 'true') {
+      } else if (cart == 'true' && type.userType == 'client') {
         this.toast.success('Bem vindo');
         iEmail = !iEmail;
         iPassword = !iPassword;
         this.auth.login();
         this.router.navigate(['/cart']);
-      }
-      if(JSON.parse(localStorage.getItem("mega_store")).at(0).cart == 'false') {
+      } else if (
+        cart == 'false' ||
+        cart == null ||
+        type.userType == 'client'
+      ) {
         this.toast.success('Bem vindo');
         iEmail = !iEmail;
         iPassword = !iPassword;

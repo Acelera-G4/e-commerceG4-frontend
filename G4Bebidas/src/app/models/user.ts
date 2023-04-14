@@ -1,4 +1,4 @@
-import { Address } from "./address";
+import { Address } from './address';
 
 export class User {
   id: number;
@@ -6,9 +6,9 @@ export class User {
   cpf: string;
   dateOfBirthday: Date;
   email: string;
-  userType: string;
+  userType: string = 'client';
   phoneNumber: string;
   password: string;
   active: boolean;
-  address: Address[]=[];
+  address: Address[] = [];
 }
