@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import { elements } from 'chart.js';
+import { tap } from 'rxjs';
 import { LoginModel } from 'src/app/models/login';
 import { User } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/isLoggedIn.service';
 import { UserService } from 'src/app/services/users.service';
 
 @Component({
@@ -25,8 +25,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private activeRouter: ActivatedRoute,
-    private toast: ToastService,
-    private auth: AuthService
+    private toast: ToastService
   ) {}
   ngOnInit(): void {
     // localStorage.getItem('log') == (null || 'false')
@@ -65,56 +64,9 @@ export class LoginComponent implements OnInit {
     });
   }
   loginUser() {
-    let iName: any;
     const e = this.formLogin.value;
+    console.log('entrou');
 
-    let iEmail: any = this.listUsers
-      .map((element) => element.email)
-      .includes(e.email);
-    let iPassword: any = this.listUsers
-      .map((element) => element.password)
-      .includes(e.password);
-    let type = this.listUsers.find((el) => el.email == e.email);
-
-    console.log('type', type.userType);
-    let cart = localStorage.getItem('mega_store');
-    cart == null
-      ? null
-      : JSON.parse(localStorage.getItem('mega_store')).at(0).cart;
-    if (iEmail && iPassword) {
-      if (type.userType == 'admin') {
-        iEmail = !iEmail;
-        iPassword = !iPassword;
-        this.auth.login();
-        this.toast.success('Bem vindo ADMIN');
-        this.router.navigate(['/dashboard']);
-      } else if (cart == 'true' && type.userType == 'client') {
-        this.toast.success('Bem vindo');
-        iEmail = !iEmail;
-        iPassword = !iPassword;
-        this.auth.login();
-        this.router.navigate(['/cart']);
-      } else if (
-        cart == 'false' ||
-        cart == null ||
-        type.userType == 'client'
-      ) {
-        this.toast.success('Bem vindo');
-        iEmail = !iEmail;
-        iPassword = !iPassword;
-        this.auth.login();
-        this.router.navigate(['/home']);
-      }
-    } else {
-      if (!iEmail) {
-        this.toast.error('email incorreto!');
-      }
-      if (!iPassword) {
-        this.toast.error('senha incorreta!');
-      }
-    }
-    iName = this.listUsers.find((el) => el.email === e.email);
-
-    localStorage.setItem('name', iName.name);
+    this.userService.logar(e.email, e.password);
   }
 }

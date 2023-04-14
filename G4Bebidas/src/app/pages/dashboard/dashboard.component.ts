@@ -2,10 +2,7 @@ import { UserService } from 'src/app/services/users.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/isLoggedIn.service';
 import { ProductService } from 'src/app/services/product.service';
-import { forkJoin } from 'rxjs';
-import { CategoriesComponent } from '../components/categories/categories.component';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -19,7 +16,6 @@ export class DashboardComponent {
 
   constructor(
     private router: Router,
-    private auth: AuthService,
     private userService: UserService,
     private productService: ProductService,
     private categoryService: CategoryService
