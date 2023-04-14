@@ -45,6 +45,7 @@ export class SignUpComponent implements OnInit {
       cpf: [null],
       dateOfBirthday: [null],
       email: [null],
+      userType: ['client'],
       phoneNumber: [null],
       password: [null],
     });
@@ -62,7 +63,8 @@ export class SignUpComponent implements OnInit {
       name: [user.name],
       cpf: [user.cpf],
       dateOfBirthday: [dateOfBirthday],
-      email: [user.email],
+      email: [user.email], 
+      userType: [user.userType],
       phoneNumber: [user.phoneNumber],
       password: [user.password],
     });
@@ -104,7 +106,8 @@ export class SignUpComponent implements OnInit {
         console.log('cadastrado', cadastrado.id);
         this.router.navigate(['/login']);
       },
-      error: (erro) => this.toast.error("Existem erros no formulário, corrija-os"),
+      error: (erro) =>
+        this.toast.error('Existem erros no formulário, corrija-os'),
     });
   }
 
