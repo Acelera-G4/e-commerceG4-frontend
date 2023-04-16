@@ -44,9 +44,9 @@
         <div class="button button-radius-left" (click)="decreaseQuantity(productDetails)">
           -
         </div>
-        <div class="button">{{ productDetails.quantity }}</div>
+        <div class="button">{{showQuantity(productDetails.productId)}}</div>
         <div class="button" (click)="increaseQuantity(productDetails)">+</div>
-        <div class="button button-radius-right" (click)="addToCart()">
+        <div class="button button-radius-right" (click)="goToCart()">
           <img src="../../../../assets/cart.svg" alt="icone de carrinho para comprar" />
         </div>
       </div>
