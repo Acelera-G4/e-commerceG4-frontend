@@ -17,7 +17,7 @@
             <i class="pi pi-minus" (click)="decrease(listProduct)"></i>
             <div style="display: inline; margin: 0 10px; ">{{ listProduct.quantity }}</div>
             <i class="pi pi-plus" (click)="inclease(listProduct)"></i>
-            <i class="pi pi-times" style="margin-left: 5px;" (click)="removeToCart(listProduct.id)"></i>
+            <i class="pi pi-times" style="margin-left: 5px;" (click)="removeToCart(listProduct)"></i>
           </div>
         </td>
         <td>{{ listProduct.price | currency : "BRL" : "symbol" : "1.2-2" }}</td>
