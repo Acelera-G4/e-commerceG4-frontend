@@ -166,9 +166,10 @@ export class CartComponent implements OnInit {
       );
     }
   }
-  removeToCart(product: number) {
+  removeToCart(product: OrderProduct) {
+    console.log('sou um id', product.IdProduct);
     let indexProductRemove = this.listProducts.findIndex(
-      (e) => e.id == product
+      (e) => e.IdProduct == product.IdProduct
     );
     this.listProducts.splice(indexProductRemove, 1);
     this.addToCart();
