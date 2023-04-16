@@ -6,6 +6,7 @@ import { elements } from 'chart.js';
 import { tap } from 'rxjs';
 import { LoginModel } from 'src/app/models/login';
 import { User } from 'src/app/models/user';
+import { AuthenticatedClientGuard } from 'src/app/services/guards/authenticated-client/authenticated-client.guard';
 import { UserService } from 'src/app/services/users.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private activeRouter: ActivatedRoute,
-    private toast: ToastService
+    private toast: ToastService,
+    private authenticatedClient: AuthenticatedClientGuard
   ) {}
   ngOnInit(): void {
     // localStorage.getItem('log') == (null || 'false')
@@ -65,8 +67,6 @@ export class LoginComponent implements OnInit {
   }
   loginUser() {
     const e = this.formLogin.value;
-    console.log('entrou');
-
     this.userService.logar(e.email, e.password);
   }
 }
