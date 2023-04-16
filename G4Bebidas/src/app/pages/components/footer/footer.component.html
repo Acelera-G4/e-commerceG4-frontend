@@ -6,12 +6,13 @@
         src="../../../../assets/logoroxo.svg"
         alt="logo grupo 4"
       />
-      <a class="menu_link" href="#">MASTERTIPS</a>
+      <a *ngFor="let category of mainCategories" class="menu_link" href="#">{{category.name}}</a>
+      <!-- <a class="menu_link" href="#">MASTERTIPS</a>
       <a class="menu_link" href="#">VODKA</a>
       <a class="menu_link" href="#">WHISKY</a>
       <a class="menu_link" href="#">GIM</a>
       <a class="menu_link" href="#">NÃO-ALCOÓLICOS</a>
-      <a class="menu_link" href="#">KITS</a>
+      <a class="menu_link" href="#">KITS</a> -->
       <div class="newsletter">
         <p>Assine nossa newsletter</p>
         <img src="../../../../assets/news.svg" alt="" />

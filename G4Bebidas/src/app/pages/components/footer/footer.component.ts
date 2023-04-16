@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Category } from 'src/app/models/category';
+import { CategoryService } from 'src/app/services/category.service';
+import { AuthService } from 'src/app/services/isLoggedIn.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,7 +13,14 @@ export class FooterComponent {
   isDashboard = false;
   isHome = false;
   isFormAddres = false;
-  constructor(private router: Router) {}
+  mainCategories: Category[] = [];
+  error: any;
+
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
@@ -31,6 +41,16 @@ export class FooterComponent {
         this.isDashboard = false;
         this.isFormAddres = false;
       }
+    });
+    this.getMainCategories();
+  }
+
+  getMainCategories() {
+    this.categoryService.getMainCategories().subscribe({
+      next: (response) => {
+        this.mainCategories = response;
+      },
+      error: (error) => (this.error = error),
     });
   }
 }
