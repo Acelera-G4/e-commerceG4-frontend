@@ -39,7 +39,7 @@ import { CarouselComponent } from './pages/components/carousel/carousel.componen
 import { CarouselModule } from 'primeng/carousel';
 import { UsersComponent } from './pages/components/users/users.component';
 import { SplitterModule } from 'primeng/splitter';
-import { ModalPaymentComponent } from './modal-payment/modal-payment.component';
+import { ModalPaymentComponent } from './pages/components/modal-payment/modal-payment.component';
 
 @NgModule({
   declarations: [

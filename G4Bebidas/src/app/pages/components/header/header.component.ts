@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/isLoggedIn.service';
 import { CategoriesComponent } from '../categories/categories.component';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category';
+import { UserService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-header',
@@ -23,14 +23,13 @@ export class HeaderComponent {
   error: any;
   constructor(
     private router: Router,
-    private auth: AuthService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (
-        this.router.url === '/' ||
         this.router.url === '/login' ||
         this.router.url === '/sign-up' ||
         this.router.url.startsWith('/form-address')
@@ -65,6 +64,7 @@ export class HeaderComponent {
     this.categoryService.getMainCategories().subscribe({
       next: (response) => {
         this.mainCategories = response;
+        console.log('CHEGUEI NAS CATEGORIAS', this.mainCategories);
       },
       error: (error) => (this.error = error),
     });
@@ -73,6 +73,6 @@ export class HeaderComponent {
   logout() {
     console.log('saindo');
     this.displaySidebar = false;
-    this.auth.logout();
+    this.userService.logout();
   }
 }

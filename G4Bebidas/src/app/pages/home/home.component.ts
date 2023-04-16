@@ -3,7 +3,6 @@ import { Product } from './../../models/product';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
-import { AuthService } from 'src/app/services/isLoggedIn.service';
 
 @Component({
   selector: 'app-home',
@@ -21,8 +20,7 @@ export class HomeComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private activeRouter: ActivatedRoute,
-    private toast: ToastService,
-    private auth: AuthService
+    private toast: ToastService
   ) {}
 
   showDialog() {
