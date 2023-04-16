@@ -59,7 +59,7 @@ export class CartComponent implements OnInit {
         ? null
         : JSON.parse(localStorage.getItem('mega_store')).at(0).cart;
     console.log('verifycart', this.verifyCart);
-    if (this.verifyCart == true) {
+    if (this.verifyCart) {
       if (localStorage.getItem('log') == null) {
         this.toast.error('Faça login antes de finalizar a compra');
         this.router.navigate(['/login']);
