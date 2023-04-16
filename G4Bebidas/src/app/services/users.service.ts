@@ -25,6 +25,10 @@ export class UserService {
   ) {}
 
   logar(email: string, password: string) {
+    let verifyCart =
+      localStorage.getItem('mega_store') == null
+        ? null
+        : JSON.parse(localStorage.getItem('mega_store')).at(0).cart;
     this.listUserByEmail(email).subscribe({
       next: (response) => {
         if (response.email == email && response.password == password) {
@@ -32,8 +36,13 @@ export class UserService {
             'log',
             JSON.stringify([btoa(response.email), response.userType])
           );
-          this.toast.success(`Bem Vindo, ${response.name} `);
-          this.router.navigate(['/home']);
+          if (verifyCart == 'true') {
+            this.router.navigate(['/cart']);
+            this.toast.success('Finalize suas compras');
+          } else {
+            this.router.navigate(['/home']);
+            this.toast.success(`Bem Vindo, ${response.name} `);
+          }
         } else {
           if (response.password != password) {
             this.toast.warn('Senha incorreta');
