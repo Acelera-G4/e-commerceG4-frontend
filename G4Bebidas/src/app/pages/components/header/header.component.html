@@ -21,9 +21,9 @@
     <button style="background: none; border: none" (click)="displaySidebarDashboard = true">
       <i class="icon pi pi-bars"></i>
     </button>
-    <button style="background: none; border: none" (click)="displaySidebar = true">
+    <!-- <button style="background: none; border: none" (click)="displaySidebar = true">
       <i class="icon pi pi-bars"></i>
-    </button>
+    </button> -->
   </div>
 </div>
 <p-sidebar [(visible)]="displaySidebar" position="right">
@@ -57,24 +57,24 @@
   <ng-template pTemplate="content">
     <div class="container-content">
       <div class="menu-option">
-        <button class="link-menu" routerLink="/dashboard">Dashboard</button>
+        <button class="link-menu" routerLink="/dashboard" (click)="displaySidebarDashboard = false">Dashboard</button>
         <i class="pi pi-th-large"></i>
       </div>
       <div class="menu-option">
-        <button routerLink="/users" class="link-menu">
+        <button routerLink="/users" class="link-menu" (click)="displaySidebarDashboard = false">
           Lista de usuários
         </button>
         <i class="pi pi-user-edit" alt="link para visualizar lista usuários "></i>
       </div>
 
       <div class="menu-option">
-        <button routerLink="/product" class="link-menu">
+        <button routerLink="/product" class="link-menu" (click)="displaySidebarDashboard = false">
           Lista de produtos
         </button>
         <i class="pi pi-list" alt="link para visualizar lista de produtos "></i>
       </div>
       <div class="menu-option">
-        <button routerLink="/category" class="link-menu">
+        <button routerLink="/category" class="link-menu" (click)="displaySidebarDashboard = false">
           Categoria de prod.
         </button>
         <i class="pi pi-tags" alt="link para visualizar lista de categoria "></i>
