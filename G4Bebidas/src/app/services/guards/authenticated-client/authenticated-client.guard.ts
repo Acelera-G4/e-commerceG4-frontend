@@ -19,10 +19,7 @@ export class AuthenticatedClientGuard implements CanActivate {
         localStorage.getItem('log') == null
           ? null
           : JSON.parse(localStorage.getItem('log')).at(1);
-      // let verifyCart =
-      //   localStorage.getItem('mega_store') == null
-      //     ? null
-      //     : JSON.parse(localStorage.getItem('mega_store')).at(0).cart;
+
       console.log('authent-client', detectIsClient);
       if (detectIsClient == 'client') {
         // if (verifyCart == 'true') {

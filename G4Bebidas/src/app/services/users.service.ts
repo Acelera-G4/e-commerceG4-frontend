@@ -39,6 +39,9 @@ export class UserService {
           if (verifyCart == 'true') {
             this.router.navigate(['/cart']);
             this.toast.success('Finalize suas compras');
+          } else if (response.userType == 'admin') {
+            this.router.navigate(['/dashboard']);
+            this.toast.success(`Bem Vindo, ${response.name} `);
           } else {
             this.router.navigate(['/home']);
             this.toast.success(`Bem Vindo, ${response.name} `);
@@ -59,7 +62,7 @@ export class UserService {
   }
 
   logado(): boolean {
-    return localStorage.getItem('log') ? true : false;
+    return localStorage.getItem('log') !== null ? true : false;
   }
 
   logout() {

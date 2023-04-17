@@ -24,7 +24,7 @@ export class CartComponent implements OnInit {
   cart: boolean;
   total: number;
   visiblePayment: boolean = false;
-  verifyCart: boolean;
+  verifyCart: any;
 
   constructor(
     private router: Router,
@@ -59,7 +59,8 @@ export class CartComponent implements OnInit {
         ? null
         : JSON.parse(localStorage.getItem('mega_store')).at(0).cart;
     console.log('verifycart', this.verifyCart);
-    if (this.verifyCart) {
+    if (this.verifyCart == 'true') {
+      console.log('localStorage.getItem("log")', localStorage.getItem('log'));
       if (localStorage.getItem('log') == null) {
         this.toast.error('Faça login antes de finalizar a compra');
         this.router.navigate(['/login']);
@@ -132,10 +133,10 @@ export class CartComponent implements OnInit {
               next: (response) => {
                 e.quantity++;
                 e.price = response.price * e.quantity;
+                this.addToCart();
               },
             });
             console.log('price total', e.price);
-            this.addToCart();
           }
         });
       }

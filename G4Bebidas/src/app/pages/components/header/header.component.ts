@@ -73,6 +73,7 @@ export class HeaderComponent {
   logout() {
     console.log('saindo');
     this.displaySidebar = false;
+    this.displaySidebarDashboard = false;
     this.userService.logout();
   }
 }
