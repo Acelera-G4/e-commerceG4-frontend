@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalPaymentComponent } from './modal-payment.component';
+import { ModalPaymentComponent } from './ModalPaymentComponent';
 
 describe('ModalPaymentComponent', () => {
   let component: ModalPaymentComponent;
@@ -8,9 +8,8 @@ describe('ModalPaymentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalPaymentComponent ]
-    })
-    .compileComponents();
+      declarations: [ModalPaymentComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ModalPaymentComponent);
     component = fixture.componentInstance;

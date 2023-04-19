@@ -90,7 +90,11 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<any> {
-    return this.httpClient.put<User[]>(`${this.url}`, user, this.header);
+    return this.httpClient.put<User[]>(
+      `${this.url}/${user.id}`,
+      user,
+      this.header
+    );
   }
 
   deleteUserById(id: number): Observable<User> {

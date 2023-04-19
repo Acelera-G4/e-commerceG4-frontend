@@ -10,5 +10,5 @@ export class User {
   phoneNumber: string;
   password: string;
   active: boolean;
-  address: Address[] = [];
+  addresses: Address[] = [];
 }
