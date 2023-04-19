@@ -43,15 +43,12 @@ export class UsersComponent {
     private formBuilder: FormBuilder,
     private toast: ToastService,
     private router: Router,
-    private email: EmailComponent,
+    private email: EmailComponent
   ) {
     this.user = new User();
   }
 
   ngOnInit(): void {
-    localStorage.getItem('log') == (null || 'false')
-      ? this.router.navigate(['/'])
-      : this.router.navigate(['/users']);
     this.isLoading = true;
     this.getUsers();
     console.log(this.listUsers);
@@ -101,12 +98,12 @@ export class UsersComponent {
       address: [this.addressform],
     });
     this.addressform = this.formBuilder.group({
-      cep: [user.address[0].cep],
-      logradouro: [user.address[0].logradouro],
-      complemento: [user.address[0].complemento],
-      localidade: [user.address[0].localidade],
-      bairro: [user.address[0].bairro],
-      uf: [user.address[0].uf],
+      cep: [user.addresses[0].cep],
+      logradouro: [user.addresses[0].logradouro],
+      complemento: [user.addresses[0].complemento],
+      localidade: [user.addresses[0].localidade],
+      bairro: [user.addresses[0].bairro],
+      uf: [user.addresses[0].uf],
     });
   }
 
@@ -126,7 +123,6 @@ export class UsersComponent {
       next: (response) => {
         this.listAddress = response;
         this.size = this.listUsers.length;
-        this.isLoading = false;
       },
       error: (error) => (this.error = error),
     });
@@ -161,7 +157,7 @@ export class UsersComponent {
     user.email = this.userForm.value.email;
     user.userType = this.userForm.value.userType;
     user.phoneNumber = this.userForm.value.phoneNumber;
-    user.address.push(this.addressform.value);
+    user.addresses.push(this.addressform.value);
     console.log(JSON.stringify(user));
 
     this.userService.createUser(user).subscribe({
@@ -189,7 +185,7 @@ export class UsersComponent {
       email: [user.email],
       userType: [user.userType],
       phoneNumber: [user.phoneNumber],
-      address: [user.address],
+      address: [user.addresses],
     });
   }
 
@@ -205,7 +201,7 @@ export class UsersComponent {
     newUser.email = this.userForm.value.email;
     newUser.userType = this.userForm.value.userType;
     newUser.phoneNumber = this.userForm.value.phoneNumber;
-    newUser.address = this.userForm.value.address;
+    newUser.addresses = this.userForm.value.address;
     console.log('sou log do erro', newUser);
     this.userService.updateUser(newUser).subscribe({
       next: (response) => {

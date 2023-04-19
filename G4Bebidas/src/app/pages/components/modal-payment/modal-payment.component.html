@@ -1,1 +1,65 @@
-<p>modal-payment works!</p>
+<div class="card">
+    <p-tabView>
+        <p-tabPanel header="Endereço">
+            <div>
+                <form [formGroup]="addressForm">
+                    <i class="icon pi pi-home" style="font-size: 2rem; color: blueviolet" alt="icone de usuário"></i>
+                    <div class="container-input">
+                        <input pInputText placeholder="Cep" type="text" id="cep" formControlName="cep" required
+                            #cepInput /><i class="icon pi pi-search"
+                            style="font-size: 1.5rem; margin: 0 1rem; color: blueviolet" alt="procurar"
+                            (click)="searchCep()"></i>
+
+                        <input pInputText placeholder="Street" type="text" id="street" name="street"
+                            formControlName="logradouro" required />
+
+                        <input pInputText placeholder="Neighborhood" type="text" id="number" name="number"
+                            formControlName="bairro" required />
+
+                        <input pInputText placeholder="Complement" type="text" id="complement" name="complement"
+                            formControlName="complemento" />
+                        <input pInputText placeholder="City" type="text" id="city" name="city"
+                            formControlName="localidade" required />
+
+                        <input pInputText placeholder="State" type="text" id="uf" name="uf" required
+                            formControlName="uf" />
+                    </div>
+                </form>
+            </div>
+            <div class="button">
+                <button class="button-create" (click)="createAddress()">
+                    cadastrar Endereço
+                </button>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Cartão" [disabled]="!selecionado">
+            <form [formGroup]="creditcardForm">
+                <i class="icon pi pi-user" style="font-size: 2rem; color: blueviolet; padding: 5px; margin-bottom: 5px;"
+                    alt="icone de usuário"></i>
+                <div class="container-input">
+                    <input pInputText placeholder="Name" type="text" id="name" formControlName="name" required />
+
+                    <input pInputText placeholder="CPF" type="text" id="cpf" formControlName="cpf" required />
+
+                    <input pInputText type="date" id="dateOfBirthday" formControlName="dateOfBirthday"
+                        title="Insira sua data de nascimento neste campo" required />
+
+                    <input pInputText placeholder="Email" type="text" id="email" formControlName="email" required />
+
+                    <input pInputText placeholder="User Type" type="text" id="userType" formControlName="userType"
+                        required />
+
+                    <input pInputText placeholder="Phone" type="text" id="userType" formControlName="phoneNumber"
+                        required />
+                    <input style="display:none;" pInputText placeholder="address" type="text" id="address"
+                        formControlName="address" required />
+                </div>
+            </form>
+            <!-- <div class="button">
+                <button class="button-create" (click)="button()">
+                    voltar
+                </button>
+            </div> -->
+        </p-tabPanel>
+    </p-tabView>
+</div>

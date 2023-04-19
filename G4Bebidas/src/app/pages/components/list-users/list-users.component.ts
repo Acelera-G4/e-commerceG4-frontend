@@ -15,7 +15,7 @@ export class ListUsersComponent {
   @Input() displayCreateUser: boolean = false;
   displayAddress: boolean = false;
   displayUpdateUser: boolean = false;
-   newUser: User;
+  newUser: User;
   newUserId: any;
   userForm: FormGroup;
 
@@ -52,7 +52,7 @@ export class ListUsersComponent {
       email: [user.email],
       userType: [user.userType],
       phoneNumber: [user.phoneNumber],
-      address: [user.address],
+      address: [user.addresses],
     });
     // console.log(user);
   }
