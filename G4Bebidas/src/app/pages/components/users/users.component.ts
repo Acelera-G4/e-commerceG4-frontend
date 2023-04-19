@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import { ListUsersComponent } from '../list-users/list-users.component';
+import { EmailComponent } from '../email/email.component';
 
 @Component({
   selector: 'app-users',
@@ -41,7 +42,8 @@ export class UsersComponent {
     private addressService: AddressService,
     private formBuilder: FormBuilder,
     private toast: ToastService,
-    private router: Router
+    private router: Router,
+    private email: EmailComponent,
   ) {
     this.user = new User();
   }
@@ -169,6 +171,7 @@ export class UsersComponent {
         this.user = Response;
         this.displayCreateUser = false;
         this.getUsers();
+        this.email.sendEmail();
       },
       error: (error) => (this.error = error),
     });

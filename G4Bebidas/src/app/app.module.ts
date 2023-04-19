@@ -40,6 +40,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { UsersComponent } from './pages/components/users/users.component';
 import { SplitterModule } from 'primeng/splitter';
 import { ModalPaymentComponent } from './pages/components/modal-payment/modal-payment.component';
+import { EmailComponent } from './pages/components/email/email.component';
+import { EmailService } from './services/email.service';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { ModalPaymentComponent } from './pages/components/modal-payment/modal-pa
     CarouselComponent,
     UsersComponent,
     ModalPaymentComponent,
+    EmailComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,7 @@ import { ModalPaymentComponent } from './pages/components/modal-payment/modal-pa
     SplitterModule,
   ],
   exports: [AppRoutingModule],
-  providers: [ToastService],
+  providers: [ToastService, EmailService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
