@@ -23,7 +23,7 @@ export class FooterComponent {
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (
-        this.router.url === '/' ||
+        
         this.router.url === '/dashboard' ||
         this.router.url === '/category' ||
         this.router.url === '/users' ||
