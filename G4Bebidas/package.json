@@ -23,6 +23,7 @@
     "accordion": "^3.0.2",
     "angular-toastify": "^1.0.4",
     "chart.js": "^4.2.1",
+    "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primeng": "^15.3.0",
     "rxjs": "~7.8.0",

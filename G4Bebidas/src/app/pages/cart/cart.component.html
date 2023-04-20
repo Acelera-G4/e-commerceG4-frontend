@@ -1,60 +1,79 @@
 <div class="container table-responsive" *ngIf="cart">
-  <p-table [value]="listProducts" [rows]="5" [paginator]="true" [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[5, 10, 30]" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    responsiveLayout="stack" [breakpoint]="'660px'" [tableStyle]="{ 'min-width': '50rem' }">
+  <p-table
+    [value]="listProducts"
+    [rows]="5"
+    [paginator]="true"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 30]"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    responsiveLayout="stack"
+    [breakpoint]="'660px'"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
     <ng-template pTemplate="header" style="background-color: #ab47bc">
       <tr>
         <th id="header-list">Nome</th>
         <th id="header-list">Quantidade</th>
         <th id="header-list">Preço</th>
+        <th id="header-list"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-listProduct>
       <tr>
         <td>{{ listProduct.name }}</td>
         <td>
-          <div>
-            <i class="pi pi-minus" (click)="decrease(listProduct)"></i>
-            <div style="display: inline; margin: 0 10px; ">{{ listProduct.quantity }}</div>
-            <i class="pi pi-plus" (click)="inclease(listProduct)"></i>
-            <i class="pi pi-times" style="margin-left: 5px;" (click)="removeToCart(listProduct)"></i>
+          <div class="buttons-list-product">
+            <div class="button-list">
+              <i class="pi pi-minus" (click)="decrease(listProduct)"></i>
+            </div>
+            <div class="quantity-product">
+              {{ listProduct.quantity }}
+            </div>
+            <div class="button-list">
+              <i class="pi pi-plus" (click)="inclease(listProduct)" title="Remover produto do carrinho"></i>
+            </div>
           </div>
         </td>
         <td>{{ listProduct.price | currency : "BRL" : "symbol" : "1.2-2" }}</td>
-
+        <td>
+          <div class="button-list">
+            <i
+              class="pi pi-times"
+              style="margin-left: 5px"
+              (click)="removeToCart(listProduct)"
+              title="Remover produto do carrinho"
+            ></i>
+          </div>
+        </td>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="paginatorleft"></ng-template>
     <ng-template pTemplate="paginatorright"> </ng-template>
   </p-table>
-
 </div>
 
-
-<div class="card">
-  <p-splitter [gutterSize]="0" [style]="{ height: '100px' }" styleClass="mb-5">
-    <ng-template pTemplate>
-      <div class="col flex align-items-center justify-content-center"><button pButton
-          style="width: auto; justify-content: center;  margin-left:60px ;" routerLink="/home">Continuar
-          comprando</button></div>
-    </ng-template>
-    <ng-template pTemplate>
-      <div class="col flex align-items-center justify-content-center">
-        <button pButton style="width: auto; margin-left:30px ;" (click)="login()">finalizar
-          compra</button>
+<div class="container-cart">
+  <div class="cart-total">
+    <div class="button">
+      <button pButton routerLink="/home">Continuar comprando</button>
+    </div>
+    <div class="button">
+      <button pButton (click)="login()">finalizar compra</button>
+    </div>
+    <div class="container-price">
+      <div class="price">
+        <h2 class="title-price">Total a pagar</h2>
+        <p class="price">{{ total | currency : "BRL" : "symbol" : "1.2-2" }}</p>
       </div>
-    </ng-template>
-    <ng-template pTemplate>
-      <div class="col flex align-items-center justify-content-center">
-        <h2 style="display: inline-block; margin-right: 20px;">Total a pagar</h2>
-        <p style="display: inline-block; margin: 0 50px; font-size: 20px;" class="price">{{total | currency : "BRL" :
-          "symbol" : "1.2-2" }}</p>
-      </div>
-    </ng-template>
-  </p-splitter>
+    </div>
+  </div>
 </div>
 
-<p-dialog header="Hora do Pagamento" [(visible)]="visiblePayment" [style]="{width: '50vw'}">
+<p-dialog
+  header="Hora do Pagamento"
+  [(visible)]="visiblePayment"
+  [style]="{ width: '50vw' }"
+>
   <app-modal-payment></app-modal-payment>
 </p-dialog>

@@ -1,6 +1,8 @@
 <p-carousel [value]="images" [circular]="true" [autoplayInterval]="5000">
   <ng-template let-image pTemplate="item">
-    <img [src]="image.url" [alt]="image.title" />
-    <div class="title">{{ image.title }}</div>
+    <div class="container">
+      <img [src]="image.url" [alt]="image.title" />
+      <div class="title">{{ image.title }}</div>
+    </div>
   </ng-template>
 </p-carousel>
