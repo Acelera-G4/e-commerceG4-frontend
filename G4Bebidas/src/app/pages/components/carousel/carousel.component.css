@@ -1,7 +1,17 @@
+.container {
+  background-color: black;
+  height: 100%;
+}
+
 img {
-  height: 250px;
+  height: 100%;
   width: 100%;
-  object-fit: scale-down;
+  object-fit: cover;
+  transition: 0.3s;
+  cursor: pointer;
+}
+img:hover {
+  opacity: 0.7;
 }
 
 .title {
