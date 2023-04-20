@@ -1,14 +1,32 @@
 <div class="card">
     <p-tabView>
-        <p-tabPanel header="Endereço">
+        <p-tabPanel header="Endereço de entrega">
+
+            <div *ngFor="let item of addressD">
+                <div *ngIf="item.localidade != null">
+                    <p-radioButton pRadioButton type="radio" [value]="item" [(ngModel)]="teste"
+                        [id]="item.id"></p-radioButton>
+                    <label [for]="item.id">{{item.logradouro}}, {{item.complemento}},
+                        {{item.bairro}},{{item.localidade}},
+                        {{item.uf}}</label>
+                </div>
+
+            </div>
+            <div class="button">
+                <button class="button-create" (click)="testeButton()">
+                    escolhi este Endereço
+                </button>
+            </div>
+
             <div>
                 <form [formGroup]="addressForm">
                     <i class="icon pi pi-home" style="font-size: 2rem; color: blueviolet" alt="icone de usuário"></i>
                     <div class="container-input">
                         <input pInputText placeholder="Cep" type="text" id="cep" formControlName="cep" required
-                            #cepInput /><i class="icon pi pi-search"
-                            style="font-size: 1.5rem; margin: 0 1rem; color: blueviolet" alt="procurar"
-                            (click)="searchCep()"></i>
+                            #cepInput (blur)="searchCep()" />
+                        <!-- <i class="icon pi pi-search"
+                            style="font-size: 1.5rem; margin: 0 1rem; color: blueviolet; cursor: pointer" alt="procurar"
+                            (click)="searchCep()"></i> -->
 
                         <input pInputText placeholder="Street" type="text" id="street" name="street"
                             formControlName="logradouro" required />
@@ -25,36 +43,49 @@
                             formControlName="uf" />
                     </div>
                 </form>
-            </div>
-            <div class="button">
-                <button class="button-create" (click)="createAddress()">
-                    cadastrar Endereço
-                </button>
+                <div class="button">
+                    <button class="button-create" (click)="createAddress()">
+                        cadastrar Endereço
+                    </button>
+                </div>
             </div>
         </p-tabPanel>
-        <p-tabPanel header="Cartão" [disabled]="!selecionado">
-            <form [formGroup]="creditcardForm">
-                <i class="icon pi pi-user" style="font-size: 2rem; color: blueviolet; padding: 5px; margin-bottom: 5px;"
-                    alt="icone de usuário"></i>
-                <div class="container-input">
-                    <input pInputText placeholder="Name" type="text" id="name" formControlName="name" required />
-
-                    <input pInputText placeholder="CPF" type="text" id="cpf" formControlName="cpf" required />
-
-                    <input pInputText type="date" id="dateOfBirthday" formControlName="dateOfBirthday"
-                        title="Insira sua data de nascimento neste campo" required />
-
-                    <input pInputText placeholder="Email" type="text" id="email" formControlName="email" required />
-
-                    <input pInputText placeholder="User Type" type="text" id="userType" formControlName="userType"
-                        required />
-
-                    <input pInputText placeholder="Phone" type="text" id="userType" formControlName="phoneNumber"
-                        required />
-                    <input style="display:none;" pInputText placeholder="address" type="text" id="address"
-                        formControlName="address" required />
+        <p-tabPanel header="Método de pagamento">
+            <div class="flex flex-wrap gap-3">
+                <div class="flex align-items-center">
+                    <p-radioButton name="money" value="money" [(ngModel)]="paymentMethod" inputId="money"
+                        (onClick)="credCard = false"></p-radioButton>
+                    <label for="money" class="ml-2">Dinheiro</label>
                 </div>
-            </form>
+
+                <div class="flex align-items-center">
+                    <p-radioButton name="card" value="card" [(ngModel)]="paymentMethod" inputId="card"
+                        (onClick)="credCard = true"></p-radioButton>
+                    <label for="card" class="ml-2">Cartão de crédito</label>
+                </div>
+
+            </div>
+            <div *ngIf="credCard">
+                <form [formGroup]="creditcardForm">
+                    <i class="icon pi pi-credit-card"
+                        style="font-size: 2rem; color: blueviolet; padding: 5px; margin-bottom: 5px;"
+                        alt="icone de usuário"></i>
+                    <div class="container-input">
+                        <input pInputText placeholder="Number" type="text" id="number" formControlName="number"
+                            required />
+
+                        <input pInputText placeholder="Name" type="text" id="name" formControlName="name" required />
+
+                        <input pInputText type="text" id="expiry" placeholder="Data de expiração"
+                            formControlName="expiry" title="Data de expiração" required />
+
+                        <input pInputText placeholder="cvc" type="text" id="cvc" formControlName="cvc" required />
+
+
+
+                    </div>
+                </form>
+            </div>
             <!-- <div class="button">
                 <button class="button-create" (click)="button()">
                     voltar

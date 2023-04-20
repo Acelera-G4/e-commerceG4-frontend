@@ -44,6 +44,7 @@ import { EmailService } from './services/email.service';
 import { AccordionModule } from 'primeng/accordion';
 import { TabViewModule } from 'primeng/tabview';
 import { ModalPaymentComponent } from './pages/components/modal-payment/modal-payment.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,6 @@ import { ModalPaymentComponent } from './pages/components/modal-payment/modal-pa
     DialogModule,
     ButtonModule,
     ReactiveFormsModule,
-    AngularToastifyModule,
     SidebarModule,
     FormsModule,
     DropdownModule,
@@ -91,6 +91,8 @@ import { ModalPaymentComponent } from './pages/components/modal-payment/modal-pa
     SplitterModule,
     AccordionModule,
     TabViewModule,
+    RadioButtonModule,
+    AngularToastifyModule,
   ],
   exports: [AppRoutingModule],
   providers: [ToastService, EmailService],
