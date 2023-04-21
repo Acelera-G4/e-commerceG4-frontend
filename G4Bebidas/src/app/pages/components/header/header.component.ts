@@ -32,6 +32,7 @@ export class HeaderComponent {
       if (
         this.router.url === '/login' ||
         this.router.url === '/sign-up' ||
+        this.router.url === '/admin' ||
         this.router.url.startsWith('/form-address')
       ) {
         this.isLogin = true;
@@ -58,6 +59,13 @@ export class HeaderComponent {
       }
     });
     this.getMainCategories();
+  }
+
+  ngOnChange() {
+    console.log(
+      'teste do header',
+      JSON.parse(localStorage.getItem('mega_store')).at(1)
+    );
   }
 
   getMainCategories() {

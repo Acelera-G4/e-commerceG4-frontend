@@ -50,7 +50,7 @@
                 </div>
             </div>
         </p-tabPanel>
-        <p-tabPanel header="Método de pagamento">
+        <!-- <p-tabPanel header="Método de pagamento">
             <div class="flex flex-wrap gap-3">
                 <div class="flex align-items-center">
                     <p-radioButton name="money" value="money" [(ngModel)]="paymentMethod" inputId="money"
@@ -86,11 +86,62 @@
                     </div>
                 </form>
             </div>
-            <!-- <div class="button">
-                <button class="button-create" (click)="button()">
-                    voltar
+            <div class="button">
+                <button class="button-create" (click)="testeButton()">
+                    Finalizar pedido
                 </button>
-            </div> -->
-        </p-tabPanel>
+            </div>
+        </p-tabPanel> -->
     </p-tabView>
 </div>
+
+<p-dialog card header="Hora do Pagamento" [(visible)]="visible" [style]=" {width: '70vw', height: '100%'}">
+    <p-tabView>
+
+        <p-tabPanel header="Método de pagamento">
+            <div class="flex flex-wrap gap-3">
+                <div class="flex align-items-center">
+                    <p-radioButton name="money" value="money" [(ngModel)]="paymentMethod" inputId="money"
+                        (onClick)="credCard = false"></p-radioButton>
+                    <label for="money" class="ml-2">Dinheiro</label>
+                </div>
+
+                <div class="flex align-items-center">
+                    <p-radioButton name="card" value="card" [(ngModel)]="paymentMethod" inputId="card"
+                        (onClick)="credCard = true"></p-radioButton>
+                    <label for="card" class="ml-2">Cartão de crédito</label>
+                </div>
+
+            </div>
+            <div *ngIf="credCard">
+                <form [formGroup]="creditcardForm">
+                    <i class="icon pi pi-credit-card"
+                        style="font-size: 2rem; color: blueviolet; padding: 5px; margin-bottom: 5px;"
+                        alt="icone de usuário"></i>
+                    <div class="container-input">
+                        <input pInputText pTooltip="Enter the number card" placeholder="Number" type="text" id="number"
+                            formControlName="number" required />
+
+                        <input pInputText pTooltip="Enter the name" placeholder="Name" type="text" id="name"
+                            formControlName="name" required />
+
+                        <input pInputText pTooltip="Enter the expiration date" type="text" id="expiry"
+                            placeholder="Data de expiração" formControlName="expiry" title="Data de expiração"
+                            required />
+
+                        <input pInputText pTooltip="Enter the code of verification" placeholder="cvc" type="text"
+                            id="cvc" formControlName="cvc" required />
+
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="button">
+                <button class="button-create" type="submit" (click)="finishOrder()">
+                    Finalizar pedido
+                </button>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+</p-dialog>

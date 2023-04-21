@@ -45,6 +45,8 @@ import { AccordionModule } from 'primeng/accordion';
 import { TabViewModule } from 'primeng/tabview';
 import { ModalPaymentComponent } from './pages/components/modal-payment/modal-payment.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { TcCardModule } from '@ngx-tc/card';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     TabViewModule,
     RadioButtonModule,
     AngularToastifyModule,
+    TooltipModule,
   ],
   exports: [AppRoutingModule],
   providers: [ToastService, EmailService],

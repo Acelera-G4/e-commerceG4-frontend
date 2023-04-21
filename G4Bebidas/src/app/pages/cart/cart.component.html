@@ -1,15 +1,7 @@
 <div class="container table-responsive" *ngIf="cart">
-  <p-table
-    [value]="listProducts"
-    [rows]="5"
-    [paginator]="true"
-    [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[5, 10, 30]"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    responsiveLayout="stack"
-    [breakpoint]="'660px'"
-    [tableStyle]="{ 'min-width': '50rem' }"
-  >
+  <p-table [value]="listProducts" [rows]="5" [paginator]="true" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 30]" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    responsiveLayout="stack" [breakpoint]="'660px'" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header" style="background-color: #ab47bc">
       <tr>
         <th id="header-list">Nome</th>
@@ -37,12 +29,8 @@
         <td>{{ listProduct.price | currency : "BRL" : "symbol" : "1.2-2" }}</td>
         <td>
           <div class="button-list">
-            <i
-              class="pi pi-times"
-              style="margin-left: 5px"
-              (click)="removeToCart(listProduct)"
-              title="Remover produto do carrinho"
-            ></i>
+            <i class="pi pi-times" style="margin-left: 5px" (click)="removeToCart(listProduct)"
+              title="Remover produto do carrinho"></i>
           </div>
         </td>
       </tr>
@@ -70,10 +58,6 @@
   </div>
 </div>
 
-<p-dialog
-  header="Hora do Pagamento"
-  [(visible)]="visiblePayment"
-  [style]="{ width: '50vw' }"
->
+<p-dialog header="Hora do Pagamento" [(visible)]="visiblePayment" [style]="{ width: '70vw', height:'100%' }">
   <app-modal-payment></app-modal-payment>
 </p-dialog>

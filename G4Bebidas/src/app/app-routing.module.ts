@@ -36,6 +36,11 @@ const routes: Routes = [
     canActivate: [UnauthenticatedUserGuard],
   },
   {
+    path: 'admin',
+    component: LoginComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
     path: 'sign-up',
     component: SignUpComponent,
     canActivate: [UnauthenticatedUserGuard],

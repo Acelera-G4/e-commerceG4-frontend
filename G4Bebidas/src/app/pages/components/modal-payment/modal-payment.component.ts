@@ -7,6 +7,10 @@ import { User } from 'src/app/models/user';
 import { Address } from 'src/app/models/address';
 import { AddressService } from 'src/app/services/address.service';
 import { CreditCard } from 'src/app/models/creditCard';
+import { Order } from 'src/app/models/order';
+import { OrderService } from 'src/app/services/order.service';
+import { EmailService } from 'src/app/services/email.service';
+import { Email } from 'src/app/models/email';
 
 @Component({
   selector: 'app-modal-payment',
@@ -26,16 +30,20 @@ export class ModalPaymentComponent implements OnInit {
   newAddress: boolean = false;
   paymentMethod: any;
   credCard: boolean = false;
+  visible: boolean = false;
 
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
     private toast: ToastService,
     private router: Router,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private orderService: OrderService,
+    private emailService: EmailService
   ) {}
   ngOnInit(): void {
     this.email = atob(JSON.parse(localStorage.getItem('log')).at(0));
+
     console.log('email aq', this.email);
     this.getUser();
     this.formEmpty();
@@ -58,12 +66,9 @@ export class ModalPaymentComponent implements OnInit {
     this.creditcardForm = this.formBuilder.group({
       id: [null],
       name: [null],
-      cpf: [null],
-      dateOfBirthday: [null],
-      email: [null],
-      userType: [null],
-      phoneNumber: [null],
-      address: [this.addressForm],
+      number: [null],
+      expiry: [null],
+      cvc: [null],
     });
     this.addressForm = this.formBuilder.group({
       cep: [null],
@@ -132,6 +137,53 @@ export class ModalPaymentComponent implements OnInit {
   }
 
   testeButton() {
+    this.visible = true;
+
+    console.log('form card', this.creditcardForm.value);
     console.log('teste', this.teste);
+    console.log('metodo de pagamento', this.paymentMethod);
+  }
+
+  finishOrder() {
+    let order = new Order();
+    let email = new Email();
+    order.listProducts = JSON.parse(localStorage.getItem('mega_store')).at(1);
+
+    console.log('lista de prod', order.listProducts);
+
+    order.delivery = true;
+    order.finished = true;
+    order.clientID = this.user.id;
+    order.payment = this.paymentMethod;
+
+    console.log('order', order);
+
+    console.log('email email', this.user.email);
+    email.to.push(this.user.email);
+    email.from = 'bebidas.g4@gmail.com';
+    email.subject = 'Boas compras';
+    email.emailBody = `${JSON.stringify(order.listProducts)}`;
+
+    this.orderService.createOrUpdateOrder(order).subscribe({
+      next: (resp) => {
+        localStorage.removeItem('mega_store');
+        console.log('resp order', resp);
+        this.visible = false;
+        this.toast.success('Isso aí... Compre mais');
+        this.emailService.postEmail(email).subscribe({
+          next: (resp) => {
+            console.log('email enviado');
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        this.toast.error('FERROU');
+        console.log(err.value);
+      },
+    });
   }
 }
