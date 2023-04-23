@@ -1,9 +1,6 @@
-import { CardComponent } from './pages/components/card/card.component';
-
 import { CategoriesComponent } from './pages/components/categories/categories.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
-import { ModalCreateUserComponent } from './pages/components/modal-create-user/modal-create-user.component';
 
 import { ProductsComponent } from './pages/components/products/products.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -14,10 +11,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import { ListUsersComponent } from './pages/components/list-users/list-users.component';
 import { UsersComponent } from './pages/components/users/users.component';
 import { UnauthenticatedUserGuard } from './services/guards/unauthenticated-user/unauthenticated-user.guard';
 import { AuthenticatedAdminGuard } from './services/guards/authenticator-admin/authenticated-admin.guard';
+import { MyAccountComponent } from './pages/my-account/my-account.component';
+import { TermsAndConditionComponent } from './pages/components/terms-and-condition/terms-and-condition.component';
+import { PrivacyPolicyComponent } from './pages/components/privacy-policy/privacy-policy.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -60,11 +60,7 @@ const routes: Routes = [
     component: CategoriesComponent,
     canActivate: [AuthenticatedAdminGuard],
   },
-  {
-    path: 'list-users',
-    component: ListUsersComponent,
-    canActivate: [AuthenticatedAdminGuard],
-  },
+
   {
     path: 'form-address',
     component: FormAddressComponent,
@@ -76,18 +72,28 @@ const routes: Routes = [
     canActivate: [UnauthenticatedUserGuard],
   },
   {
-    path: 'modal-create-user',
-    component: ModalCreateUserComponent,
-    canActivate: [UnauthenticatedUserGuard],
-  },
-  {
-    path: 'modal-create-user/:id',
-    component: ModalCreateUserComponent,
-    canActivate: [UnauthenticatedUserGuard],
-  },
-  {
     path: 'cart',
     component: CartComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'my-account',
+    component: MyAccountComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'terms-and-condition',
+    component: TermsAndConditionComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent,
+    canActivate: [UnauthenticatedUserGuard],
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
     canActivate: [UnauthenticatedUserGuard],
   },
 ];

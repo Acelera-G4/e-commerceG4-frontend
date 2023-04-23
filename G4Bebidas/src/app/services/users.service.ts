@@ -36,6 +36,9 @@ export class UserService {
             'log',
             JSON.stringify([btoa(response.email), response.userType])
           );
+          localStorage.setItem('mail', response.email);
+          console.log('EMAIL WILL', localStorage.getItem('mail'));
+          
           if (verifyCart == 'true') {
             this.router.navigate(['/cart']);
             this.toast.success('Finalize suas compras');

@@ -1,0 +1,27 @@
+<div class="container-cards-my-account">
+  <p-card class="card-my-account" header="Title">
+    <div>
+      <h2>User Details</h2>
+      <p><strong>Name:</strong> {{ user?.name }}</p>
+      <p><strong>CPF:</strong> {{ user?.cpf }}</p>
+      <p>
+        <strong>Date of Birthday:</strong> {{ user?.dateOfBirthday | date }}
+      </p>
+      <p><strong>Email:</strong> {{ user?.email }}</p>
+      <p><strong>User Type:</strong> {{ user?.userType }}</p>
+      <p><strong>Phone Number:</strong> {{ user?.phoneNumber }}</p>
+      <p><strong>Password:</strong> {{ user?.password }}</p>
+      <p><strong>Active:</strong> {{ user?.active ? "Yes" : "No" }}</p>
+    </div>
+    <ul>
+      <li *ngFor="let address of user?.addresses">
+        <p><strong>CEP:</strong> {{address?.cep}}</p>
+        <p><strong>Logradouro:</strong> {{address?.logradouro}}</p>
+        <p><strong>Localidade:</strong> {{address?.localidade}}</p>
+        <p><strong>Bairro:</strong> {{address?.bairro}}</p>
+        <p><strong>Complemento:</strong> {{address?.complemento}}</p>
+        <p><strong>UF:</strong> {{address?.uf}}</p>
+      </li>
+    </ul>
+  </p-card>
+</div>
