@@ -1,0 +1,9 @@
+.container-cards-my-account {
+  display: flex;
+  padding: 50px;
+  gap: 5px;
+}
+
+.card-my-account{
+    border: 1px solid black;
+}

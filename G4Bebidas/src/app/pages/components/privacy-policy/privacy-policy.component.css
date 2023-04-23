@@ -1,0 +1,40 @@
+.container {
+  margin: 50px 50px 150px 50px;
+  color: #ab47bc;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+
+h1,
+h2 {
+  color: #6e2c9d;
+  font-weight: 600;
+}
+
+h2 {
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+  margin-top: 20px;
+}
+
+p {
+  line-height: 1.5;
+}
+
+a {
+  color: #333;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer{
+    text-align: center;
+    color: #6e2c9d;
+    font-weight: 600;
+    margin-bottom: 50px;
+}

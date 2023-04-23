@@ -30,7 +30,6 @@ export class FooterComponent {
         this.router.url === '/product' ||
         this.router.url === '/login' ||
         this.router.url === '/sign-up' ||
-        this.router.url === '/list-users' ||
         this.router.url.startsWith('/form-address')
       ) {
         this.isDashboard = true;

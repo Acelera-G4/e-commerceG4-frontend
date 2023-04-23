@@ -1,7 +1,6 @@
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
 import { ChartModule } from 'primeng/chart';
 
-import { ListUsersComponent } from './pages/components/list-users/list-users.component';
 import { HeaderComponent } from './pages/components/header/header.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,8 +22,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ModalCreateUserComponent } from './pages/components/modal-create-user/modal-create-user.component';
-import { ModalUpdateUserComponent } from './pages/components/modal-update-user/modal-update-user.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ModalMaiorIdadeComponent } from './pages/components/modal-maior-idade/modal-maior-idade.component';
@@ -32,7 +30,7 @@ import { CategoriesComponent } from './pages/components/categories/categories.co
 import { DropdownModule } from 'primeng/dropdown';
 import { FormAddressComponent } from './pages/sign-up/components/form-address/form-address.component';
 import { CartComponent } from './pages/cart/cart.component';
-import { Sidebar, SidebarModule } from 'primeng/sidebar';
+import { SidebarModule } from 'primeng/sidebar';
 import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CarouselComponent } from './pages/components/carousel/carousel.component';
@@ -45,9 +43,16 @@ import { AccordionModule } from 'primeng/accordion';
 import { TabViewModule } from 'primeng/tabview';
 import { ModalPaymentComponent } from './pages/components/modal-payment/modal-payment.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { MyAccountComponent } from './pages/my-account/my-account.component';
+
+import { TermsAndConditionComponent } from './pages/components/terms-and-condition/terms-and-condition.component';
+import { PrivacyPolicyComponent } from './pages/components/privacy-policy/privacy-policy.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+
 
 @NgModule({
   declarations: [
+    MyAccountComponent,
     AppComponent,
     HomeComponent,
     FooterComponent,
@@ -57,9 +62,6 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     DashboardComponent,
     HeaderComponent,
     ProductsComponent,
-    ListUsersComponent,
-    ModalCreateUserComponent,
-    ModalUpdateUserComponent,
     FormAddressComponent,
     ModalMaiorIdadeComponent,
     CartComponent,
@@ -68,6 +70,9 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     UsersComponent,
     ModalPaymentComponent,
     EmailComponent,
+    TermsAndConditionComponent,
+    PrivacyPolicyComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
-import { ListUsersComponent } from '../list-users/list-users.component';
+
 import { EmailComponent } from '../email/email.component';
 
 @Component({
@@ -42,8 +42,7 @@ export class UsersComponent {
     private addressService: AddressService,
     private formBuilder: FormBuilder,
     private toast: ToastService,
-    private router: Router,
-    private email: EmailComponent
+    private router: Router
   ) {
     this.user = new User();
   }
@@ -133,21 +132,6 @@ export class UsersComponent {
     this.displayCreateUser = true;
   }
 
-  // createUser() {
-
-  //   this.userService.createUser(this.userForm.value).subscribe({
-  //     next: (registered) => {
-  //       console.log('ID ', registered.id);
-  //       this.user = registered;
-  //       console.log(this.user);
-  //       this.displayCreateUser = false;
-  //       this.getUsers();
-  //     },
-  //     error: (erro) => alert('Preencha todos os campos!'),
-  //   });
-  //   this.addressService.createAddress(this.addressform.value)
-  //   // console.log(this.formUser);
-  // }
   createUser() {
     const user = new User();
     user.id = this.userForm.value.id;
@@ -167,7 +151,6 @@ export class UsersComponent {
         this.user = Response;
         this.displayCreateUser = false;
         this.getUsers();
-        this.email.sendEmail();
       },
       error: (error) => (this.error = error),
     });
@@ -208,20 +191,14 @@ export class UsersComponent {
         //fazer tratamento de erro aqui
         this.getUsers();
         this.displayUpdateUser = false;
-        // this.displayUpdateAddress = true;
         this.listUsersById = this.userService.listUserById(newUser.id);
 
         console.log('Address', this.listUsersById);
       },
       error: (error) => (this.error = error),
     });
-    // this.addressService.
   }
 
-  // updateAddress() {
-  //   let newAddres = new Address();
-  //   // this.addressService.
-  // }
 
   deleteUserById(id: number) {
     this.userService.deleteUserById(id).subscribe({

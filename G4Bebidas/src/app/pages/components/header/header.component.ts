@@ -46,7 +46,6 @@ export class HeaderComponent {
       if (
         this.router.url === '/dashboard' ||
         this.router.url === '/category' ||
-        this.router.url === '/list-users' ||
         this.router.url === '/users' ||
         this.router.url === '/product'
       ) {

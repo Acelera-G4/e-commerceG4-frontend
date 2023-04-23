@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     //   ? this.router.navigate(['/'])
     //   : this.router.navigate(['/home']);
     this.listAllUsers();
-    this.id = this.activeRouter.snapshot.params['id'];
+    
     if (this.id) {
       this.formEmpty();
       this.userService.listUserById(this.id).subscribe({
